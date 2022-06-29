@@ -9,4 +9,4 @@ Windows:
     <br>
   -  install composer: https://getcomposer.org/download/
     <br>
-  -  clone git: https://github.com/hieuthanh1999/project-book
+  -  clone git: git clone git@github.com:hieuthanh1999/project-book.git
