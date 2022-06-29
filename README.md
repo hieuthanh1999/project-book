@@ -2,11 +2,11 @@
 - 👋 Hi, I’m @hieuthanh1999
 
 Windows:
-    <br>Cancel changes
-    install Git Bash: https://git-scm.com/downloads
     <br>
-    install Xampp: https://www.apachefriends.org/download.html
+  - install Git Bash: https://git-scm.com/downloads
     <br>
-    install composer: https://getcomposer.org/download/
+  -  install Xampp: https://www.apachefriends.org/download.html
     <br>
-    clone git: https://github.com/hieuthanh1999/project-book
+  -  install composer: https://getcomposer.org/download/
+    <br>
+  -  clone git: https://github.com/hieuthanh1999/project-book
