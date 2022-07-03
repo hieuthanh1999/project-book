@@ -14,5 +14,40 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('FE.layout');
+});
+
+/*
+ *
+ *
+========================= Sign-in, Sign-up ==============================
+ *
+ *
+*/
+Route::get('/sign-in', function () {
+    return view('sign-in');
+});
+
+Route::get('/sign-up', function () {
+    return view('sign-up');
+});
+
+/*
+ *
+ *
+========================= Website ==============================
+ *
+ *
+*/
+
+/*
+ *
+ *
+=========================Admin Website ==============================
+ *
+ *
+*/
+
+Route::get('/admin', function () {
+    return view('BE.layout');
 });
