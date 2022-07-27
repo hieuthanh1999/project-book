@@ -1,10 +1,12 @@
 
 @extends('FE.layout_theme')
 @section('content')
+
+            @include('FE.layouts.product_new')
      <!--************************************
 					Best Selling Start
 			*************************************-->
-            <section class="tg-sectionspace tg-haslayout">
+            <!-- <section class="tg-sectionspace tg-haslayout 2333">
                 <div class="container">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -59,14 +61,14 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> -->
             <!--************************************
 					Best Selling End
 			*************************************-->
             <!--************************************
 					Featured Item Start
 			*************************************-->
-            <section class="tg-bglight tg-haslayout">
+            <!-- <section class="tg-bglight tg-haslayout">
                 <div class="container">
                     <div class="row">
                         <div class="tg-featureditm">
@@ -99,14 +101,14 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> -->
             <!--************************************
 					Featured Item End
 			*************************************-->
             <!--************************************
 					New Release Start
 			*************************************-->
-            <section class="tg-sectionspace tg-haslayout">
+            <!-- <section class="tg-sectionspace tg-haslayout">
                 <div class="container">
                     <div class="row">
                         <div class="tg-newrelease">
@@ -227,14 +229,14 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> -->
             <!--************************************
 					New Release End
 			*************************************-->
             <!--************************************
 					Collection Count Start
 			*************************************-->
-            <section class="tg-parallax tg-bgcollectioncount tg-haslayout" data-z-index="-100"
+            <!-- <section class="tg-parallax tg-bgcollectioncount tg-haslayout" data-z-index="-100"
                 data-appear-top-offset="600" data-parallax="scroll" data-image-src="images/parallax/bgparallax-04.jpg">
                 <div class="tg-sectionspace tg-collectioncount tg-haslayout">
                     <div class="container">
@@ -284,14 +286,14 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> -->
             <!--************************************
 					Collection Count End
 			*************************************-->
             <!--************************************
 					Picked By Author Start
 			*************************************-->
-            <section class="tg-sectionspace tg-haslayout">
+            <!-- <section class="tg-sectionspace tg-haslayout">
                 <div class="container">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -339,14 +341,14 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> -->
             <!--************************************
 					Picked By Author End
 			*************************************-->
             <!--************************************
 					Testimonials Start
 			*************************************-->
-            <section class="tg-parallax tg-bgtestimonials tg-haslayout" data-z-index="-100" data-appear-top-offset="600"
+            <!-- <section class="tg-parallax tg-bgtestimonials tg-haslayout" data-z-index="-100" data-appear-top-offset="600"
                 data-parallax="scroll" data-image-src="images/parallax/bgparallax-05.jpg">
                 <div class="tg-sectionspace tg-haslayout">
                     <div class="container">
@@ -371,7 +373,7 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> -->
             <!--************************************
 					Testimonials End
 			*************************************-->
@@ -379,7 +381,7 @@
             <!--************************************
 					Call to Action Start
 			*************************************-->
-            <section class="tg-parallax tg-bgcalltoaction tg-haslayout" data-z-index="-100" data-appear-top-offset="600"
+            <!-- <section class="tg-parallax tg-bgcalltoaction tg-haslayout" data-z-index="-100" data-appear-top-offset="600"
                 data-parallax="scroll" data-image-src="images/parallax/bgparallax-06.jpg">
                 <div class="tg-sectionspace tg-haslayout">
                     <div class="container">
@@ -395,52 +397,9 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> -->
             <!--************************************
 					Call to Action End
 			*************************************-->
-            <!--************************************
-					Latest News Start
-			*************************************-->
-            <section class="tg-sectionspace tg-haslayout">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="tg-sectionhead">
-                                <h2><span>Latest News &amp; Articles</span>What's Hot in The News</h2>
-                                <a class="tg-btn" href="javascript:void(0);">View All</a>
-                            </div>
-                        </div>
-                        <div id="tg-postslider" class="tg-postslider tg-blogpost owl-carousel">
-                            <article class="item tg-post">
-                                <figure><a href="javascript:void(0);"><img
-                                            src="{{URL::asset('FE/images/blog/img-01.jpg')}}"
-                                            alt="image description"></a></figure>
-                                <div class="tg-postcontent">
-                                    <ul class="tg-bookscategories">
-                                        <li><a href="javascript:void(0);">Adventure</a></li>
-                                        <li><a href="javascript:void(0);">Fun</a></li>
-                                    </ul>
-                                    <div class="tg-themetagbox"><span class="tg-themetag">featured</span></div>
-                                    <div class="tg-posttitle">
-                                        <h3><a href="javascript:void(0);">Where The Wild Things Are</a></h3>
-                                    </div>
-                                    <span class="tg-bookwriter">By: <a href="javascript:void(0);">Kathrine
-                                            Culbertson</a></span>
-                                    <ul class="tg-postmetadata">
-                                        <li><a href="javascript:void(0);"><i class="fa fa-comment-o"></i><i>21,415
-                                                    Comments</i></a></li>
-                                        <li><a href="javascript:void(0);"><i class="fa fa-eye"></i><i>24,565
-                                                    Views</i></a></li>
-                                    </ul>
-                                </div>
-                            </article>
-
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!--************************************
-					Latest News End
-			*************************************-->
+          
 @endsection

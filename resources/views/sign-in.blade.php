@@ -61,7 +61,7 @@
           </label>
 										</div>
 										<div class="text-center mt-3">
-											<a href="/admin" class="btn btn-lg btn-primary">Sign in</a>
+											<a href="/admin/index" class="btn btn-lg btn-primary">Sign in</a>
 											<!-- <button type="submit" class="btn btn-lg btn-primary">Sign in</button> -->
 										</div>
 									</form>

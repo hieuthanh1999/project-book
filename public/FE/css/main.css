@@ -2374,12 +2374,14 @@ li.menu-item-has-mega-menu { position: static; }
 /* =============================================
 			latest News Style					
 ============================================= */
+
 .tg-postslider .owl-nav {
-	top: -86px;
-	right: 15px;
-	width: auto;
-	float: none;
-	position: absolute;
+	width: 100%;
+    float: none;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    top: 50%;
 }
 .tg-blogpost{
 	width: 100%;

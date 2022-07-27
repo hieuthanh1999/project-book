@@ -65,8 +65,8 @@ jQuery(document).on('ready', function() {
 			0: { items:1 },
 			480: { items:2 },
 			600: { items:3 },
-			1000: { items:5 },
-			1200: { items:6 },
+			1000: { items:4 },
+			1200: { items:4 },
 		}
 	});
 	/*--------------------------------------
@@ -202,6 +202,9 @@ jQuery(document).on('ready', function() {
 		nav: true,
 		loop: true,
 		dots: true,
+		autoplay:true,
+		autoplayTimeout:2000,
+		autoplayHoverPause:true,
 		navText: [
 					'<i class="icon-chevron-left"></i>',
 					'<i class="icon-chevron-right"></i>'
@@ -212,9 +215,9 @@ jQuery(document).on('ready', function() {
 				],
 		responsive: {
 			0: { items:1 },
-			600: { items:2 },
-			992: { items:3 },
-			1200: { items:4 },
+			600: { items:1 },
+			992: { items:1 },
+			1200: { items:1 },
 		}
 	});
 	/*--------------------------------------
@@ -258,7 +261,11 @@ jQuery(document).on('ready', function() {
 			PRODUCT INCREASE
 	------------------------------------------*/
 	jQuery('em.minus').on('click', function () {
-		jQuery('#quantity1').val(parseInt(jQuery('#quantity1').val(), 10) - 1);
+		if(parseInt(jQuery('#quantity1').val()) < 2){
+		}else{
+			jQuery('#quantity1').val(parseInt(jQuery('#quantity1').val(), 10) - 1);
+		}
+		
 	});
 	jQuery('em.plus').on('click', function () {
 		jQuery('#quantity1').val(parseInt(jQuery('#quantity1').val(), 10) + 1);
