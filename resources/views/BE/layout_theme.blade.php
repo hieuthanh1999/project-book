@@ -95,33 +95,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <li class="sub-menu">
                         <a href="javascript:;">
                             <i class="fa fa-book"></i>
-                            <span>Danh mục</span>
+                            <span>Danh mục & thể loại</span>
                         </a>
                         <ul class="sub">
                             <li><a href="{{URL::to('admin/category/create')}}">Thêm danh mục</a></li>
                             <li><a href="{{URL::to('admin/category/list')}}">Liệt kê danh mục</a></li>
-                        </ul>
-                    </li>
-                    <li class="sub-menu">
-                        <a href="javascript:;">
-                            <i class="fa fa-book"></i>
-                            <span>Thể loại</span>
-                        </a>
-                        <ul class="sub">
                             <li><a href="{{URL::to('admin/sub-category/create')}}">Thêm thể loại</a></li>
                             <li><a href="{{URL::to('admin/sub-category/list')}}">Liệt kê thể loại</a></li>
                         </ul>
                     </li>
-                    <li class="sub-menu">
-                        <a href="javascript:;">
-                            <i class="fa fa-book"></i>
-                            <span>nhà xuất bản</span>
-                        </a>
-                        <ul class="sub">
-                            <li><a href="{{URL::to('admin/publisher/create')}}">Thêm nhà xuất bản</a></li>
-                            <li><a href="{{URL::to('admin/publisher/list')}}">Liệt kê nhà xuất bản</a></li>
-                        </ul>
-                    </li>
+                 
+                   
                     <li class="sub-menu">
                         <a href="javascript:;">
                             <i class="fa fa-book"></i>
@@ -135,11 +119,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <li class="sub-menu">
                         <a href="javascript:;">
                             <i class="fa fa-book"></i>
-                            <span>Tác giả</span>
+                            <span>Tác giả & Nhà sản xuất</span>
                         </a>
                         <ul class="sub">
                             <li><a href="{{URL::to('admin/author/create')}}">Thêm tác giả</a></li>
                             <li><a href="{{URL::to('admin/author/list')}}">Liệt tác giả</a></li>
+                            <li><a href="{{URL::to('admin/publisher/create')}}">Thêm nhà xuất bản</a></li>
+                            <li><a href="{{URL::to('admin/publisher/list')}}">Liệt kê nhà xuất bản</a></li>
                         </ul>
                     </li>
                     <li class="sub-menu">
@@ -155,11 +141,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <li class="sub-menu">
                         <a href="javascript:;">
                             <i class="fa fa-book"></i>
-                            <span>Khuyến mãi</span>
+                            <span>Khuyến mãi & Phí Vận Chuyển</span>
                         </a>
                         <ul class="sub">
                             <li><a href="{{URL::to('admin/discount/create')}}">Thêm khuyến mãi</a></li>
                             <li><a href="{{URL::to('admin/discount/list')}}">Liệt khuyến mãi</a></li>
+                            <li><a href="{{URL::to('admin/shipping-fee/create')}}">Thêm</a></li>
+                            <li><a href="{{URL::to('admin/shipping-fee/list')}}">Liệt kê phí</a></l>
                         </ul>
                     </li>
                     <li class="sub-menu">
@@ -172,16 +160,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li><a href="{{URL::to('')}}">Liệt kê hóa đơn</a></li>
                         </ul>
                     </li>
-                    <li class="sub-menu">
-                        <a href="javascript:;">
-                            <i class="fa fa-book"></i>
-                            <span>Phí Vận Chuyển</span>
-                        </a>
-                        <ul class="sub">
-                            <li><a href="{{URL::to('admin/shipping-fee/create')}}">Thêm</a></li>
-                            <li><a href="{{URL::to('admin/shipping-fee/list')}}">Liệt kê phí</a></li>
-                        </ul>
-                    </li>
+                  
                     <li class="sub-menu">
                         <a href="javascript:;">
                             <i class="fa fa-book"></i>
