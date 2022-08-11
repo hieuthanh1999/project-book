@@ -14,8 +14,9 @@
                 @foreach ($authors as $values)
                 <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                     <div class="tg-author">
-                        <figure><img style="object-fit: contain;     height: 150px;" src="{{URL::asset('image/author/'.$values['author_image'])}}"
-                                    alt="image description"></figure>
+                        <figure><img style="object-fit: contain;     height: 150px;"
+                                src="{{URL::asset('image/author/'.$values['author_image'])}}" alt="image description">
+                        </figure>
                         <div class="tg-authorcontent">
                             <h2><a href="tac-gia-{{$values['id']}}">{{$values['name']}}</a></h2>
                             <span>Sách đã xuất bản: {{$values->count()}}</span>

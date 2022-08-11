@@ -30,6 +30,7 @@ class OrderController extends Controller
         $states = DistrictModel::all();
         $countries = ProvinceModel::all();
         $fee_price = ShippingFeeModel::getShippingFee($province_id);
+    
         return BasicClass::handlingView('FE.order.list', [
             'states' => $states,
             'countries' => $countries,

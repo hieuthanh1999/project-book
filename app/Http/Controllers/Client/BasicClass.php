@@ -13,6 +13,7 @@ use App\Models\SizeModel;
 use App\Models\PublisherModel;
 use App\Models\DistrictModel;
 use App\Models\ProvinceModel;
+use App\Models\User;
 
 class BasicClass extends Controller
 {
@@ -22,6 +23,7 @@ class BasicClass extends Controller
     static public $authors_all    =array();
     static public $states    =array();
     static public $countries    =array();
+    static public $admin    =array();
 
 
     public function __construct()
@@ -32,7 +34,7 @@ class BasicClass extends Controller
         BasicClass::$authors_all = AuthorModel::getAll(); 
         BasicClass::$states = DistrictModel::all();
         BasicClass::$countries = ProvinceModel::all();
-
+        BasicClass::$admin =  User::getAdmin();
     }
 
     public static function handlingView($viewLayout='FE.layout',$arrayValue=array())
@@ -44,6 +46,7 @@ class BasicClass extends Controller
                         'authors_all'      => BasicClass::$authors_all,
                         'states'      => BasicClass::$states,
                         'countries'      => BasicClass::$countries,
+                        'admin'      => BasicClass::$admin,
                     ];  
         return view($viewLayout,array_merge($arrayDefault,$arrayValue));
     }

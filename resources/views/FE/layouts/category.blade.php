@@ -39,15 +39,25 @@
                 <div class="tg-postbook">
                     <figure class="tg-featureimg">
                         <div class="tg-bookimg">
-                            <div class="tg-frontcover"><img src="{{URL::asset('image/product/'.$value['image'])}}" alt="image description">
+                            <div class="tg-frontcover"><img src="{{URL::asset('image/product/'.$value['image'])}}"
+                                    alt="image description">
                             </div>
-                            <div class="tg-backcover"><img src="{{URL::asset('image/product/'.$value['image'])}}" alt="image description">
+                            <div class="tg-backcover"><img src="{{URL::asset('image/product/'.$value['image'])}}"
+                                    alt="image description">
                             </div>
                         </div>
-                        <a class="tg-btnaddtowishlist" href="javascript:void(0);">
-                            <i class="icon-heart"></i>
-                            <span>add to wishlist</span>
-                        </a>
+                        @guest
+
+                        @else
+                        <form action="{{ route('addWish') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $value['id'] }}">
+                            <button class="tg-btnaddtowishlist" type="submit">
+                                <i class="icon-heart"></i>
+                                <span>Yêu thích</span>
+                            </button>
+                        </form>
+                        @endguest
                     </figure>
                     <div class="tg-postbookcontent">
                         <ul class="tg-bookscategories">
@@ -58,28 +68,46 @@
                             <h3><a href="/chi-tiet-sach-{{$value['id']}}">{{$value['name']}}</a></h3>
                         </div>
                         <span class="tg-bookwriter">Tác giả: <a href="javascript:void(0);">
-                        @foreach($authors as $author)
+                                @foreach($authors as $author)
                                 @if($value['author_id'] == $author['id'])
-                                    {{$author['name']}}
+                                {{$author['name']}}
                                 @endif
-                        @endforeach
-                        </a></span>
+                                @endforeach
+                            </a></span>
                         <!-- <span class="tg-stars"><span></span></span> -->
                         <span class="tg-bookprice">
                             <ins>{{number_format($value['price']).' '.'VND'}}</ins>
                             <!-- <del>$27.20</del> -->
                         </span>
-                        <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
+                        @if (Auth::check())
+                        @if ($value['quantity'] > 0)
+                        <form action="{{ route('addCart') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="quantity" value="1">
+                            <input type="hidden" name="id" value="{{ $value['id'] }}">
+                            <button type="submit" class="tg-btn tg-btnstyletwo">
+                                <i class="fa fa-shopping-basket"></i>
+                                <em>Thêm vào giỏ</em>
+                            </button>
+                        </form>
+                        @else
+                        <button class="tg-btn tg-btnstyletwo">Đã hết hàng</button>
+                        @endif
+                        @else
+
+                        <a href="/login" class="tg-btn tg-btnstyletwo">
                             <i class="fa fa-shopping-basket"></i>
                             <em>Thêm vào giỏ</em>
                         </a>
+                        @endif
+
                     </div>
                 </div>
             </div>
             @endforeach
-           
+
         </div>
 
     </div>
 </div>
-    @endsection
+@endsection

@@ -45,17 +45,12 @@
                     <button class="tg-btn tg-active tg-btn-lg">Đã hết hàng</button>
                     @endif
                     @else
-
-                    <button onclick="alert('Bạn phải đăng nhập')" class="tg-btn tg-active tg-btn-lg">
+                    <a href="/login" class="tg-btn tg-active tg-btn-lg">
                         <i class="fa fa-shopping-basket"></i>
-                        Thêm vào giỏ
-                    </button>
+                        <em>Thêm vào giỏ</em>
+                    </a>
                     @endif
-
-
-
                     @guest
-
                     @else
                     <form action="{{ route('addWish') }}" method="post">
                         @csrf
@@ -293,7 +288,7 @@
             </div>
         </div>
     </div>
-    @if($list_product)
+    @if($list_product->count() >0)
     <div class="tg-relatedproducts">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="tg-sectionhead">
@@ -346,10 +341,28 @@
                                 <ins>{{number_format($value['price']).' '.'VND'}}</ins>
                                 <!-- <del>$27.20</del> -->
                             </span>
-                            <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
+                            @if (Auth::check())
+                            @if ($value['quantity'] > 0)
+                            <form action="{{ route('addCart') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="quantity" value="1">
+                                <input type="hidden" name="id" value="{{ $value['id'] }}">
+                                <button type="submit" class="tg-btn tg-btnstyletwo">
+                                    <i class="fa fa-shopping-basket"></i>
+                                    <em>Thêm vào giỏ</em>
+                                </button>
+                            </form>
+                            @else
+                            <button class="tg-btn tg-btnstyletwo">Đã hết hàng</button>
+                            @endif
+                            @else
+
+                            <a href="/login" class="tg-btn tg-btnstyletwo">
                                 <i class="fa fa-shopping-basket"></i>
                                 <em>Thêm vào giỏ</em>
                             </a>
+                            @endif
+
                         </div>
                     </div>
                 </div>

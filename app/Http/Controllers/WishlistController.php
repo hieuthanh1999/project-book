@@ -13,7 +13,7 @@ class WishlistController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('level');
+        $this->middleware('user');
     }
     
     public function save(Request $request)

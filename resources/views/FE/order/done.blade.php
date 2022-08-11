@@ -15,7 +15,7 @@
                     <fieldset>
                         <div class="form-card">
                             <br><br>
-                            <h2 class="purple-text text-center"><strong>Cám ơn bạn đã đặt hàng tại Skymart !</strong>
+                            <h2 class="purple-text text-center"><strong>Cám ơn bạn đã đặt hàng tại Kim Đồng !</strong>
                             </h2> <br>
                             <div class="row justify-content-center">
                                 <div class="col-3"> <img

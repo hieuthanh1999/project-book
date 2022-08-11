@@ -12,10 +12,6 @@ use Auth;
 
 class ReviewsController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('user');
-    }
 
      /**
      * Display a listing of the resource.

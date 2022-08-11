@@ -20,7 +20,12 @@ class ShippingFeeModel extends Model
 
     public static function getShippingFee($id)
     {
+
+      if($id == '01TTT'){
       return ShippingFeeModel::where('provinceid', 'LIKE', '%' . $id . '%')->first(); 
+      }else{
+        return ShippingFeeModel::where('provinceid', '0')->first(); 
+      }
     }
 
   /**

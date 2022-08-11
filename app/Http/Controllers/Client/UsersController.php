@@ -18,7 +18,6 @@ class UsersController extends Controller
     {
         $user_id = Auth::user()->id;
         $wish = User::findOrFail($user_id);
-
         return BasicClass::handlingView('FE.users.details', ['wish' => $wish]);
     }
 }

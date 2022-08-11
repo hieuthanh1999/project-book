@@ -75,12 +75,30 @@
                                             </span>
                                             <!-- <span class="tg-stars"><span></span></span> -->
                                             <span class="tg-bookprice">
-											<ins>{{number_format($value['price']).' '.'VND'}}</ins>
+                                                <ins>{{number_format($value['price']).' '.'VND'}}</ins>
                                             </span>
-                                            <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
+                                            @if (Auth::check())
+                                            @if ($value['quantity'] > 0)
+                                            <form action="{{ route('addCart') }}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="quantity" value="1">
+                                                <input type="hidden" name="id" value="{{ $value['id'] }}">
+                                                <button type="submit" class="tg-btn tg-btnstyletwo">
+                                                    <i class="fa fa-shopping-basket"></i>
+                                                    <em>Thêm vào giỏ</em>
+                                                </button>
+                                            </form>
+                                            @else
+                                            <button class="tg-btn tg-btnstyletwo">Đã hết hàng</button>
+                                            @endif
+                                            @else
+
+                                            <a href="/login" class="tg-btn tg-btnstyletwo">
                                                 <i class="fa fa-shopping-basket"></i>
-												<em>Thêm vào giỏ</em>
+                                                <em>Thêm vào giỏ</em>
                                             </a>
+                                            @endif
+
                                         </div>
                                     </div>
                                 </div>

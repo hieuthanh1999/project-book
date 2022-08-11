@@ -4233,4 +4233,8 @@ body.tg-comingsoonpage .tg-footerbar{position:static;}
 .review-comment-content{
     font-size: 1.4rem;
 }
-   
+.tg-frontcover img{
+	width: 165px;
+    height: 233px;
+    object-fit: cover;
+}

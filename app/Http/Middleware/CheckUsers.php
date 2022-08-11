@@ -18,7 +18,7 @@ class CheckUsers
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user() && Auth::user()->level==0) {
+        if (Auth::user() && (Auth::user()->level==0 || Auth::user()->level==2)) {
             return $next($request);
         }else{
             return redirect('/login');
