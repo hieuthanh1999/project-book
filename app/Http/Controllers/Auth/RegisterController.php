@@ -72,14 +72,15 @@ class RegisterController extends Controller
     {
         // admin@gmail.com
         // 123456789
-        
+       
         $users = User::all();
         
         if(count($users)==0)
             $level=2;
         else 
             $level=0;
-
+        // dump($data);
+        // die;
         return User::create([
             'name'          => $data['name'],
             'email'         => $data['email'],

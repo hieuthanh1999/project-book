@@ -57,6 +57,11 @@ figure {
 	margin-bottom: 6px;
 	position: relative;
 }
+.cart-main .row {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
 img {
 	height: auto;
 	max-width: 100%;
@@ -1916,7 +1921,7 @@ li.menu-item-has-mega-menu { position: static; }
 	float: left;
 	width: auto;
 	display: block;
-	max-width: none;
+	max-width: 300px;
 }
 .tg-featureditmcontent{
 	width: 100%;
@@ -4143,3 +4148,89 @@ body.tg-comingsoonpage:before{
 body.tg-comingsoonpage .tg-footer{border:0;}
 body.tg-comingsoonpage .tg-footerbar{position:static;}
 .tg-userlogin  figure a img {width: 50px; height: 50px;}
+
+
+  .container-product ul.filter-review-item {
+    display: flex;
+    list-style: none;
+}
+.container-product ul.filter-review-item li{
+    font-size: 1.6rem;
+    cursor: pointer;
+    padding: 10px 20px;
+    background: rgb(238, 238, 238);
+    margin: 0 10px;
+    align-items: center;
+    border-radius: 20px;
+}
+.container-product ul.filter-review-item li i{
+    color: rgb(253, 216, 53);;
+}
+.container-product .review-rating__inner{
+    display: flex;
+    margin-left: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgb(238, 238, 238);
+}
+.container-product .review-rating__summary{
+    flex-basis: 144px;
+    flex-shrink: 0;
+    border-right: 1px solid rgb(224, 224, 224);
+    display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+.review-rating__point {
+    font-size: 25px;
+    line-height: 40px;
+    margin: 0px 0px 4px;
+}
+
+
+.jucQbJ {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+}
+.review-rating__total {
+    margin: 4px 0px 0px;
+    font-size: 14px;
+    line-height: 20px;
+    color: rgb(120, 120, 120);
+}
+.review-rating__detail {
+    padding: 0px 24px;
+}
+.review-rating__level {
+    display: flex;
+    margin: 4px 0px;
+    -webkit-box-align: center;
+    align-items: center;
+    font-size: 1.6rem;
+
+}
+/*  */
+.review-comment__avatar ul{
+    margin-top: 20px;
+    padding: 0;
+}
+.review-comment__avatar ul li{
+    list-style: none;
+    display: inline-block;
+    position: absolute;
+    font-size: 1.4rem;
+}
+.review-comment__avatar ul li:last-child{
+    left: 360px;
+    color: rgb(0, 153, 0);;
+}
+.review-comment__avatar ul li img{
+    width: 133%;
+}
+.review-comment-content{
+    font-size: 1.4rem;
+}
+   

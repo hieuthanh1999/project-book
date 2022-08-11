@@ -45,8 +45,7 @@ class ProductController extends Controller
         $size = SizeModel::orderBy('id', 'DESC')->where('status', 1)->get();
         $author = AuthorModel::orderBy('id', 'DESC')->where('status', 1)->get();
         $publisher = PublisherModel::orderBy('id', 'DESC')->where('status', 1)->get();
-        $discount = DiscountModel::orderBy('id', 'DESC')->where('status', 1)->get();
-        return view('BE.product.create', compact('sub_categories', 'size', 'author', 'publisher', 'discount'));
+        return view('BE.product.create', compact('sub_categories', 'size', 'author', 'publisher'));
     }
 
      /**
@@ -71,7 +70,7 @@ class ProductController extends Controller
             'publisher_id'=>'required',
             'size_id'=>'required',
             'weight'=>'required|numeric',
-            'discount_id'=>'',
+            'sale'=>'',
             'status' =>'',
         ], ['required'=>'không được để trống!', 'numeric'=>'Phải nhập số!', 'image'=>"phải là file ảnh"]);
         
@@ -91,7 +90,7 @@ class ProductController extends Controller
             $add->author_id = $request->author_id;
             $add->publisher_id = $request->publisher_id;
             $add->size_id = $request->size_id;
-            $add->discount_id = $request->discount_id;
+            $add->sale = $request->sale;
             $add->name = $data['name'];
             $add->short_description = $data['short_description'];
             $add->long_description = $data['long_description'];
@@ -135,7 +134,7 @@ class ProductController extends Controller
             'publisher_id'=>'required',
             'size_id'=>'required',
             'weight'=>'required|numeric',
-            'discount_id'=>'',
+            'sale'=>'',
         ], ['required'=>'không được để trống!', 'numeric'=>'Phải nhập số!', 'image'=>"phải là file ảnh"]);
         
         if($request->isMethod('post'))
@@ -155,7 +154,7 @@ class ProductController extends Controller
             $add->author_id = $request->author_id;
             $add->publisher_id = $request->publisher_id;
             $add->size_id = $request->size_id;
-            $add->discount_id = $request->discount_id;
+            $add->sale = $request->sale;
             $add->name = $data['name'];
             $add->short_description = $data['short_description'];
             $add->long_description = $data['long_description'];

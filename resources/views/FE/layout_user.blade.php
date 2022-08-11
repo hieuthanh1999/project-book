@@ -13,8 +13,6 @@
 
 	<link rel="canonical" href="https://demo-basic.adminkit.io/pages-sign-up.html" />
 
-	<title>Sign Up</title>
-
 	<link href="{{URL::asset('BE/css/app.css')}}" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
@@ -56,7 +54,7 @@
 			Wrapper End
 	*************************************-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
+	<script>
     $(document).ready(function() {
         $('#country_id').change(function() {
             var $city = $('#state_id');
@@ -67,16 +65,16 @@
                 },
                 success: function(data) {
                     var obj = JSON.parse(data) ;
-                    console.log(obj);
-                    $city.html(' <option>Quận/Huyện</option>');
+					$("#state_id option").remove();
                     $.each(obj, function(id, value) {
-                    $city.append('<option value="'+id+'">'+value+'</option>');
+                    	$city.append('<option value="'+id+'">'+value+'</option>');
                     });
                     $('#city').show(150);
                     $('#address').show(150);
                 }
             });
         });
+
     });
 </script>
 </body>

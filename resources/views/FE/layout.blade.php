@@ -3,6 +3,9 @@
 @section('content')
 
             @include('FE.layouts.product_new')
+            @include('FE.layouts.featured_item')
+            @include('FE.layouts.author_home')
+            @include('FE.layouts.products_top_view')
      <!--************************************
 					Best Selling Start
 			*************************************-->

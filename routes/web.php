@@ -12,8 +12,11 @@ use App\Http\Controllers\Admin\ShippingFeeController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\CityController; 
-use App\Http\Controllers\CartController; 
-use App\Http\Controllers\WishlistController; 
+use App\Http\Controllers\Client\CartController; 
+use App\Http\Controllers\Client\OrderController; 
+use App\Http\Controllers\Client\UsersController as UsersClient; 
+// use App\Http\Controllers\Admin\UsersController  as UsersAdmin; 
+use App\Http\Controllers\WishlistController;  
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,8 +46,32 @@ Route::get('tac-gia-{id}', [HomeController::class, 'authorDetailsPage']);
 // Route::get('chi-tiet-tac-gia-{id}', [HomeController::class, 'authorDetailsPage']);
 
 Route::get('cities', [CityController::class, 'index'])->name('cities.index');
-Route::post('addCart', [CartController::class, 'save_cart'])->name('addCart');
-Route::post('add-wishlist', [WishlistController::class, 'save_wishlist'])->name('addWish');
+
+// Cart
+Route::post('addCart', [CartController::class, 'save'])->name('addCart');
+Route::get('cart', [CartController::class, 'index'])->name('showCart');
+Route::post('update-qty-cart{id}', [CartController::class, 'update'])->name('updateCart');
+Route::get('delete-cart/{rowId}', [CartController::class, 'delete'])->name('deleteCart');
+
+//Wishlist
+Route::post('them-yeu-thich', [WishlistController::class, 'save'])->name('addWish');
+Route::get('danh-sach-yeu-thich}', [WishlistController::class, 'index'])->name('showWish');
+Route::post('xoa/{id}', [WishlistController::class, 'delete'])->name('deleteWish');
+
+//Router
+Route::post('order',  [OrderController::class, 'index'])->name('viewOrder');
+Route::post('order/store', [OrderController::class, 'store'])->name('storeOrder');
+Route::get('thanh-cong', [OrderController::class, 'done']);
+
+#Author
+Route::get('danh-sach-tac-gia', [App\Http\Controllers\Client\AuthorController::class, 'index']);
+
+
+#Users
+Route::get('thong-tin-{id}', [UsersClient::class, 'index']);
+
+#Reviews
+Route::post('review/store', [App\Http\Controllers\ReviewsController::class, 'store'])->name('reviewStore');
 /*
  *
  *
@@ -97,6 +124,20 @@ Route::prefix('admin')->group(function () {
         Route::get('edit', function () {
             return view('BE.category.edit');
         });
+    });
+
+     // users 
+     Route::prefix('users')->group(function () {
+
+        Route::get('list', [App\Http\Controllers\Admin\UsersController::class, 'index']);
+    });
+
+     // Order 
+     Route::prefix('order')->group(function () {
+
+        Route::get('list', [App\Http\Controllers\Admin\OrderController::class, 'index']);
+        Route::get('/details/{id}', [App\Http\Controllers\Admin\OrderController::class, 'details'])->name('detailOrder');
+        Route::post('/update/{id}', [App\Http\Controllers\Admin\OrderController::class, 'update'])->name('updateStatusOrder');
     });
 
      // sub category 
@@ -191,7 +232,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/delete/{id}', [DiscountController::class, 'delete']);
 
     });
-
+    
 
 
 

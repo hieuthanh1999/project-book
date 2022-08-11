@@ -18,11 +18,12 @@ class DiscountModel extends Model
          'name', 'description', 'price',' status'
       ];
 
-     /**
-     * Get the comments for the blog post.
-     */
-    public function product()
-    {
-        return $this->hasMany(ProductModel::class, 'discount_id', 'id');
-    }
+    //  /**
+    //  * Get the comments for the blog post.
+    //  */
+    // public function product()
+    // {
+    //     return $this->hasMany(ProductModel::class, 'discount_id', 'id');
+    // }
+
 }

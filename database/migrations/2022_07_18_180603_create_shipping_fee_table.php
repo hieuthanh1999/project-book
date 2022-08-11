@@ -14,7 +14,7 @@ class CreateShippingFeeTable extends Migration
     public function up()
     {
         Schema::create('table_shipping_fee', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('provinceid')->nullable(true);
             $table->string('name');
             $table->string('price');

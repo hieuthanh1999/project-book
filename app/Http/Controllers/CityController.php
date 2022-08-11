@@ -9,8 +9,9 @@ class CityController extends Controller
 {
     public function index(Request $request)
     {
-        $cities = DistrictModel::where('provinceid','LIKE', '%' . $request->get('country_id') . '%'  )->pluck('name', 'districtid');
+        $cities = DistrictModel::where('provinceid','LIKE', '%' . $request->get('country_id') . '%'  )->pluck('name', 'districtid', 'provinceid');
         echo $cities;
+
         //return response()->json($cities);
     }
 }

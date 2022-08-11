@@ -17,6 +17,17 @@
     <link rel="stylesheet" href="{{URL::asset('FE/css/color.css')}}">
     <link rel="stylesheet" href="{{URL::asset('FE/css/responsive.css')}}">
     
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-zoom/1.7.20/jquery.zoom.min.js"></script> -->
+    <link rel="stylesheet" href="{{ asset('/assets/css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/css/base.css') }}">
+    <!-- <script src="{{ asset('/assets/js/js.js') }}"></script>
+    <script src="{{ asset('/assets/js/jquery.modal.min.js') }}"></script> -->
 
     
     <script src="{{URL::asset('FE/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js')}}"></script>
@@ -33,4 +44,29 @@
     <script src="{{URL::asset('FE/js/appear.js')}}"></script>
     <script src="{{URL::asset('FE/js/gmap3.js')}}"></script>
     <script src="{{URL::asset('FE/js/main.js')}}"></script>
+    <script>
+    $(document).ready(function() {
+        $('#country_id').change(function() {
+            var $city = $('#state_id');
+            $.ajax({
+                url: "{{ route('cities.index') }}",
+                data: {
+                    country_id: $(this).val()
+                },
+                success: function(data) {
+                    var obj = JSON.parse(data) ;
+                    console.log(obj);
+                    $.each(obj, function(id, value) {
+                    $city.append('<option value="'+id+'">'+value+'</option>');
+                    });
+                    $('#city').show(150);
+                    $('#address').show(150);
+                }
+            });
+        });
+
+    });
+
+
+</script>
 </head>

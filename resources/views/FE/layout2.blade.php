@@ -23,7 +23,7 @@
             <div class="tg-sectionspace tg-haslayout">
                 <div class="container">
                     <div class="row">
-                        <div id="tg-twocolumns" class="tg-twocolumns">
+                        <div id="tg-twocolumns" class="tg-twocolumns" style="float: unset">
                             <div class="col-xs-12 col-sm-8 col-md-8 col-lg-9 pull-right">
                                 <div id="tg-content" class="tg-content">
                                     @yield('content')

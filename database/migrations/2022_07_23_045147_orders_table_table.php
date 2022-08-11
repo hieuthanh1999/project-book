@@ -24,9 +24,7 @@ class OrdersTableTable extends Migration
             $table->string('nameReceiver')->nullable();
             
             $table->timestamps();
-            // $table->foreign('user_id')->references('id')->on('users');
-            // $table->foreign('payment_id')->references('id')->on('table_payments');
-            // $table->foreign('shipping_id')->references('id')->on('table_shipping_fee');
+
         });
     }
 

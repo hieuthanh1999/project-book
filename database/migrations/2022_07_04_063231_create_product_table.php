@@ -32,11 +32,7 @@ class CreateProductTable extends Migration
             $table->double('weight', 4, 2);
             $table->integer('view_count')->default(0)->nullable(true);
             $table->timestamps();
-            // $table->foreign('sub_category_id')->references('id')->on('table_sub_category');
-            // $table->foreign('author_id')->references('id')->on('table_author');
-            // $table->foreign('publisher_id')->references('id')->on('table_publisher');
-            // $table->foreign('size_id')->references('id')->on('table_size');
-            // $table->foreign('discount_id')->references('id')->on('table_discount');
+
         });
     }
 

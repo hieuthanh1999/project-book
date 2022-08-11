@@ -9,6 +9,10 @@ use App\Models\AuthorModel;
 use App\Models\PublisherModel;
 use App\Models\SizeModel;
 use App\Models\DiscountModel;
+use App\Models\WishListModel;
+use App\Models\OrderDetailsModel;
+use App\Models\ReviewsModel;
+use Illuminate\Support\Facades\DB;
 
 class ProductModel extends Model
 {
@@ -18,6 +22,25 @@ class ProductModel extends Model
     public $timestamps= true;
     protected $primaryKey='id';
     
+    public function wishlists()
+    {
+        return $this->hasMany(WishListModel::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(ReviewsModel::class, 'product_id');
+    }
+
+
+     /**
+     * Get the post that owns the comment.
+     */
+    public function orderDetais()
+    {
+        return $this->hasMany(OrderDetailsModel::class, 'product_id', 'id');
+    }
+
     /**
      * Get the post that owns the comment.
      */
@@ -29,7 +52,7 @@ class ProductModel extends Model
     /**
      * Get the post that owns the comment.
      */
-    public function authorModel()
+    public function author()
     {
         return $this->belongsTo(AuthorModel::class, 'author_id', 'id');
     }
@@ -42,13 +65,13 @@ class ProductModel extends Model
         return $this->belongsTo(PublisherModel::class, 'publisher_id', 'id');
     }
 
-    /**
-     * Get the post that owns the comment.
-     */
-    public function discountModel()
-    {
-        return $this->belongsTo(DiscountModel::class, 'discount_id', 'id');
-    }
+    // /**
+    //  * Get the post that owns the comment.
+    //  */
+    // public function discountModel()
+    // {
+    //     return $this->belongsTo(DiscountModel::class, 'discount_id', 'id');
+    // }
 
      /**
      * Get the post that owns the comment.
@@ -76,5 +99,25 @@ class ProductModel extends Model
     public static function getAllProductByIdAuthor($author_id)
     {
         return  ProductModel::where('author_id', $author_id)->get(); 
+    }
+    
+    public static function getCount()
+    {
+        return ProductModel::count(); 
+    }
+
+    public static function getViewProduct()
+    {
+        return ProductModel::orderBy('view_count', 'DESC')->get(); 
+    }
+
+    public static function getProductWithDiscount()
+    {
+        return ProductModel::orderBy('sale','desc')->first();
+    }
+
+    public static function getProductTopView()
+    {
+        return ProductModel::orderBy('view_count', 'DESC')->take(10)->get(); 
     }
 }

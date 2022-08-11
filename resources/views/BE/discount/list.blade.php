@@ -74,7 +74,7 @@
                     <tr>
                         <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
                         <td>{{$value['name']}}</td>
-                        <td>{{number_format($value['price']).' '.'VND'}}</td>
+                        <td>{{($value['price']).' '.'%'}}</td>
                         <td><span class="text-ellipsis">
                             @if($value['status']>0)
                             <a href="/admin/discount/disable_status/{{$value['id']}}"><span

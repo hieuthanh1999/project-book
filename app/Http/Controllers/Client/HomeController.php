@@ -17,6 +17,7 @@ use App\Models\PublisherModel;
 
 class HomeController extends Controller
 {
+    
       /**
      * Display a listing of the resource.
      *
@@ -25,8 +26,12 @@ class HomeController extends Controller
     public function index()
     {
         $list_product_new = ProductModel::getAll()->take(5);
+        $product_sale = ProductModel::getProductWithDiscount();
+        $product_top_view = ProductModel::getProductTopView();
         return BasicClass::handlingView('FE.layout', [
-            'list_product_new'=> $list_product_new
+            'list_product_new'=> $list_product_new,
+            'product_sale' => $product_sale,
+            'product_top_view' => $product_top_view
         ]);
     }
 
@@ -49,6 +54,7 @@ class HomeController extends Controller
         $authors = AuthorModel::getAuthor($product_details['author_id']); 
         $sub_category_details = SubCategoryModel::getSub($id);
         $list_product = ProductModel::getProductRelated($product_details['author_id'], $product_details['id']);  
+        $product_details->increment('view_count');
         //return view('FE.layouts.product_details', compact('categorys', 'sub_categorys', 'banners', 'product_details', 'sub_category_details', 'authors', 'sizes', 'publishers'));
         return BasicClass::handlingView('FE.layouts.product_details',[
             'product_details'=> $product_details, 'sizes' => $sizes, 'publishers' => $publishers,
@@ -61,6 +67,7 @@ class HomeController extends Controller
         $author_details = AuthorModel::getAuthor($id); 
         $list_product =  ProductModel::getAllProductByIdAuthor($id);
         $count_book =  $list_product->count();
+        $author_details->increment('view_count');
         //return view('FE.layouts.product_details', compact('categorys', 'sub_categorys', 'banners', 'product_details', 'sub_category_details', 'authors', 'sizes', 'publishers'));
         return BasicClass::handlingView('FE.layouts.author_details',[
             'author_details'=> $author_details,

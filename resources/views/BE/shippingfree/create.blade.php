@@ -26,7 +26,7 @@
                         <div class="form-group">
                             <label for="exampleInputPassword1">Nội thành</label>
                             <select name="provinceid" class="form-control input-sm m-bot15">
-                                <option value="1">Nội thành</option>
+                                <option value="01TTT">Nội thành</option>
                                 <option value="0">Ngoại thành</option>
                             </select>
                         </div>

@@ -4,7 +4,7 @@
 <!-- page start-->
 <div class="row">
     <div class="col-lg-12">
-        <section class="panel">
+        <div class="agile-grid">
             <header class="panel-heading">
                 Thêm
             </header>
@@ -48,7 +48,7 @@
                 </div>
 
             </div>
-        </section>
+        </div>
     </div>
 </div>
 

@@ -186,8 +186,16 @@
                             </span>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Mã giảm giá</label>
-                            <select name="discount_id" class="form-control input-sm m-bot15">
+                            <label for="exampleInputPassword1">Giảm giá (%)</label>
+                            <input type="text" name="sale" class="form-control" id=""
+                                placeholder="Nhập %">
+                                <span>
+                                @if($errors->has('sale'))
+                                <div class="alert alert-danger">
+                                    {{$errors->first('sale')}}
+                                </div>
+                                @endif
+                            <!-- <select name="discount_id" class="form-control input-sm m-bot15">
                                 @foreach($discount as $value)
                                     @if($values['sub_category_id'] == $value['id'])
                                         <option selected value="{{$value['id']}}">{{$value['name']}}</option>
@@ -195,7 +203,7 @@
                                         <option value="{{$value['id']}}">{{$value['name']}}</option>
                                     @endif
                                 @endforeach
-                            </select>
+                            </select> -->
 
                         </div>
 

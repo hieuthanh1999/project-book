@@ -15,7 +15,7 @@
                 <div class="row justify-content-center">
                     <div class="col-md-8">
                         <div class="card">
-                            <div class="card-header">{{ __('Đăng ký') }}</div>
+                            <div style="text-align: center;" class="card-header">{{ __('Đăng ký') }}</div>
 
                             <div class="card-body">
                                 <form method="POST" action="{{ route('register') }}">
@@ -58,13 +58,13 @@
                                         <label for="password"
                                             class="col-md-4 col-form-label text-md-end">{{ __('Tỉnh/Thành') }}</label>
                                         <div class="col-md-6">
-               
                                             <select
-                                                class="form-control m-bot15 @error('province_id') is-invalid @enderror" id="country_id" name="province_id">
+                                                class="form-control m-bot15 @error('province_id') is-invalid @enderror"
+                                                id="country_id" name="province_id">
                                                 <option value="" selected>Tỉnh/Thành</option>
                                                 @foreach($countries as $country)
-                                                
-                                                <option value="{{ $country['provinceid'] }}">{{ $country->name }}</option>
+
+                                                <option value="{{ $country->provinceid }}">{{ $country->name }}</option>
                                                 @endforeach
                                             </select>
                                             @error('province_id')
@@ -79,9 +79,9 @@
                                             class="col-md-4 col-form-label text-md-end">{{ __('Quận/Huyện') }}</label>
                                         <div class="col-md-6">
                                             <select
-                                                class="form-control m-bot15 @error('district_id') is-invalid @enderror" id="state_id" name="district_id">
-                                                <option value="" selected>Quận/Huyện</option>
-            
+                                                class="form-control m-bot15 @error('district_id') is-invalid @enderror"
+                                                id="state_id" name="district_id">
+
                                             </select>
                                             @error('district_id')
                                             <span class="invalid-feedback" role="alert">
@@ -92,13 +92,11 @@
                                     </div>
 
                                     <div class="row mb-3" id="address" style="display: none">
-                 
+
                                         <label for="password"
                                             class="col-md-4 col-form-label text-md-end">{{ __('Xã/Ngõ/Số nhà') }}</label>
                                         <div class="col-md-6">
-                                            <textarea name="address" id="address" class="form-control" rows="3">
-                                    {{ old('address') }}
-                                </textarea>
+                                            <input name="address" id="address" class="form-control" value="{{ old('address') }}"/>
                                             @if ($errors->has('address'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('address') }}</strong>
@@ -155,10 +153,17 @@
                                     </div>
 
                                     <div class="row mb-0">
-                                        <div class="col-md-6 offset-md-4">
-                                            <button type="submit" class="btn btn-primary">
+                                        <div class="col-md-12 " style="    text-align: center;">
+                                            <button type="submit" class="btn btn-primary" style="margin-right: 20px">
                                                 {{ __('Đăng ký') }}
                                             </button>
+
+                                            <a href="{{ route('login') }}" class="btn btn-primary">
+                                                {{ __('Đăng nhập') }}
+                                            </a>
+                                        </div>
+                                        <div class="col-md-12 " style="text-align: center;">
+                                            
                                         </div>
                                     </div>
                                 </form>
@@ -168,7 +173,8 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 </main>
+
 @endsection

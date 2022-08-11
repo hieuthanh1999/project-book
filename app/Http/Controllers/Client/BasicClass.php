@@ -11,6 +11,8 @@ use App\Models\ProductModel;
 use App\Models\AuthorModel;
 use App\Models\SizeModel;
 use App\Models\PublisherModel;
+use App\Models\DistrictModel;
+use App\Models\ProvinceModel;
 
 class BasicClass extends Controller
 {
@@ -18,6 +20,8 @@ class BasicClass extends Controller
     static public $sub_categorys =array();
     static public $banners    =array();
     static public $authors_all    =array();
+    static public $states    =array();
+    static public $countries    =array();
 
 
     public function __construct()
@@ -26,6 +30,8 @@ class BasicClass extends Controller
         BasicClass::$sub_categorys = SubCategoryModel::getAll(); 
         BasicClass::$banners = BannerModel::getAll(); 
         BasicClass::$authors_all = AuthorModel::getAll(); 
+        BasicClass::$states = DistrictModel::all();
+        BasicClass::$countries = ProvinceModel::all();
 
     }
 
@@ -36,6 +42,8 @@ class BasicClass extends Controller
                         'sub_categorys'   => BasicClass::$sub_categorys,
                         'banners'      => BasicClass::$banners,
                         'authors_all'      => BasicClass::$authors_all,
+                        'states'      => BasicClass::$states,
+                        'countries'      => BasicClass::$countries,
                     ];  
         return view($viewLayout,array_merge($arrayDefault,$arrayValue));
     }

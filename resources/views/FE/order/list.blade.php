@@ -1,0 +1,238 @@
+@extends('FE.layout_cart')
+@section('content')
+<div class="container">
+    <div class="row justify-content-center" style="display: block">
+        <div class="   text-center p-0 mt-3 mb-2">
+            <div class="card-c px-0 pt-4 pb-0 mt-3 mb-3">
+                <div class="check-logo">
+                    <p class="text-logo" style="margin: 20px 0">Đặt hàng cùng Kim Đồng ngay hôm nay để nhận được nhiều khuyến mãi hấp dẫn</p>
+                </div>
+                <form action="{{ route('storeOrder') }}" id="msform" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="fee_price" value="{{$fee_price['id']}}"/>
+                    <!-- progressbar -->
+                    <ul id="progressbar">
+                        <li class="active" id="account"><strong>Thông tin thanh toán</strong></li>
+                        <li id="payment"><strong>Thanh toán & đặt mua</strong></li>
+                        <li id="confirm"><strong>Hoàn thành</strong></li>
+                    </ul>
+                    <fieldset>
+                        <div class="form-card">
+                            @php
+                            if (Auth::guest()){
+                            $name='';
+                            $phone='';
+                            $address='';
+                            $province_id ='';
+                            $district_id ='';
+                            }else{
+                            $name = Auth::user()->name;
+                            $phone = Auth::user()->phone;
+                            $address = Auth::user()->address;
+                            $province_id = Auth::user()->province_id;
+                            $district_id = Auth::user()->district_id;
+                            }
+                            @endphp
+                            <div class="row">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <label class="fieldlabels col-3">Họ và tên:</label>
+                                        <input disabled id="huhu-name" name="order_name" type="text" class="col-8"
+                                            placeholder="" value="{{$name}}" />
+                                        {{--  tên  --}}
+
+                                        <label class="fieldlabels col-3">Số điện thoại nhận hàng:</label>
+                                        <input disabled id="first-name" type="number" name="order_phone"
+                                            value="{{$phone}}" class="col-8" placeholder="" />
+                                        {{--  sđt nhận hàng  --}}
+
+                                        <label class="fieldlabels col-3">Tỉnh/Thành phố:</label>
+                                        @foreach($countries as $country)
+                                        @if($country->provinceid == $province_id)
+                                        <input disabled id="checkprice" type="text" name="order_city"
+                                            value="{{ $country->name }}" class="col-8" placeholder="" />
+                                        @endif
+
+                                        @endforeach
+
+                                        <label class="fieldlabels col-3">Quận/Huyện: </label>
+                                        @foreach($states as $state)
+                                        @if($state->districtid == $district_id)
+                                        <input disabled id="checkprice" type="text" name="order_city"
+                                            value="{{ $state->name }}" class="col-8" placeholder="" />
+                                        @endif
+                                        @endforeach
+
+
+                                        <label class="fieldlabels col-3">Địa chỉ:</label>
+                                        <input id="adress" disabled type="text" name="order_address"
+                                            value="{{$address}}" class="col-8" placeholder="" />
+                                        {{--  địa chỉ  --}}
+                                    </div>
+
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div>
+
+                        </div> <input type="button" id="submit" name="next" class="next action-button"
+                            value="Tiếp theo" />
+                    </fieldset>
+
+                    <fieldset>
+                        <div class="form-card">
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-10">
+                                    <div class="small-container  cart-page2 ">
+                                        <div class="row">
+                                            <div class="col-md-10">
+                                                <table style="text-align:center">
+                                                    <tr>
+                                                        <th style="text-align: center">Tên sản phẩm</th>
+                                                        <th style="text-align: center">Hình ảnh</th>
+                                                        <th style="text-align: center">Số lượng</th>
+                                                        <th style="text-align: center">Giá</th>
+                                                    </tr>
+                                                    @foreach (Cart::content() as $item)
+                                                    <tr>
+                                                        <td style="text-align: center">
+                                                            {{ $item->name }}
+                                                        </td>
+                                                        <td style="text-align: center">
+                                                            <div class="cart-info" style="justify-content: center">
+
+                                                                <img style="height: 200px; width: 150px; object-fit: contain;"
+                                                                    src="{{URL::asset('image/product/'. $item->options->image )}}"
+                                                                    alt="">
+                                                            </div>
+
+                                                        </td style="text-align: center">
+
+                                                        <td style="text-align: center">{{ $item->qty }}</td>
+
+                                                        <td style="text-align: center">
+                                                            {{ number_format($item->price).' '.'VND'}}</td>
+                                                    </tr>
+                                                    @endforeach
+                                                </table>
+                                                <div class="total-price2">
+                                                    <table>
+                                                        <tr>
+                                                            <td>Tổng tiền</td>
+                                                            <td style="text-align: center">
+                                                                {{(number_format(Cart::subTotal())).' '.'VND'}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Phí vận chuyển</td>
+                                                            <td style="text-align: center">
+                                                                {{number_format($fee_price['price']).' '.'VND' }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Thành tiền</td>
+                                                            <td style="text-align: center">
+                                                                {{number_format(Cart::subTotal() + $fee_price['price']).' '.'VND'}}
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2"></div>
+                            </div>
+                        </div>
+                        <input type="button" name="previous" class="previous action-button-previous" value="Quay lại" />
+                        <input type="submit" name="next" class="next action-button" value="Đặt hàng" />
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+$(document).ready(function() {
+
+    var current_fs, next_fs, previous_fs; //fieldsets
+    var opacity;
+    var current = 1;
+    var steps = $("fieldset").length;
+
+    setProgressBar(current);
+
+    $(".next").click(function() {
+
+        current_fs = $(this).parent();
+        next_fs = $(this).parent().next();
+        console.log($("fieldset").index(next_fs));
+        //Add Class Active
+        $("#progressbar li").eq($("fieldset").index(next_fs) - 1).addClass("active");
+        //show the next fieldset
+        next_fs.show();
+        //hide the current fieldset with style
+        current_fs.animate({
+            opacity: 0
+        }, {
+            step: function(now) {
+                // for making fielset appear animation
+                opacity = 1 - now;
+
+                current_fs.css({
+                    'display': 'none',
+                    'position': 'relative'
+                });
+                next_fs.css({
+                    'opacity': opacity
+                });
+            },
+            duration: 500
+        });
+        setProgressBar(++current);
+    });
+
+    $(".previous").click(function() {
+
+        current_fs = $(this).parent();
+        previous_fs = $(this).parent().prev();
+
+        //Remove class active
+        $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+        //show the previous fieldset
+        previous_fs.show();
+
+        //hide the current fieldset with style
+        current_fs.animate({
+            opacity: 0
+        }, {
+            step: function(now) {
+                // for making fielset appear animation
+                opacity = 1 - now;
+
+                current_fs.css({
+                    'display': 'none',
+                    'position': 'relative'
+                });
+                previous_fs.css({
+                    'opacity': opacity
+                });
+            },
+            duration: 500
+        });
+        setProgressBar(--current);
+    });
+
+    function setProgressBar(curStep) {
+        var percent = parseFloat(100 / steps) * curStep;
+        percent = percent.toFixed();
+        $(".progress-bar")
+            .css("width", percent + "%")
+    }
+
+
+});
+</script>
+@endsection

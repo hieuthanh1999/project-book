@@ -21,15 +21,19 @@
                                             src="{{URL::asset('image/product/'.$value['image'])}}"
                                             alt="image description"></div>
                                 </div>
+                                @guest
+
+                                @else
                                 <form action="{{ route('addWish') }}" method="post">
-                                @csrf
-                                <input type="hidden" name="id" value="{{ $value['id'] }}">
-                                <button class="tg-btnaddtowishlist" type="submit" >
-                                    <i class="icon-heart"></i>
-                                    <span>Yêu thích</span>
-                                </button>
-                            </form>
-                               
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{ $value['id'] }}">
+                                    <button class="tg-btnaddtowishlist" type="submit">
+                                        <i class="icon-heart"></i>
+                                        <span>Yêu thích</span>
+                                    </button>
+                                </form>
+                                @endguest
+
                             </figure>
                             <div class="tg-postbookcontent">
                                 <ul class="tg-bookscategories">
@@ -56,20 +60,35 @@
                                 </span>
                                 <!-- <span class="tg-stars"><span></span></span> -->
                                 <span class="tg-bookprice">
-                                <ins>{{number_format($value['price']).' '.'VND'}}</ins>
+                                    <ins>{{number_format($value['price']).' '.'VND'}}</ins>
                                 </span>
-                                <form action="{{ route('addCart') }}" method="post">
-                                    @csrf
-                                    <input type="hidden" name="quantity" value="1">
-                                    <input type="hidden" name="id" value="{{ $value['id'] }}">
-                                    <button type="submit" class="tg-btn tg-btnstyletwo" >
-                                    <i class="fa fa-shopping-basket"></i>
-                                    <em>Thêm vào giỏ</em>
-                                    </button>
-                                </form>
-                                <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
-                                   
-                                </a>
+                            
+
+                                    @if (Auth::check())
+                                    @if ($value['quantity'] > 0)
+                                        <form action="{{ route('addCart') }}" method="post">
+                                        @csrf
+                                            <input type="hidden" name="quantity" value="1">
+                                            <input type="hidden" name="id" value="{{ $value['id'] }}">
+                                            <button type="submit" class="tg-btn tg-btnstyletwo">
+                                                <i class="fa fa-shopping-basket"></i>
+                                                <em>Thêm vào giỏ</em>
+                                            </button>
+                                        </form>
+                                    @else
+                                    <button class="tg-btn tg-btnstyletwo">Đã hết hàng</button>
+                                    @endif
+                                    @else
+                                  
+                                        <button  onclick="alert('Bạn phải đăng nhập')"class="tg-btn tg-btnstyletwo">
+                                                <i class="fa fa-shopping-basket"></i>
+                                                <em>Thêm vào giỏ</em>
+                                            </button>
+                                    @endif
+
+
+                                
+
                             </div>
                         </div>
                     </div>

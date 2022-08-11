@@ -1,132 +1,77 @@
 <footer id="tg-footer" class="tg-footer tg-haslayout">
-            <div class="tg-footerarea">
-                <div class="container">
-                    <div class="row">
-                       
-                        <div class="tg-threecolumns">
-                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                                <div class="tg-footercol">
-                                    <strong class="tg-logo"><a href="javascript:void(0);"><img src="images/flogo.png"
-                                                alt="image description"></a></strong>
-                                    <ul class="tg-contactinfo">
-                                        <li>
-                                            <i class="icon-apartment"></i>
-                                            <address>Suit # 07, Rose world Building, Street # 02, AT246T Manchester
-                                            </address>
-                                        </li>
-                                        <li>
-                                            <i class="icon-phone-handset"></i>
-                                            <span>
-                                                <em>0800 12345 - 678 - 89</em>
-                                                <em>+4 1234 - 4567 - 67</em>
-                                            </span>
-                                        </li>
-                                        <li>
-                                            <i class="icon-clock"></i>
-                                            <span>Serving 7 Days A Week From 9am - 5pm</span>
-                                        </li>
-                                        <li>
-                                            <i class="icon-envelope"></i>
-                                            <span>
-                                                <em><a href="mailto:support@domain.com">support@domain.com</a></em>
-                                                <em><a href="mailto:info@domain.com">info@domain.com</a></em>
-                                            </span>
-                                        </li>
-                                    </ul>
-                                    <ul class="tg-socialicons">
-                                        <li class="tg-facebook"><a href="javascript:void(0);"><i
-                                                    class="fa fa-facebook"></i></a></li>
-                                        <li class="tg-twitter"><a href="javascript:void(0);"><i
-                                                    class="fa fa-twitter"></i></a></li>
-                                        <li class="tg-linkedin"><a href="javascript:void(0);"><i
-                                                    class="fa fa-linkedin"></i></a></li>
-                                        <li class="tg-googleplus"><a href="javascript:void(0);"><i
-                                                    class="fa fa-google-plus"></i></a></li>
-                                        <li class="tg-rss"><a href="javascript:void(0);"><i class="fa fa-rss"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                                <div class="tg-footercol tg-widget tg-widgetnavigation">
-                                    <div class="tg-widgettitle">
-                                        <h3>Shipping And Help Information</h3>
-                                    </div>
-                                    <div class="tg-widgetcontent">
-                                        <ul>
-                                            <li><a href="javascript:void(0);">Terms of Use</a></li>
-                                            <li><a href="javascript:void(0);">Terms of Sale</a></li>
-                                            <li><a href="javascript:void(0);">Returns</a></li>
-                                            <li><a href="javascript:void(0);">Privacy</a></li>
-                                            <li><a href="javascript:void(0);">Cookies</a></li>
-                                            <li><a href="javascript:void(0);">Contact Us</a></li>
-                                            <li><a href="javascript:void(0);">Our Affiliates</a></li>
-                                            <li><a href="javascript:void(0);">Vision &amp; Aim</a></li>
-                                        </ul>
-                                        <ul>
-                                            <li><a href="javascript:void(0);">Our Story</a></li>
-                                            <li><a href="javascript:void(0);">Meet Our Team</a></li>
-                                            <li><a href="javascript:void(0);">FAQ</a></li>
-                                            <li><a href="javascript:void(0);">Testimonials</a></li>
-                                            <li><a href="javascript:void(0);">Join Our Team</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                                <div class="tg-footercol tg-widget tg-widgettopsellingauthors">
-                                    <div class="tg-widgettitle">
-                                        <h3>Top Selling Authors</h3>
-                                    </div>
-                                    <div class="tg-widgetcontent">
-                                        <ul>
-                                            <li>
-                                                <figure><a href="javascript:void(0);"><img
-                                                            src="images/author/imag-09.jpg" alt="image description"></a>
-                                                </figure>
-                                                <div class="tg-authornamebooks">
-                                                    <h4><a href="javascript:void(0);">Jude Morphew</a></h4>
-                                                    <p>21,658 Published Books</p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <figure><a href="javascript:void(0);"><img
-                                                            src="images/author/imag-10.jpg" alt="image description"></a>
-                                                </figure>
-                                                <div class="tg-authornamebooks">
-                                                    <h4><a href="javascript:void(0);">Shaun Humes</a></h4>
-                                                    <p>20,257 Published Books</p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <figure><a href="javascript:void(0);"><img
-                                                            src="images/author/imag-11.jpg" alt="image description"></a>
-                                                </figure>
-                                                <div class="tg-authornamebooks">
-                                                    <h4><a href="javascript:void(0);">Kathrine Culbertson</a></h4>
-                                                    <p>15,686 Published Books</p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    <div class="tg-footerarea">
+        <div class="container">
+            <div class="row">
+
+                <div class="tg-threecolumns" style="padding: 30px 0;">
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                        <ul class="tg-contactinfo">
+                            <li>
+                                <i class="icon-apartment"></i>
+                                <address>Đồng Nhân, Hải Bối, Đông Anh, Hà Nội
+                                </address>
+                            </li>
+                            <li>
+                                <i class="icon-phone-handset"></i>
+                                <span>
+                                    <em>0355668062</em>
+                                </span>
+                            </li>
+                            <li>
+                                <i class="icon-clock"></i>
+                                <span>Mở cửa: 7:00 - 21:00</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                        <ul class="tg-contactinfo">
+
+                          
+                        </ul>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <ul class="tg-contactinfo">
+
+                           
+
+                        </ul>
                     </div>
                 </div>
             </div>
-          
-            <div class="tg-footerbar">
-                <a id="tg-btnbacktotop" class="tg-btnbacktotop" href="javascript:void(0);"><i
-                        class="icon-chevron-up"></i></a>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <span class="tg-paymenttype"><img src="images/paymenticon.png"
-                                    alt="image description"></span>
-                            <span class="tg-copyright">2017 All Rights Reserved By &copy; Book Library</span>
-                        </div>
+            <div class="row">
+                <div class="tg-threecolumns" style="padding: 0 0 30px;">
+                    <div class="col-lg-12 col-sm-6 col-md-4 col-lg-4">
+                            <ul class="tg-socialicons">
+                                <li class="tg-facebook"><a href="javascript:void(0);"><i class="fa fa-facebook"></i></a>
+                                </li>
+                                <li class="tg-twitter"><a href="javascript:void(0);"><i class="fa fa-twitter"></i></a>
+                                </li>
+                                <li class="tg-linkedin"><a href="javascript:void(0);"><i class="fa fa-linkedin"></i></a>
+                                </li>
+                                <li class="tg-googleplus"><a href="javascript:void(0);"><i
+                                            class="fa fa-google-plus"></i></a></li>
+                                <li class="tg-rss"><a href="javascript:void(0);"><i class="fa fa-rss"></i></a>
+                                </li>
+                            </ul>
                     </div>
                 </div>
             </div>
-        </footer>
+        </div>
+    </div>
+
+    <div class="tg-footerbar">
+        <a id="tg-btnbacktotop" class="tg-btnbacktotop" href="javascript:void(0);"><i class="icon-chevron-up"></i></a>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <span class="tg-paymenttype">
+                        <i class="fa fa-facebook"></i>
+                        <i class="fa fa-instagram"></i>
+                        <i class="fa fa-google-plus"></i>
+                    </span>
+                    <span class="tg-copyright">2021 &copy; Hồng</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

@@ -6,30 +6,30 @@ use Illuminate\Http\Request;
 use App\Models\ProductModel;
 use Cart;
 use Session;
+use App\Models\WishListModel;
+use Illuminate\Support\Facades\Auth;
 
 class WishlistController extends Controller
 {
-    public function save_wishlist(Request $request)
+    public function __construct()
     {
-        // $id = $request->input('id');
-        // $quantity = $request->input('quantity');
-        // $product = ProductModel::find($id);
-        // $name = $product->name;
-        // $image = $product->image;
-        // $price = $product->price;
-        // $weight = $product->weight;
+        $this->middleware('level');
+    }
+    
+    public function save(Request $request)
+    {
+        WishListModel::create([
+            'user_id' => Auth::user()->id,
+            'product_id' => $request->input('id'),
+        ]);
 
-        // $data = [
-        //     'id' => $id,
-        //     'qty' => $quantity,
-        //     'name' => $name,
-        //     'price' => $price,
-        //     'weight' => $weight,
-        //     'options' => [
-        //         'image' => $image,
-        //     ],
-        // ];
-        // Cart::add($data);
+        return redirect()->back();
+    }
+
+    public function delete($id)
+    {
+        $wish = WishListModel::findOrFail($id);
+        $wish->delete();
 
         return redirect()->back();
     }

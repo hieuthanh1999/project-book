@@ -65,8 +65,8 @@ jQuery(document).on('ready', function() {
 			0: { items:1 },
 			480: { items:2 },
 			600: { items:3 },
-			1000: { items:4 },
-			1200: { items:4 },
+			1000: { items:5 },
+			1200: { items:6 },
 		}
 	});
 	/*--------------------------------------
@@ -114,6 +114,26 @@ jQuery(document).on('ready', function() {
 	--------------------------------------*/
 	var _tg_pickedbyauthorslider = jQuery('#tg-pickedbyauthorslider');
 	_tg_pickedbyauthorslider.owlCarousel({
+		nav: true,
+		loop: true,
+		dots: true,
+		navText: [
+					'<i class="icon-chevron-left"></i>',
+					'<i class="icon-chevron-right"></i>'
+				],
+		navClass: [
+					'owl-prev tg-btnround tg-btnprev',
+					'owl-next tg-btnround tg-btnnext'
+				],
+		responsive: {
+			0: { items:1 },
+			768: { items:2 },
+			992: { items:3 },
+		}
+	});
+
+	var _tg_pickedbyauthorslider2= jQuery('#tg-pickedbyauthorslider2');
+	_tg_pickedbyauthorslider2.owlCarousel({
 		nav: true,
 		loop: true,
 		dots: true,
@@ -264,10 +284,14 @@ jQuery(document).on('ready', function() {
 		if(parseInt(jQuery('#quantity1').val()) < 2){
 		}else{
 			jQuery('#quantity1').val(parseInt(jQuery('#quantity1').val(), 10) - 1);
+			jQuery('#qty_cart').val(jQuery('#quantity1').val());
 		}
 		
 	});
 	jQuery('em.plus').on('click', function () {
-		jQuery('#quantity1').val(parseInt(jQuery('#quantity1').val(), 10) + 1);
+		if(parseInt(jQuery('#quantity1').val()) < parseInt(jQuery('#quantity1').attr('max'))){
+			jQuery('#quantity1').val(parseInt(jQuery('#quantity1').val(), 10) + 1);
+			jQuery('#qty_cart').val(jQuery('#quantity1').val());
+		}
 	});
 });
