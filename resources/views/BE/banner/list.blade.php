@@ -64,7 +64,7 @@
                         <th>Hinh Anh</th>
                         <th>Trạng thái</th>
                         <th>Ngày tạo</th>
-                        <th>Chức năng</th>
+                        <th><a href="{{URL::to('admin/banner/create')}}"><i class="fa fa-plus-square fa-lg"></i></a></th>
                         <th style="width:30px;"></th>
                     </tr>
                 </thead>

@@ -8,13 +8,13 @@
                         <ul class="tg-contactinfo">
                             <li>
                                 <i class="icon-apartment"></i>
-                                <address>Đồng Nhân, Hải Bối, Đông Anh, Hà Nội
+                                <address>{{$admin->address}}, {{$admin->district->name}}, {{$admin->province->name}}
                                 </address>
                             </li>
                             <li>
                                 <i class="icon-phone-handset"></i>
                                 <span>
-                                    <em>0355668062</em>
+                                    <em>{{$admin->phone}}</em>
                                 </span>
                             </li>
                             <li>

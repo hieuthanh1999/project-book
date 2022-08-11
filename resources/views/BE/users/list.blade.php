@@ -90,9 +90,9 @@
                         </td>
                         <td><span class="text-ellipsis">{{$value['created_at']}}</span></td>
                         <td>
-                            <a href="/admin/sub-category/update/{{$value['id']}}" class="active x" ui-toggle-class="">
+                            <!-- <a href="/admin/sub-category/update/{{$value['id']}}" class="active x" ui-toggle-class="">
                                 <i class="fa fa-pencil-square-o text-success text-active"></i>
-                            </a>
+                            </a> -->
                             <!-- 
 
                             <a onclick="return confirm('Xác nhận xóa?')" href="/admin/sub-category/delete/{{$value['id']}}"
@@ -121,9 +121,9 @@
                         </td>
                         <td><span class="text-ellipsis">{{$value['created_at']}}</span></td>
                         <td>
-                            <a href="/admin/sub-category/update/{{$value['id']}}" class="active x" ui-toggle-class="">
+                            <!-- <a href="/admin/sub-category/update/{{$value['id']}}" class="active x" ui-toggle-class="">
                                 <i class="fa fa-pencil-square-o text-success text-active"></i>
-                            </a>
+                            </a> -->
                             <!-- 
 
                             <a onclick="return confirm('Xác nhận xóa?')" href="/admin/sub-category/delete/{{$value['id']}}"

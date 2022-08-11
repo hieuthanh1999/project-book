@@ -8,6 +8,7 @@ use App\Models\CategoryModel;
 use App\Models\User;
 use App\Models\ProductModel;
 use App\Models\OrdersModel;
+use App\Models\OrderDetailsModel;
 use Illuminate\Support\Facades\Redirect;
 use Auth;
 
@@ -29,6 +30,9 @@ class HomeController extends Controller
         $count_product = ProductModel::getCount();
         $count_order = OrdersModel::getCount();
         $list_product_view = ProductModel::getViewProduct();        
-        return view('BE.dash_board', compact('count_user', 'count_product', 'count_order', 'list_product_view'));
+        $list_product_buy = OrderDetailsModel::getProductTopBuy(); 
+        $list_product_rate = ProductModel::getProductTopRate();  
+        // dd( $list_product_rate);
+        return view('BE.dash_board', compact('count_user', 'count_product', 'count_order', 'list_product_view', 'list_product_buy', 'list_product_rate'));
     }
 }

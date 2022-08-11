@@ -54,8 +54,11 @@ class LoginController extends Controller
             else if($user->level==1||$user->level==2)
                 return Redirect::to('admin/');
             
-        }else
-            return 'Mật khẩu sai,Không tồn tại hoặc đã bị xóa';
+        }else{
+            session()->flash('delete', 'Mật khẩu sai,Không tồn tại hoặc đã bị xóa');
+         
+            return back();
+        }
         
     }
 }

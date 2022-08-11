@@ -80,6 +80,12 @@ class User extends Authenticatable
         return User::where('level', 0)->count(); 
     }
 
+    public static function getAdmin()
+    {
+        return User::where('level', 2)->limit(1)->first(); 
+    }
+
+
     public function reviews()
     {
         return $this->hasMany(ReviewsModel::class, 'user_id');

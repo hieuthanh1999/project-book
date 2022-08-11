@@ -7,7 +7,7 @@
                         <li>
                             <a href="javascript:void(0);">
                                 <i class="icon-envelope"></i>
-                                <em>Email: n.hieuthanhps@gmail.com</em>
+                                <em>{{$admin->email}}</em>
                             </a>
                         </li>
                         

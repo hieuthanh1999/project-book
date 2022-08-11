@@ -105,8 +105,13 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputFile">Hình ảnh</label>
-                            <input type="file" id="exampleInputFile" name="image" value="{{$values['image']}}"/>
-                            <img style="margin-top: 10px; object-fit: contain;"  height="300" width="300" src="{{asset('image/product/'.$values['image'])}}" alt="" />
+                            <!-- <input type="file" id="exampleInputFile" name="image" value="{{$values['image']}}"/> -->
+
+                            <input type="file" name="image" id="avatarfile" class="form-control file-upload" value="{{$values['image']}}" />
+                            <img id="avatar" src="{{asset('image/product/'.$values['image'])}}" class="avatar img-thumbnail" alt="thumnail"
+                                style="max-width: 200px; margin-top: 2px;">
+
+                            <!-- <img style="margin-top: 10px; object-fit: contain;"  height="300" width="300" src="{{asset('image/product/'.$values['image'])}}" alt="" /> -->
                             <span>
                                 @if($errors->has('image'))
                                 <div class="alert alert-danger">
@@ -216,4 +221,26 @@
         </section>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        var readURL = function(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('.avatar').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $(".file-upload").on('change', function() {
+            readURL(this);
+        });
+
+        $('#avatar').on('click', function() {
+            $('#avatarfile').trigger('click');
+        });
+    });
+    </script>
 @endsection

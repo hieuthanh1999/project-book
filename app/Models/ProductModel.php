@@ -120,4 +120,11 @@ class ProductModel extends Model
     {
         return ProductModel::orderBy('view_count', 'DESC')->take(10)->get(); 
     }
+
+    public static function getProductTopRate()
+    {
+        // $rate = ReviewsModel::orderBy('id', 'DESC')->with('product')->get();
+        // return ProductModel::orderBy('id', 'DESC')->with('reviews')->avg('rate')->take(10)->get(); 
+    }
+
 }

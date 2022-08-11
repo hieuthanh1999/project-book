@@ -289,11 +289,21 @@ Route::prefix('admin')->group(function () {
     });
 });
 
-
-
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Route::get('/', function () {
+//     return view('showNotification');
+// });
+
+// Route::get('getPusher', function (){
+//    return view('form_pusher');
+// });
+
+// Route::get('/pusher', function(Illuminate\Http\Request $request) {
+//     event(new App\Events\HelloPusherEvent($request));
+//     return redirect('getPusher');
+// });

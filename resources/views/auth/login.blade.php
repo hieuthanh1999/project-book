@@ -14,15 +14,18 @@
                     <div class="col-md-6">
                         <div class="card">
                             <div style="    text-align: center;" class="card-header">{{ __('Đăng nhập') }}</div>
-
+                            @if(session()->has('delete'))
+                                    <div class="alert alert-danger" style="text-align: center; padding: 10px;" role="alert">
+                                        {{session()->get('delete')}}
+                                    </div>
+                                    @endif
                             <div class="card-body">
                                 <form method="POST" action="{{ route('login') }}">
                                     @csrf
-
+                                  
                                     <div class="row mb-3">
                                         <label for="email"
                                             class="col-md-4 col-form-label text-md-end">{{ __('Email') }}</label>
-
                                         <div class="col-md-6">
                                             <input id="email" type="email"
                                                 class="form-control @error('email') is-invalid @enderror" name="email"
@@ -71,10 +74,13 @@
                                             <button type="submit" class="btn btn-primary">
                                                 {{ __('Đăng nhập') }}
                                             </button>
-                                          
+
                                         </div>
                                         <div class="col-md-12" style="    text-align: center;">
-                                        <a class="btn btn-link" href="{{ route('register') }}">
+                                            <a class="btn btn-link" href="/">
+                                                {{ __('Trang chủ') }}
+                                            </a>
+                                            <a class="btn btn-link" href="{{ route('register') }}">
                                                 {{ __('Đăng ký') }}
                                             </a>
                                             @if (Route::has('password.request'))
@@ -82,7 +88,7 @@
                                                 {{ __('Forgot Your Password?') }}
                                             </a>
                                             @endif
-                                            </div>
+                                        </div>
                                     </div>
                                 </form>
                             </div>

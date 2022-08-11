@@ -44,7 +44,12 @@
                                     @endif
                                     @endforeach
                                 </ul>
-                                <!-- <div class="tg-themetagbox"><span class="tg-themetag">sale</span></div> -->
+                              
+                                <div class="tg-themetagbox">
+                                @if($value->sale)<span class="tg-themetag">Giảm tới
+			                                {{$value->sale}}%</span>
+                                         @endif</div>
+                               
                                 <div class="tg-booktitle">
                                     <h3><a href="/chi-tiet-sach-{{$value['id']}}">{{$value['name']}}</a>
                                     </h3>
@@ -58,7 +63,13 @@
                                     @endforeach
 
                                 </span>
-                                <!-- <span class="tg-stars"><span></span></span> -->
+                                <!-- <div class="tg-ratingbox">
+                                    <div class="ratings">
+                                        <div class="empty-stars"></div>
+                                        <div class="full-stars" style="width:{{ $value->reviews->avg('rate') * 20 }}%">
+                                        </div>
+                                    </div>
+                                </div> -->
                                 <span class="tg-bookprice">
                                     <ins>{{number_format($value['price']).' '.'VND'}}</ins>
                                 </span>
@@ -80,10 +91,10 @@
                                     @endif
                                     @else
                                   
-                                        <button  onclick="alert('Bạn phải đăng nhập')"class="tg-btn tg-btnstyletwo">
+                                        <a  href="/login" class="tg-btn tg-btnstyletwo">
                                                 <i class="fa fa-shopping-basket"></i>
                                                 <em>Thêm vào giỏ</em>
-                                            </button>
+                                            </a>
                                     @endif
 
 

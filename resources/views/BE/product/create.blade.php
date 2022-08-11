@@ -27,8 +27,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Mã</label>
-                            <input type="text" name="code" class="form-control" id=""
-                                placeholder="Nhập tên sản phẩm">
+                            <input type="text" name="code" class="form-control" id="" placeholder="Nhập tên sản phẩm">
                             <span>
                                 @if($errors->has('code'))
                                 <div class="alert alert-danger">
@@ -39,8 +38,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tên</label>
-                            <input type="text" name="name" class="form-control" id=""
-                                placeholder="Nhập tên sản phẩm">
+                            <input type="text" name="name" class="form-control" id="" placeholder="Nhập tên sản phẩm">
                             <span>
                                 @if($errors->has('name'))
                                 <div class="alert alert-danger">
@@ -51,8 +49,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Giá</label>
-                            <input type="text" name="price" class="form-control" id=""
-                                placeholder="Nhập giá sản phẩm">
+                            <input type="text" name="price" class="form-control" id="" placeholder="Nhập giá sản phẩm">
                             <span>
                                 @if($errors->has('price'))
                                 <div class="alert alert-danger">
@@ -62,10 +59,9 @@
                             </span>
                         </div>
 
-                          <div class="form-group">
+                        <div class="form-group">
                             <label for="exampleInputEmail1">Khối lượng</label>
-                            <input type="text" name="weight" class="form-control" id=""
-                                placeholder="Nhập khối lượng">
+                            <input type="text" name="weight" class="form-control" id="" placeholder="Nhập khối lượng">
                             <span>
                                 @if($errors->has('weight'))
                                 <div class="alert alert-danger">
@@ -86,7 +82,7 @@
                                 @endif
                             </span>
                         </div>
-                    
+
                         <div class="form-group">
                             <label for="exampleInputEmail1">Số lượng</label>
                             <input type="text" name="quantity" class="form-control" id=""
@@ -101,7 +97,9 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputFile">Hình ảnh</label>
-                            <input type="file" id="exampleInputFile" name="image"/>
+                            <input type="file" name="image" id="avatarfile" class="form-control file-upload" />
+                            <img id="avatar" src="#" class="avatar img-thumbnail" alt="thumnail"
+                                style="max-width: 200px; margin-top: 2px;">
                             <span>
                                 @if($errors->has('image'))
                                 <div class="alert alert-danger">
@@ -170,21 +168,14 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Giảm giá (%)</label>
-                            <input type="text" name="sale" class="form-control" id=""
-                                placeholder="Nhập %">
-                                <span>
+                            <input type="text" name="sale" class="form-control" id="" placeholder="Nhập %">
+                            <span>
                                 @if($errors->has('sale'))
                                 <div class="alert alert-danger">
                                     {{$errors->first('sale')}}
                                 </div>
                                 @endif
                             </span>
-                            <!-- <select name="discount_id" class="form-control input-sm m-bot15">
-                                @foreach($discount as $value)
-                                <option value="{{$value['id']}}">{{$value['name']}}</option>
-                                @endforeach
-                            </select> -->
-
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Trạng Thái</label>
@@ -203,4 +194,26 @@
         </section>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        var readURL = function(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('.avatar').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $(".file-upload").on('change', function() {
+            readURL(this);
+        });
+
+        $('#avatar').on('click', function() {
+            $('#avatarfile').trigger('click');
+        });
+    });
+    </script>
 @endsection

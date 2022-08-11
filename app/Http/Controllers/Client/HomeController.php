@@ -14,6 +14,7 @@ use App\Models\ProductModel;
 use App\Models\AuthorModel;
 use App\Models\SizeModel;
 use App\Models\PublisherModel;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -28,10 +29,12 @@ class HomeController extends Controller
         $list_product_new = ProductModel::getAll()->take(5);
         $product_sale = ProductModel::getProductWithDiscount();
         $product_top_view = ProductModel::getProductTopView();
+        $admin = User::getAdmin();
         return BasicClass::handlingView('FE.layout', [
             'list_product_new'=> $list_product_new,
             'product_sale' => $product_sale,
-            'product_top_view' => $product_top_view
+            'product_top_view' => $product_top_view,
+            'admin' => $admin
         ]);
     }
 
