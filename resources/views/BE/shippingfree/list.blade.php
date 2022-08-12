@@ -63,7 +63,6 @@
                         <th>Tên phí</th>
                         <th>Khu vực</th>
                         <th>Giá tiền</th>
-                        <th>Ngày tạo</th>
                         <th>Chức năng</th>
                         <th style="width:30px;"></th>
                     </tr>
@@ -81,9 +80,8 @@
                             @endif
                         </span></td>
                         <td><span class="text-ellipsis">{{number_format($value['price']).' '.'VND'}}</span></td>    
-                        <td><span class="text-ellipsis">{{$value['created_at']}}</span></td>
                         <td>
-                            <a href="/admin/shipping-feea/update/{{$value['id']}}" class="active x" ui-toggle-class="">
+                            <a href="/admin/shipping-fee/update/{{$value['id']}}" class="active x" ui-toggle-class="">
                                 <i class="fa fa-pencil-square-o text-success text-active"></i>
                             </a>
 

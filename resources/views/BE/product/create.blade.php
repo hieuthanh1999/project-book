@@ -17,13 +17,6 @@
                                 <option value="{{$value['id']}}">{{$value['name']}}</option>
                                 @endforeach
                             </select>
-                            <span>
-                                @if($errors->has('sub_category_id'))
-                                <div class="alert alert-danger">
-                                    {{$errors->first('sub_category_id')}}
-                                </div>
-                                @endif
-                            </span>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Mã</label>

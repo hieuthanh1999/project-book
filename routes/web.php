@@ -185,7 +185,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/disable_status/{id}', [AuthorController::class, 'disable_status']);
         Route::get('/enable_status/{id}', [AuthorController::class, 'enable_status']);
 
-        Route::get('/create', [AuthorController::class, 'view_create']);
+        Route::get('/create', [AuthorController::class, 'view_create'])->name('createAuthor');
         Route::get('/update/{id}', [AuthorController::class, 'edit']);
 
 	    Route::post('/create', [AuthorController::class, 'create']);
