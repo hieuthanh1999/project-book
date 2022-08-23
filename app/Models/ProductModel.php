@@ -60,7 +60,7 @@ class ProductModel extends Model
     /**
      * Get the post that owns the comment.
      */
-    public function publisherModel()
+    public function publisher()
     {
         return $this->belongsTo(PublisherModel::class, 'publisher_id', 'id');
     }
@@ -83,7 +83,7 @@ class ProductModel extends Model
 
     public static function getAll()
     {
-        return  ProductModel::where('status', 1)->orderBy('id', 'DESC')->get(); 
+        return  ProductModel::orderBy('id', 'DESC')->get(); 
     }
 
     public static function getProduct($id)

@@ -1,246 +1,318 @@
 @extends('BE.layout_theme')
 @section('content')
-<div class="row">
-    <div class="col-lg-12">
-        <section class="panel">
-            <header class="panel-heading">
-                Cập nhập sách
-            </header>
-            <div class="panel-body">
-                <div class="position-center">
-                    <form role="form" action="/admin/product/update/{{$values['id']}}" method="post" enctype="multipart/form-data">
-                        @csrf
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Thể loại</label>
-                            <select name="sub_category_id" class="form-control input-sm m-bot15">
-                                @foreach($sub_categories as $value)
-                                   @if($values['sub_category_id'] == $value['id'])
-                                        <option selected value="{{$value['id']}}">{{$value['name']}}</option>
-                                    @else
-                                        <option value="{{$value['id']}}">{{$value['name']}}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                            <span>
-                                @if($errors->has('sub_category_id'))
-                                <div class="alert alert-danger">
-                                    {{$errors->first('sub_category_id')}}
-                                </div>
-                                @endif
-                            </span>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Mã</label>
-                            <input type="text" name="code" class="form-control" id=""
-                                placeholder="Nhập mã sản phẩm" value="{{$values['code']}}">
-                            <span>
-                                @if($errors->has('code'))
-                                <div class="alert alert-danger">
-                                    {{$errors->first('code')}}
-                                </div>
-                                @endif
-                            </span>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Tên</label>
-                            <input type="text" name="name" class="form-control" id=""
-                                placeholder="Nhập tên sản phẩm" value="{{$values['name']}}">
-                            <span>
-                                @if($errors->has('name'))
-                                <div class="alert alert-danger">
-                                    {{$errors->first('name')}}
-                                </div>
-                                @endif
-                            </span>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Giá</label>
-                            <input type="text" name="price" class="form-control" id=""
-                                placeholder="Nhập giá sản phẩm" value="{{$values['price']}}">
-                            <span>
-                                @if($errors->has('price'))
-                                <div class="alert alert-danger">
-                                    {{$errors->first('price')}}
-                                </div>
-                                @endif
-                            </span>
-                        </div>
+<!-- page start-->
+<!-- page start-->
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <!-- <div class="title_left">
+                <h3>Thêm banner</h3>
+            </div> -->
 
-                          <div class="form-group">
-                            <label for="exampleInputEmail1">Khối lượng</label>
-                            <input type="text" name="weight" class="form-control" id=""
-                                placeholder="Nhập khối lượng" value="{{$values['weight']}}">
-                            <span>
-                                @if($errors->has('weight'))
-                                <div class="alert alert-danger">
-                                    {{$errors->first('weight')}}
-                                </div>
-                                @endif
-                            </span>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Số trang</label>
-                            <input type="text" name="quantity_page" class="form-control" id=""
-                                placeholder="Nhập tên sản phẩm" value="{{$values['quantity_page']}}">
-                            <span>
-                                @if($errors->has('quantity_page'))
-                                <div class="alert alert-danger">
-                                    {{$errors->first('quantity_page')}}
-                                </div>
-                                @endif
-                            </span>
-                        </div>
-                    
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Số lượng</label>
-                            <input type="text" name="quantity" class="form-control" id=""
-                                placeholder="Nhập tên sản phẩm" value="{{$values['quantity']}}">
-                            <span>
-                                @if($errors->has('quantity'))
-                                <div class="alert alert-danger">
-                                    {{$errors->first('quantity')}}
-                                </div>
-                                @endif
-                            </span>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputFile">Hình ảnh</label>
-                            <!-- <input type="file" id="exampleInputFile" name="image" value="{{$values['image']}}"/> -->
 
-                            <input type="file" name="image" id="avatarfile" class="form-control file-upload" value="{{$values['image']}}" />
-                            <img id="avatar" src="{{asset('image/product/'.$values['image'])}}" class="avatar img-thumbnail" alt="thumnail"
-                                style="max-width: 200px; margin-top: 2px;">
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 ">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Cập Nhập Sách</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
 
-                            <!-- <img style="margin-top: 10px; object-fit: contain;"  height="300" width="300" src="{{asset('image/product/'.$values['image'])}}" alt="" /> -->
-                            <span>
-                                @if($errors->has('image'))
-                                <div class="alert alert-danger">
-                                    {{$errors->first('image')}}
+                        <br />
+                        <form role="form" action="{{ route('admin.product.update', $value->id) }}" method="post"
+                            enctype="multipart/form-data">
+                            @csrf
+                            <div class="item form-group">
+                                <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Thể
+                                    loại</label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <select name="sub_category_id" class="form-control input-sm m-bot15">
+                                        <option value="{{ $value->sub_category_id }}">{{ $value->subcategory->name }}
+                                        @foreach($sub_categories as $cate)
+                                        @if ($cate->id != null && $cate->id != $value->sub_category_id)
+                                        <option value="{{ $cate->id }}">{{ $cate->name }}</option>
+                                        @endif
+                                        @endforeach
+                                    </select>
                                 </div>
-                                @endif
-                            </span>
-                        </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Mã 
+                                    <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="text" name="code" class="form-control" id="exampleInputEmail1"
+                                        placeholder="Nhập mã ..." value="{{ $value->code  }}">
+                                    <!-- <input type="text" id="first-name" name="name" class="form-control "> -->
+                                    <div>
+                                        @if ($errors->any())
 
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Mô tả ngắn</label>
-                            <textarea style="resize: none" rows="6" name="short_description" class="form-control" id=""
-                                placeholder="Mô tả ">{{$values['short_description']}}</textarea >
-
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Mô tả chi tiết</label>
-                            <textarea style="resize: none" rows="6" name="long_description" class="form-control" id=""
-                                placeholder="Mô tả">{{$values['long_description']}}</textarea>
-
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Tác giả</label>
-                            <select name="author_id" class="form-control input-sm m-bot15">
-                                @foreach($author as $value)
-                                    @if($values['sub_category_id'] == $value['id'])
-                                        <option selected value="{{$value['id']}}">{{$value['name']}}</option>
-                                    @else
-                                        <option value="{{$value['id']}}">{{$value['name']}}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                            <span>
-                                @if($errors->has('author_id'))
-                                <div class="alert alert-danger">
-                                    {{$errors->first('author_id')}}
+                                        @if ($errors->has('code'))
+                                        {{ $errors->first('code')}}
+                                        @endif
+                                        @endif
+                                    </div>
                                 </div>
-                                @endif
-                            </span>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Nhà xuất bản</label>
-                            <select name="publisher_id" class="form-control input-sm m-bot15">
-                                @foreach($publisher as $value)
-                                    @if($values['sub_category_id'] == $value['id'])
-                                        <option selected value="{{$value['id']}}">{{$value['name']}}</option>
-                                    @else
-                                        <option value="{{$value['id']}}">{{$value['name']}}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                            <span>
-                                @if($errors->has('publisher_id'))
-                                <div class="alert alert-danger">
-                                    {{$errors->first('publisher_id')}}
-                                </div>
-                                @endif
-                            </span>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Kích thước</label>
-                            <select name="size_id" class="form-control input-sm m-bot15">
-                                @foreach($size as $value)
-                                    @if($values['sub_category_id'] == $value['id'])
-                                        <option selected value="{{$value['id']}}">{{$value['name']}}</option>
-                                    @else
-                                        <option value="{{$value['id']}}">{{$value['name']}}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                            <span>
-                                @if($errors->has('size_id'))
-                                <div class="alert alert-danger">
-                                    {{$errors->first('size_id')}}
-                                </div>
-                                @endif
-                            </span>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Giảm giá (%)</label>
-                            <input type="text" name="sale" class="form-control" id=""
-                                placeholder="Nhập %">
-                                <span>
-                                @if($errors->has('sale'))
-                                <div class="alert alert-danger">
-                                    {{$errors->first('sale')}}
-                                </div>
-                                @endif
-                            <!-- <select name="discount_id" class="form-control input-sm m-bot15">
-                                @foreach($discount as $value)
-                                    @if($values['sub_category_id'] == $value['id'])
-                                        <option selected value="{{$value['id']}}">{{$value['name']}}</option>
-                                    @else
-                                        <option value="{{$value['id']}}">{{$value['name']}}</option>
-                                    @endif
-                                @endforeach
-                            </select> -->
 
-                        </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Tên 
+                                    <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="text" name="name" class="form-control" id="exampleInputEmail1"
+                                        placeholder="Nhập tên ..." value="{{ $value->name  }}">
+                                    <!-- <input type="text" id="first-name" name="name" class="form-control "> -->
+                                    <div>
+                                        @if ($errors->any())
 
-                        <button type="submit" class="btn btn-info">Cập Nhập</button>
-                    </form>
-                    <br>
+                                        @if ($errors->has('name'))
+                                        {{ $errors->first('name')}}
+                                        @endif
+                                        @endif
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Giá 
+                                    <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="text" name="price" class="form-control" id="exampleInputEmail1"
+                                        placeholder="Nhập giá ..." value="{{ $value->price  }}">
+                                    <!-- <input type="text" id="first-name" name="name" class="form-control "> -->
+                                    <div>
+                                        @if ($errors->any())
+
+                                        @if ($errors->has('price'))
+                                        {{ $errors->first('price')}}
+                                        @endif
+                                        @endif
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Số lượng 
+                                    <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="text" name="quantity" class="form-control" id="exampleInputEmail1"
+                                        placeholder="Nhập số lượng ..." value="{{ $value->quantity  }}">
+                                    <!-- <input type="text" id="first-name" name="name" class="form-control "> -->
+                                    <div>
+                                        @if ($errors->any())
+
+                                        @if ($errors->has('quantity'))
+                                        {{ $errors->first('quantity')}}
+                                        @endif
+                                        @endif
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Khối lượng 
+                                    <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="text" name="weight" class="form-control" id="exampleInputEmail1"
+                                        placeholder="Nhập khối lượng ..." value="{{ $value->weight  }}">
+                                    <!-- <input type="text" id="first-name" name="name" class="form-control "> -->
+                                    <div>
+                                        @if ($errors->any())
+
+                                        @if ($errors->has('weight'))
+                                        {{ $errors->first('weight')}}
+                                        @endif
+                                        @endif
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Kích thước 
+                                    <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="text" name="size" class="form-control" id="exampleInputEmail1"
+                                        placeholder="Nhập kích thước ..." value="{{ $value->size  }}">
+                                    <!-- <input type="text" id="first-name" name="name" class="form-control "> -->
+                                    <div>
+                                        @if ($errors->any())
+
+                                        @if ($errors->has('size'))
+                                        {{ $errors->first('size')}}
+                                        @endif
+                                        @endif
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Số trang 
+                                    <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="text" name="quantity_page" class="form-control" id="exampleInputEmail1"
+                                        placeholder="Nhập số trang ..." value="{{ $value->quantity_page  }}">
+                                    <!-- <input type="text" id="first-name" name="name" class="form-control "> -->
+                                    <div>
+                                        @if ($errors->any())
+
+                                        @if ($errors->has('quantity_page'))
+                                        {{ $errors->first('quantity_page')}}
+                                        @endif
+                                        @endif
+                                    </div>
+                                </div>
+
+                            </div>
+                           
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Hình
+                                    ảnh</label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="file" name="image" id="avatarfile" class="form-control file-upload" value="{{ $value->image  }}"/>
+                                    <img id="avatars" src="{{URL::asset('image/product/'.$value['image'])}}" class="avatars img-thumbnail" alt="thumnail"
+                                        style="max-width: 500px; margin-top: 10px;">
+                                    <div>
+                                        @if ($errors->any())
+                                        @if ($errors->has('image'))
+                                        {{ $errors->first('image')}}
+                                        @endif
+                                        @endif
+                                    </div>
+                                </div>
+
+                            </div>
+                           
+                            <div class="item form-group">
+                                <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Tác giả</label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <select name="author_id" class="form-control input-sm m-bot15">
+                                    <option value="{{ $value->author_id }}">{{ $value->author->name }}
+                                        @foreach($author as $cate)
+                                        @if ($cate->id != null && $cate->id != $value->author_id)
+                                        <option value="{{ $cate->id }}">{{ $cate->name }}</option>
+                                        @endif
+                                
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Nhà sản xuất</label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <select name="publisher_id" class="form-control input-sm m-bot15">
+                                        <option value="{{ $value->publisher_id }}">{{ $value->publisher->name }}
+                                        @foreach($publisher as $cate)
+                                            @if ($cate->id != null && $cate->id != $value->publisher_id)
+                                            <option value="{{ $cate->id }}">{{ $cate->name }}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Giảm giá(%)</label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="text" name="sale" class="form-control" id="exampleInputEmail1"
+                                        placeholder="Nhập % ..." value="{{ $value->sale  }}">
+                                    <!-- <input type="text" id="first-name" name="name" class="form-control "> -->
+                                    <div>
+                                        @if ($errors->any())
+
+                                        @if ($errors->has('sale'))
+                                        {{ $errors->first('sale')}}
+                                        @endif
+                                        @endif
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Mô tả ngắn
+                                
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <textarea class="form-control" id="short_description" name="short_description" rows="3">
+                                    {{ $value->short_description }}
+                                </textarea>
+
+                                    <!-- <input type="text" id="first-name" name="name" class="form-control "> -->
+                                    <div>
+                                        @if ($errors->any())
+
+                                        @if ($errors->has('short_description'))
+                                        {{ $errors->first('short_description')}}
+                                        @endif
+                                        @endif
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Mô tả dài
+                                
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <textarea class="form-control" id="long_description" name="long_description" rows="3">
+                                    {{ $value->long_description }}
+                                </textarea>
+
+                                    <!-- <input type="text" id="first-name" name="name" class="form-control "> -->
+                                    <div>
+                                        @if ($errors->any())
+
+                                        @if ($errors->has('long_description'))
+                                        {{ $errors->first('long_description')}}
+                                        @endif
+                                        @endif
+                                    </div>
+                                </div>
+
+                            </div>
+                         
+                            <div class="ln_solid"></div>
+                            <div class="item form-group">
+                                <div class="col-md-6 col-sm-6 offset-md-3">
+                                    <button type="submit" class="btn btn-success">Cập Nhập</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
                 </div>
-
             </div>
-        </section>
+        </div>
     </div>
 </div>
+
 <script>
-    $(document).ready(function() {
-        var readURL = function(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
+$(document).ready(function() {
+    var readURL = function(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
-                reader.onload = function(e) {
-                    $('.avatar').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(input.files[0]);
+            reader.onload = function(e) {
+                $('.avatars').attr('src', e.target.result);
             }
+            reader.readAsDataURL(input.files[0]);
         }
+    }
 
-        $(".file-upload").on('change', function() {
-            readURL(this);
-        });
+    $(".file-upload").on('change', function() {
 
-        $('#avatar').on('click', function() {
-            $('#avatarfile').trigger('click');
-        });
+        readURL(this);
     });
-    </script>
+
+    $('#avatars').on('click', function() {
+        $('#avatarfile').trigger('click');
+    });
+});
+</script>
 @endsection

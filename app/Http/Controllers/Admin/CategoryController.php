@@ -32,20 +32,35 @@ class CategoryController extends Controller
      */
     public function create(Request $request)
     {
-        // dump($request);
-        $data=$request->validate([
-            'name'=>'required',
-            'description' =>'',
-            'status' =>'',
-        ], ['required'=>'không được để trống!']);
-        $add = new CategoryModel();
-        $add->name = $data['name'];
-        $add->description = $data['description'];
-        $add->status = $request->status;
-        $add->save();
-        session()->flash('save', 'Thêm Thành Công!');
+        $rules = [
+            'name' => 'required'
+        ];
+
+        $messages = [ 
+            'name.required'=> 'Tên danh mục không được để trống.'
+        ];
+
+        $validator = \Validator::make($request->all(), $rules, $messages);
+        $request->flashOnly(['name', 'description',]);
         
-        return Redirect::to('admin/category/list');
+        if (!$validator->fails())
+        {
+            $add = new CategoryModel();
+            $add->name = $request->name;
+            $add->description = $request->description;
+            $add->status = $request->status;
+            $add->save();
+            session()->flash('save', 'Thêm Thành Công!');
+            
+            return Redirect::to('admin/category/list');
+        }
+        else{
+            
+            // dd($validator);
+            return back()->withErrors($validator);
+
+        }
+       
     }
 
     public  function disable_status($id)
@@ -73,14 +88,21 @@ class CategoryController extends Controller
 
     public function update($id, Request $request)
     {
-        $data=$request->validate([
-            'name'=>'required',
-            'description' =>'',
-            'status' =>'',
-        ], ['required'=>'không được để trống!']);
+
+        $rules = [
+            'name' => 'required'
+        ];
+
+        $messages = [ 
+            'name.required'=> 'Tên danh mục không được để trống.'
+        ];
+
+        $validator = \Validator::make($request->all(), $rules, $messages);
+        $request->flashOnly(['name', 'description',]);
         
-        if($request->isMethod('post'))
+        if (!$validator->fails())
         {
+           
             $up= CategoryModel::where('id', $request->id)->first();
             $up->name = $request->name;
             $up->description = $request->description;
@@ -89,6 +111,12 @@ class CategoryController extends Controller
             session()->flash('update', 'cập nhập danh mục thành công!');
 
             return Redirect::to('admin/category/list');
+        }
+        else{
+            
+            // dd($validator);
+            return back()->withErrors($validator);
+
         }
 
     }

@@ -7,9 +7,13 @@ use Illuminate\Http\Request;
 use App\Models\BannerModel;
 use Illuminate\Support\Facades\Redirect;
 use Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
+use Session;
 
 class BannerController extends Controller
 {
+    
     public function __construct()
     {
         $this->middleware('level');
@@ -42,29 +46,49 @@ class BannerController extends Controller
      */
     public function create(Request $request)
     {
-        // dump($request);
-        $data=$request->validate([
-            'name'=>'required',
-            'image' =>'required',
-            'status' =>'',
-        ], ['required'=>'không được để trống!']);
 
-        $get_img = $request->file('image');
-        if($get_img) {
+        $rules = [
+            'name' => 'required',
+            'image' => 'required',
+        ];
 
-            $get_name = $get_img->getClientOriginalName();
-            $name_img = current(explode('.', $get_name));     // $get_img.rand(0, 99)
-            $new_img =  $name_img.'.'.$get_img->getClientOriginalExtension();
-            $get_img->move('image/banner', $new_img);
+        $messages = [ 
+            'name.required'=> 'Tên banner không được để trống.',
+            'image.required'=> 'Tên banner không được để trống.',
+        ];
+
+        $validator = \Validator::make($request->all(), $rules, $messages);
+        $request->flashOnly(['name']);
+        if (!$validator->fails())
+        {
+            
+            $get_img = $request->file('image');
+          
+            if($get_img) {
+
+                $get_name = $get_img->getClientOriginalName();
+                $name_img = time().current(explode('.', $get_name));     // $get_img.rand(0, 99)
+                $new_img =  $name_img.'.'.$get_img->getClientOriginalExtension();
+                $get_img->move(public_path('image/banner'),$new_img);
+               
+
+                // $get_img->storeAs('image/banner', $new_img);
 
 
-            $add = new BannerModel();
-            $add->name = $data['name'];
-            $add->image = $new_img;
-            $add->status = $request->status;
-            $add->save();
-            session()->flash('save', 'Thêm thành công!');
-            return Redirect::to('admin/banner/list');
+                $add = new BannerModel();
+                $add->name = $request->name;
+                $add->image = $new_img;
+                $add->status = $request->status;
+                $add->save();
+                session()->flash('save', 'Thêm thành công!');
+                return Redirect::to('admin/banner/list');
+            }
+        }
+        else{
+            
+            // dd($validator);
+            return back()->withErrors($validator);
+
         }
     }
 
@@ -93,41 +117,58 @@ class BannerController extends Controller
     
     public function update($id, Request $request)
     {
-        $data=$request->validate([
-            'name'=>'required',
-        ], ['required'=>'không được để trống!', 'numeric'=>'Phải nhập số!', 'image'=>"phải là file ảnh"]);
-        
-        if($request->isMethod('post'))
+        $rules = [
+            'name' => 'required',
+            'image' => 'required',
+        ];
+
+        $messages = [ 
+            'name.required'=> 'Tên banner không được để trống.',
+            'image.required'=> 'Tên banner không được để trống.',
+        ];
+
+        $validator = \Validator::make($request->all(), $rules, $messages);
+        if (!$validator->fails())
         {
-            $add= BannerModel::where('id', $request->id)->first();
+            if($request->isMethod('post'))
+            {
+                $add= BannerModel::where('id', $request->id)->first();
+                
+                $get_img=$request->file('image');
+                if($get_img) {
+                    $get_name = $get_img->getClientOriginalName();
+                    $name_img = current(explode('.', $get_name));     // $get_img.rand(0, 99)
+                    $new_img =  $name_img.'.'.$get_img->getClientOriginalExtension();
+                    $get_img->move('image/banner', $new_img);
+        
+                }
+        
+                $add->name = $data['name'];
+                if(isset($get_img)) {
+                    $add->image = $new_img;
+                }
+    
+                $add->save();
+                session()->flash('update', 'cập nhập thành công!');
+    
+                return Redirect::to('admin/banner/list');
+            }
+    
+        } else{
             
-            $get_img=$request->file('image');
-            if($get_img) {
-                $get_name = $get_img->getClientOriginalName();
-                $name_img = current(explode('.', $get_name));     // $get_img.rand(0, 99)
-                $new_img =  $name_img.'.'.$get_img->getClientOriginalExtension();
-                $get_img->move('image/banner', $new_img);
-    
-            }
-    
-            $add->name = $data['name'];
-            if(isset($get_img)) {
-                $add->image = $new_img;
-            }
+            // dd($validator);
+            return back()->withErrors($validator);
 
-            $add->save();
-            session()->flash('update', 'cập nhập thành công!');
-
-            return Redirect::to('admin/banner/list');
         }
 
+      
     }
 
     //delete
     public function delete(Request $request)
     {
         BannerModel::where('id', $request->id)->delete();
-        session()->flash('delete', 'Xóa tác giả thành công!');
+        session()->flash('delete', 'Xóa thành công!');
         
         return back();
     }

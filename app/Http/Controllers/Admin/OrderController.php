@@ -34,7 +34,23 @@ class OrderController extends Controller
     {
 
         $orders = OrdersModel::findOrFail($id); 
-        return view('BE.order.details', compact('orders'));
+        $order_detail = OrderDetailsModel::where('order_id', $orders->id)->get(); 
+        return view('BE.order.details', compact('orders', 'order_detail'));
+    }
+
+
+         /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function view_create()
+    {
+        // $sub_categories = SubCategoryModel::all();
+        // $size = SizeModel::orderBy('id', 'DESC')->where('status', 1)->get();
+        // $author = AuthorModel::orderBy('id', 'DESC')->where('status', 1)->get();
+        // $publisher = PublisherModel::orderBy('id', 'DESC')->where('status', 1)->get();
+        return view('BE.order.create', );
     }
 
         /**
@@ -52,4 +68,13 @@ class OrderController extends Controller
 
         return redirect()->back();
     }
+
+     //delete
+     public function delete(Request $request)
+     {
+         OrdersModel::where('id', $request->id)->delete();
+         session()->flash('delete', 'Xóa tác giả thành công!');
+         
+         return back();
+     }
 }

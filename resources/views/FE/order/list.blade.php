@@ -5,11 +5,12 @@
         <div class="   text-center p-0 mt-3 mb-2">
             <div class="card-c px-0 pt-4 pb-0 mt-3 mb-3">
                 <div class="check-logo">
-                    <p class="text-logo" style="margin: 20px 0">Đặt hàng cùng Kim Đồng ngay hôm nay để nhận được nhiều khuyến mãi hấp dẫn</p>
+                    <p class="text-logo" style="margin: 20px 0">Đặt hàng cùng Kim Đồng ngay hôm nay để nhận được nhiều
+                        khuyến mãi hấp dẫn</p>
                 </div>
                 <form action="{{ route('storeOrder') }}" id="msform" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" name="fee_price" value="{{$fee_price['id']}}"/>
+                    <input type="hidden" name="fee_price" value="{{$fee_price['id']}}" />
                     <!-- progressbar -->
                     <ul id="progressbar">
                         <li class="active" id="account"><strong>Thông tin thanh toán</strong></li>
@@ -38,36 +39,48 @@
                                 <div class="col-md-6">
                                     <div class="row">
                                         <label class="fieldlabels col-3">Họ và tên:</label>
-                                        <input disabled id="huhu-name" name="order_name" type="text" class="col-8"
-                                            placeholder="" value="{{$name}}" />
+                                        <input id="huhu-name" name="order_name" type="text" class="col-8" placeholder=""
+                                            value="{{$name}}" />
                                         {{--  tên  --}}
 
                                         <label class="fieldlabels col-3">Số điện thoại nhận hàng:</label>
-                                        <input disabled id="first-name" type="number" name="order_phone"
-                                            value="{{$phone}}" class="col-8" placeholder="" />
+                                        <input id="first-name" type="number" name="order_phone" value="{{$phone}}"
+                                            class="col-8" placeholder="" />
                                         {{--  sđt nhận hàng  --}}
 
                                         <label class="fieldlabels col-3">Tỉnh/Thành phố:</label>
-                                        @foreach($countries as $country)
-                                        @if($country->provinceid == $province_id)
-                                        <input disabled id="checkprice" type="text" name="order_city"
-                                            value="{{ $country->name }}" class="col-8" placeholder="" />
-                                        @endif
 
-                                        @endforeach
+                                        <select class="col-8 form-control custom-control" 
+                                            id="country_id" name="province_id">
+                                            <option value="{{ $province_id }}">{{ Auth::user()->province->name }}
+                                            </option>
+                                            @foreach($countries as $country)
+                                            @if ($country->provinceid != null && $country->provinceid != $province_id)
+                                            <option value="{{ $country->provinceid }}">{{ $country->name }}</option>
+                                            @endif
+
+                                            @endforeach
+                                        </select>
+
 
                                         <label class="fieldlabels col-3">Quận/Huyện: </label>
-                                        @foreach($states as $state)
-                                        @if($state->districtid == $district_id)
-                                        <input disabled id="checkprice" type="text" name="order_city"
-                                            value="{{ $state->name }}" class="col-8" placeholder="" />
-                                        @endif
-                                        @endforeach
+ 
 
+                                        <select class="col-8 form-control custom-control" 
+                                            id="state_id" name="district_id">
+                                            <option value="{{ $district_id }}">{{ Auth::user()->district->name }}
+                                            </option>
+                                            @foreach($states as $country)
+                                            @if ($country->districtid != null && $country->districtid != $province_id)
+                                            <option value="{{ $country->districtid }}">{{ $country->name }}</option>
+                                            @endif
+
+                                            @endforeach
+                                        </select>
 
                                         <label class="fieldlabels col-3">Địa chỉ:</label>
-                                        <input id="adress" disabled type="text" name="order_address"
-                                            value="{{$address}}" class="col-8" placeholder="" />
+                                        <input id="adress" type="text" name="order_address" value="{{$address}}"
+                                            class="col-8" placeholder="" />
                                         {{--  địa chỉ  --}}
                                     </div>
 
@@ -234,5 +247,51 @@ $(document).ready(function() {
 
 
 });
+</script>
+<style>
+.custom-control {
+    padding: 8px 15px 8px 15px;
+    border: 1px solid rgb(204, 204, 204);
+    border-radius: 4px;
+    margin-bottom: 25px;
+    margin-top: 2px;
+    width: 100%;
+    box-sizing: border-box;
+    outline: none;
+    color: #2C3E50;
+    background-color: #ECEFF1;
+    font-size: 16px;
+    letter-spacing: 1px;
+    margin: 0 0 15px 0;
+}
+</style>
+<script>
+    $(document).ready(function() {
+        $('#country_id').change(function() {
+            var $city = $('#state_id');
+            if($(this).val() == 0){
+                $('#city').css('display', 'none');
+                $('#address').css('display', 'none');
+            }else{
+                $.ajax({
+                url: "{{ route('cities.index') }}",
+                data: {
+                    country_id: $(this).val()
+                },
+                success: function(data) {
+                    var obj = JSON.parse(data) ;
+					$("#state_id option").remove();
+                    $.each(obj, function(id, value) {
+                    	$city.append('<option value="'+id+'">'+value+'</option>');
+                    });
+                    $('#city').show(150);
+                    $('#address').show(150);
+                }
+            });
+            }
+            
+        });
+
+    });
 </script>
 @endsection

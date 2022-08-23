@@ -64,6 +64,13 @@ class ShippingFeeController extends Controller
         return Redirect::to('admin/shipping-fee/list');
     }
 
+    public function edit(Request $request)
+    {
+        $value = ShippingFeeModel::where('id',$request->id)->first();
+        $province = ProvinceModel::all();
+        return view('BE.shippingfree.edit', compact('value', 'province'));
+    }
+
      //delete
      public function delete(Request $request)
      {

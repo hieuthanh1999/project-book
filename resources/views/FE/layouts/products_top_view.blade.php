@@ -24,7 +24,9 @@
                             </div>
                             <div class="tg-hovercontent">
                                 <div class="tg-description">
-                                    <p>{{$value->short_description}}</p>
+                                    <p>
+                                    {!!$value->short_description!!}
+                                    </p>
                                 </div>
                                 <strong class="tg-bookpage">Số trang: {{$value->quantity_page}}</strong>
                                 <strong class="tg-bookcategory">Thể loại: {{$value->subCategory->name}}</strong>

@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="{{URL::asset('FE/css/main.css')}}">
     <link rel="stylesheet" href="{{URL::asset('FE/css/color.css')}}">
     <link rel="stylesheet" href="{{URL::asset('FE/css/responsive.css')}}">
-    
+    <link rel="stylesheet" href="{{URL::asset('FE/css/main.css')}}">
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->

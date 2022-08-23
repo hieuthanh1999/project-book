@@ -42,31 +42,44 @@ class AuthorController extends Controller
      */
     public function create(Request $request)
     {
-        // dump($request);
-        $data=$request->validate([
-            'name'=>'required',
-            'author_image' =>'required',
-            'description' =>'',
-            'status' =>'',
-        ], ['required'=>'không được để trống!']);
+        $rules = [
+            'name' => 'required',
+            'author_image' => 'required',
+        ];
 
-        $get_img = $request->file('author_image');
-        if($get_img) {
+        $messages = [ 
+            'name.required'=> 'Tên không được để trống.',
+            'author_image.required'=> 'Hình ảnh không được để trống.',
+        ];
 
-            $get_name = $get_img->getClientOriginalName();
-            $name_img = current(explode('.', $get_name));     // $get_img.rand(0, 99)
-            $new_img =  $name_img.'.'.$get_img->getClientOriginalExtension();
-            $get_img->move('image/author', $new_img);
-
-            $add = new AuthorModel();
-            $add->name = $data['name'];
-            $add->author_image = $new_img;
-            $add->description = $data['description'];
-            $add->status = $request->status;
-            $add->save();
-            session()->flash('save', 'Thêm tác giả thành công!');
+        $validator = \Validator::make($request->all(), $rules, $messages);
+        $request->flashOnly(['name']);
+        if (!$validator->fails())
+        {
             
-            return Redirect::to('admin/author/list');
+            $get_img = $request->file('author_image');
+            if($get_img) {
+    
+                $get_name = $get_img->getClientOriginalName();
+                $name_img = current(explode('.', $get_name));     // $get_img.rand(0, 99)
+                $new_img =  $name_img.'.'.$get_img->getClientOriginalExtension();
+                $get_img->move('image/author', $new_img);
+    
+                $add = new AuthorModel();
+                $add->name = $request->name;
+                $add->author_image = $new_img;
+                $add->description = $request->name;
+                $add->status = $request->status;
+                $add->save();
+                session()->flash('save', 'Thêm tác giả thành công!');
+                
+                return Redirect::to('admin/author/list');
+            }
+        }
+        else{
+            // dd($validator);
+            return back()->withErrors($validator);
+
         }
     }
 
@@ -95,16 +108,37 @@ class AuthorController extends Controller
 
     public function update($id, Request $request)
     {
-         // dump($request);
-         $data=$request->validate([
-            'name'=>'required',
-            'description' =>'',
-            'status' =>'',
-        ], ['required'=>'không được để trống!']);
-        
+
+        $rules = [
+            'name' => 'required',
+        ];
+
+        $messages = [ 
+            'name.required'=> 'Tên không được để trống.',
+    
+        ];
+
+        $validator = \Validator::make($request->all(), $rules, $messages);
+        $request->flashOnly(['name']);
+        if (!$validator->fails())
+        {
+            
         if($request->isMethod('post'))
         {
+            $get_img=$request->file('author_image');
+            if($get_img) {
+                $get_name = $get_img->getClientOriginalName();
+                $name_img = current(explode('.', $get_name));     // $get_img.rand(0, 99)
+                $new_img =  $name_img.'.'.$get_img->getClientOriginalExtension();
+                $get_img->move('image/author', $new_img);
+    
+            }
             $up= AuthorModel::where('id', $request->id)->first();
+            if(isset($get_img)) {
+                $up->author_image = $new_img;
+            }
+
+           
             $up->name = $request->name;
             $up->description = $request->description;
             $up->save();
@@ -112,6 +146,12 @@ class AuthorController extends Controller
             session()->flash('update', 'Cập nhập tác giả thành công!');
 
             return Redirect::to('admin/author/list');
+        }
+        }
+        else{
+            // dd($validator);
+            return back()->withErrors($validator);
+
         }
 
     }

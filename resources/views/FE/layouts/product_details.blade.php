@@ -114,7 +114,7 @@
                         </span></li>
                     <li><span>Kích cỡ:</span><span>
 
-                            {{$sizes['name']}}
+                            {{$product_details['size']}}
 
                         </span></li>
                     <li><span>Số trang:</span><span> {{$product_details['quantity_page']}}</span></li>
@@ -136,7 +136,8 @@
                 <div class="tg-tab-content tab-content">
                     <div role="tabpanel" class="tg-tab-pane tab-pane active" id="description">
                         <div class="tg-description">
-                            {{$product_details['long_description']}}
+                        {!!$product_details['long_description']!!}
+                           
                         </div>
                     </div>
                     <div role="tabpanel" class="tg-tab-pane tab-pane" id="review">

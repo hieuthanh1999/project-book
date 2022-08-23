@@ -31,7 +31,7 @@
                             </div>
                             <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 pull-left">
                                 <aside id="tg-sidebar" class="tg-sidebar">
-                                    <div class="tg-widget tg-widgetsearch">
+                                    <!-- <div class="tg-widget tg-widgetsearch">
                                         <form class="tg-formtheme tg-formsearch">
                                             <div class="form-group">
                                                 <button type="submit"><i class="icon-magnifier"></i></button>
@@ -39,7 +39,7 @@
                                                     placeholder="Search by title, author, key...">
                                             </div>
                                         </form>
-                                    </div>
+                                    </div> -->
                                     <div class="tg-widget tg-catagories">
                                         <div class="tg-widgettitle">
                                             <h3>Thể loại</h3>

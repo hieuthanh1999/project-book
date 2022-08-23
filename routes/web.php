@@ -17,7 +17,8 @@ use App\Http\Controllers\Client\OrderController;
 use App\Http\Controllers\Client\UsersController as UsersClient; 
 // use App\Http\Controllers\Admin\UsersController  as UsersAdmin; 
 use App\Http\Controllers\WishlistController;  
-/*
+use App\Http\Controllers\SearchController;  
+/*SearchController
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -47,6 +48,8 @@ Route::get('tac-gia-{id}', [HomeController::class, 'authorDetailsPage']);
 
 Route::get('cities', [CityController::class, 'index'])->name('cities.index');
 
+Route::get('details', [ProductController::class, 'details'])->name('productDetails');
+
 // Cart
 Route::post('addCart', [CartController::class, 'save'])->name('addCart');
 Route::get('cart', [CartController::class, 'index'])->name('showCart');
@@ -69,9 +72,14 @@ Route::get('danh-sach-tac-gia', [App\Http\Controllers\Client\AuthorController::c
 
 #Users
 Route::get('thong-tin-{id}', [UsersClient::class, 'index']);
+Route::get('hoa-don-{id}', [UsersClient::class, 'order']);
+Route::get('yeu-thich-{id}', [UsersClient::class, 'wishlist']);
 
 #Reviews
 Route::post('review/store', [App\Http\Controllers\ReviewsController::class, 'store'])->name('reviewStore');
+
+Route::get('search', [SearchController::class, 'getSearch']);
+Route::post('search/name', [SearchController::class, 'getSearchAjax'])->name('search');
 /*
  *
  *
@@ -79,6 +87,11 @@ Route::post('review/store', [App\Http\Controllers\ReviewsController::class, 'sto
  *
  *
 */
+Route::get('select2-autocomplete-ajax', [CityController::class, 'dataAjax']);
+Route::get('search-product', [CityController::class, 'dataProduct']);
+Route::get('get-info', [CityController::class, 'info']);
+Route::get('get-product', [CityController::class, 'getProduct']);
+
 
 Route::get('sign-in', function () {
     return view('sign-in');
@@ -99,26 +112,26 @@ Route::get('sign-up', function () {
 */
 
 
-Route::prefix('admin')->group(function () {
+Route::name('admin.')->prefix('admin')->group(function () {
 
-    Route::get('/',  [App\Http\Controllers\Admin\HomeController::class, 'index']);
+    Route::get('/',  [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('index');
   
 
     // category 
-    Route::prefix('category')->group(function () {
+    Route::name('category.')->prefix('category')->group(function () {
 
-        Route::get('list', [CategoryController::class, 'index']);
+        Route::get('list', [CategoryController::class, 'index'])->name('list');
         Route::get('disable_status/{id}', [CategoryController::class, 'disable_status']);
         Route::get('enable_status/{id}', [CategoryController::class, 'enable_status']);
 
         Route::get('create', function () {
             return view('BE.category.create');
-        });
-        Route::get('update/{id}', [CategoryController::class, 'edit']);
+        })->name('create');
+        Route::get('update/{id}', [CategoryController::class, 'edit'])->name('edit');
 
 	    Route::post('/create', [CategoryController::class, 'create']);
-        Route::post('/update/{id}', [CategoryController::class, 'update']);
-        Route::get('/delete/{id}', [CategoryController::class, 'delete']);
+        Route::post('/update/{id}', [CategoryController::class, 'update'])->name('update');
+        Route::get('/delete/{id}', [CategoryController::class, 'delete'])->name('delete');
 
         
         Route::get('edit', function () {
@@ -127,143 +140,109 @@ Route::prefix('admin')->group(function () {
     });
 
      // users 
-     Route::prefix('users')->group(function () {
-
-        Route::get('list', [App\Http\Controllers\Admin\UsersController::class, 'index']);
+     Route::name('user.')->prefix('users')->group(function () {
+        Route::get('/create', [App\Http\Controllers\Admin\UsersController::class, 'view_create'])->name('createView');
+        Route::post('/create', [App\Http\Controllers\Admin\UsersController::class, 'create'])->name('create');
+        Route::get('list', [App\Http\Controllers\Admin\UsersController::class, 'index'])->name('list');
     });
 
      // Order 
-     Route::prefix('order')->group(function () {
+     Route::name('order.')->prefix('order')->group(function () {
 
-        Route::get('list', [App\Http\Controllers\Admin\OrderController::class, 'index']);
+        Route::get('list', [App\Http\Controllers\Admin\OrderController::class, 'index'])->name('list');
+     
+        Route::get('/create', [App\Http\Controllers\Admin\OrderController::class, 'view_create'])->name('createView');
+         
         Route::get('/details/{id}', [App\Http\Controllers\Admin\OrderController::class, 'details'])->name('detailOrder');
         Route::post('/update/{id}', [App\Http\Controllers\Admin\OrderController::class, 'update'])->name('updateStatusOrder');
+        Route::get('/delete/{id}', [App\Http\Controllers\Admin\OrderController::class, 'delete'])->name('deleteOrder');
     });
 
      // sub category 
-     Route::prefix('sub-category')->group(function () {
+     Route::name('subcategory.')->prefix('sub-category')->group(function () {
 
-        Route::get('/list', [SubCategoryController::class, 'index']);
+        Route::get('/list', [SubCategoryController::class, 'index'])->name('list');
         Route::get('/disable_status/{id}', [SubCategoryController::class, 'disable_status']);
         Route::get('/enable_status/{id}', [SubCategoryController::class, 'enable_status']);
 
-        Route::get('/create', [SubCategoryController::class, 'view_create']);
-        Route::get('/update/{id}', [SubCategoryController::class, 'edit']);
+        Route::get('/create', [SubCategoryController::class, 'view_create'])->name('createView');
+        Route::get('/update/{id}', [SubCategoryController::class, 'edit'])->name('editView');
 
-	    Route::post('/create', [SubCategoryController::class, 'create']);
-        Route::post('/update/{id}', [SubCategoryController::class, 'update']);
+	    Route::post('/create', [SubCategoryController::class, 'create'])->name('create');
+        Route::post('/update/{id}', [SubCategoryController::class, 'update'])->name('update');
 
         
         Route::get('/edit', [SubCategoryController::class, 'view_update']);
-        Route::get('/delete/{id}', [SubCategoryController::class, 'delete']);
+        Route::get('/delete/{id}', [SubCategoryController::class, 'delete'])->name('delete');
 
     });
 
      // sub category 
-     Route::prefix('publisher')->group(function () {
+     Route::name('publisher.')->prefix('publisher')->group(function () {
 
-        Route::get('/list', [PublisherController::class, 'index']);
+        Route::get('/list', [PublisherController::class, 'index'])->name('list');
         Route::get('/disable_status/{id}', [PublisherController::class, 'disable_status']);
         Route::get('/enable_status/{id}', [PublisherController::class, 'enable_status']);
 
-        Route::get('/create', [PublisherController::class, 'view_create']);
-        Route::get('/update/{id}', [PublisherController::class, 'edit']);
+        Route::get('/create', [PublisherController::class, 'view_create'])->name('createView');
+        Route::get('/update/{id}', [PublisherController::class, 'edit'])->name('edit');
 
-	    Route::post('/create', [PublisherController::class, 'create']);
-        Route::post('/update/{id}', [PublisherController::class, 'update']);
+	    Route::post('/create', [PublisherController::class, 'create'])->name('create');
+        Route::post('/update/{id}', [PublisherController::class, 'update'])->name('update');
 
         
         Route::get('/edit', [PublisherController::class, 'view_update']);
-        Route::get('/delete/{id}', [PublisherController::class, 'delete']);
+        Route::get('/delete/{id}', [PublisherController::class, 'delete'])->name('delete');
 
     });
 
      // sub category 
-     Route::prefix('author')->group(function () {
+     Route::name('author.')->prefix('author')->group(function () {
 
-        Route::get('/list', [AuthorController::class, 'index']);
+        Route::get('/list', [AuthorController::class, 'index'])->name('list');
         Route::get('/disable_status/{id}', [AuthorController::class, 'disable_status']);
         Route::get('/enable_status/{id}', [AuthorController::class, 'enable_status']);
 
-        Route::get('/create', [AuthorController::class, 'view_create'])->name('createAuthor');
-        Route::get('/update/{id}', [AuthorController::class, 'edit']);
+        Route::get('/create', [AuthorController::class, 'view_create'])->name('createView');
+        Route::get('/update/{id}', [AuthorController::class, 'edit'])->name('edit');
 
-	    Route::post('/create', [AuthorController::class, 'create']);
-        Route::post('/update/{id}', [AuthorController::class, 'update']);
+	    Route::post('/create', [AuthorController::class, 'create'])->name('create');
+        Route::post('/update/{id}', [AuthorController::class, 'update'])->name('update');
 
         
         Route::get('/edit', [AuthorController::class, 'view_update']);
-        Route::get('/delete/{id}', [AuthorController::class, 'delete']);
+        Route::get('/delete/{id}', [AuthorController::class, 'delete'])->name('delete');
 
     });
 
-    Route::prefix('size')->group(function () {
-
-        Route::get('/list', [SizeController::class, 'index']);
-        Route::get('/disable_status/{id}', [SizeController::class, 'disable_status']);
-        Route::get('/enable_status/{id}', [SizeController::class, 'enable_status']);
-
-        Route::get('/create', [SizeController::class, 'view_create']);
-        Route::get('/update/{id}', [SizeController::class, 'edit']);
-
-	    Route::post('/create', [SizeController::class, 'create']);
-        Route::post('/update/{id}', [SizeController::class, 'update']);
-
-        
-        Route::get('/edit', [SizeController::class, 'view_update']);
-        Route::get('/delete/{id}', [SizeController::class, 'delete']);
-
-    });
-
-    Route::prefix('discount')->group(function () {
-
-        Route::get('/list', [DiscountController::class, 'index']);
-        Route::get('/disable_status/{id}', [DiscountController::class, 'disable_status']);
-        Route::get('/enable_status/{id}', [DiscountController::class, 'enable_status']);
-
-        Route::get('/create', [DiscountController::class, 'view_create']);
-        Route::get('/update/{id}', [DiscountController::class, 'edit']);
-
-	    Route::post('/create', [DiscountController::class, 'create']);
-        Route::post('/update/{id}', [DiscountController::class, 'update']);
-
-        
-        Route::get('/edit', [DiscountController::class, 'view_update']);
-        Route::get('/delete/{id}', [DiscountController::class, 'delete']);
-
-    });
-    
-
-
-
-    // product
-    Route::prefix('product')->group(function () {
-        Route::get('/list', [ProductController::class, 'index']);
+  //product
+    Route::name('product.')->prefix('product')->group(function () {
+        Route::get('/list', [ProductController::class, 'index'])->name('list');
         Route::get('/disable_status/{id}', [ProductController::class, 'disable_status']);
         Route::get('/enable_status/{id}', [ProductController::class, 'enable_status']);
 
-        Route::get('/create', [ProductController::class, 'view_create']);
-        Route::get('/update/{id}', [ProductController::class, 'edit']);
+        Route::get('/create', [ProductController::class, 'view_create'])->name('createView');
+        Route::get('/update/{id}', [ProductController::class, 'edit'])->name('edit');
 
-	    Route::post('/create', [ProductController::class, 'create']);
-        Route::post('/update/{id}', [ProductController::class, 'update']);
+	    Route::post('/create', [ProductController::class, 'create'])->name('create');
+        Route::post('/update/{id}', [ProductController::class, 'update'])->name('update');
 
         
         // Route::get('/edit', [ProductController::class, 'view_update']);
-        Route::get('/delete/{id}', [ProductController::class, 'delete']);
+        Route::get('/delete/{id}', [ProductController::class, 'delete'])->name('delete');
 
     });
 
-    Route::prefix('shipping-fee')->group(function () {
-        Route::get('/list', [ShippingFeeController::class, 'index']);
+    Route::name('shipping.')->prefix('shipping-fee')->group(function () {
+        Route::get('/list', [ShippingFeeController::class, 'index'])->name('list');
         // Route::get('/disable_status/{id}', [ShippingFeeController::class, 'disable_status']);
         // Route::get('/enable_status/{id}', [ShippingFeeController::class, 'enable_status']);
 
         Route::get('/create', [ShippingFeeController::class, 'view_create']);
-        // Route::get('/update/{id}', [ShippingFeeController::class, 'edit']);
+        Route::get('/update/{id}', [ShippingFeeController::class, 'edit'])->name('editView');
 
 	    Route::post('/create', [ShippingFeeController::class, 'create']);
-        // Route::post('/update/{id}', [ShippingFeeController::class, 'update']);
+        Route::post('/update/{id}', [ShippingFeeController::class, 'update']);
 
         
         // // Route::get('/edit', [ProductController::class, 'view_update']);
@@ -271,20 +250,20 @@ Route::prefix('admin')->group(function () {
 
     });
 
-    Route::prefix('banner')->group(function () {
-        Route::get('/list', [BannerController::class, 'index']);
+    Route::name('banner.')->prefix('banner')->group(function () {
+        Route::get('/list', [BannerController::class, 'index'])->name('list');
         Route::get('/disable_status/{id}', [BannerController::class, 'disable_status']);
         Route::get('/enable_status/{id}', [BannerController::class, 'enable_status']);
 
-        Route::get('/create', [BannerController::class, 'view_create']);
-        Route::get('/update/{id}', [BannerController::class, 'edit']);
+        Route::get('/create', [BannerController::class, 'view_create'])->name('create');
+        Route::get('/update/{id}', [BannerController::class, 'edit'])->name('edit');
 
 	    Route::post('/create', [BannerController::class, 'create']);
-        Route::post('/update/{id}', [BannerController::class, 'update']);
+        Route::post('/update/{id}', [BannerController::class, 'update'])->name('update');
 
         
         // Route::get('/edit', [ProductController::class, 'view_update']);
-        Route::get('/delete/{id}', [BannerController::class, 'delete']);
+        Route::get('/delete/{id}', [BannerController::class, 'delete'])->name('delete');
 
     });
 });

@@ -2,79 +2,117 @@
 @section('content')
 <!-- page start-->
 <!-- page start-->
-<div class="row">
-    <div class="col-lg-12">
-        <div class="agile-grid">
-            <header class="panel-heading">
-                Thêm
-            </header>
-            <div class="panel-body">
-                <div class="position-center">
-                    <form role="form" action="" method="post" enctype="multipart/form-data">
-                        @csrf
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Tiêu đề</label>
-                            <input type="text" name="name" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên danh mục sản phẩm">
-                            <span>
-                                @if($errors->has('name'))
-                                <div class="alert alert-danger">
-                                    {{$errors->first('name')}}
-                                </div>
-                                @endif
-                            </span>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputFile">Hình ảnh</label>
-                            <!-- <input type="file" id="exampleInputFile" name="image"/> -->
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Thêm banner</h3>
+            </div>
 
-                            <input type="file" name="image" id="avatarfile" class="form-control file-upload" />
-                            <img id="avatar" src="#" class="avatar img-thumbnail" alt="thumnail"
-                                style="max-width: 500px; margin-top: 2px;">
-                            <span>
-                                @if($errors->has('image'))
-                                <div class="alert alert-danger">
-                                    {{$errors->first('image')}}
-                                </div>
-                                @endif
-                            </span>
-                        </div>
-                        <div class="form-group" style="    width: 10%;">
-                            <label for="exampleInputPassword1">Hiển thị</label>
-                            <select name="status" class="form-control input-sm m-bot15">
-                                <option value="0">Ẩn</option>
-                                <option value="1">Hiển thị</option>
-                            </select>
-                        </div>
 
-                        <button type="submit" name="admin/banner/create" class="btn btn-info">Thêm</button>
-                    </form>
-                    <br>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 ">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Tạo banner</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+
+                        <br />
+                        <form role="form" action="/admin/banner/create" method="post" enctype="multipart/form-data">
+                            @csrf
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Hình
+                                    ảnh</label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="file" name="image" id="avatarfile" class="form-control file-upload" />
+                                    <img id="avatars" src="#" class="avatars img-thumbnail" alt="thumnail"
+                                        style="max-width: 500px; margin-top: 10px;">
+                                    <div>
+                                        @if ($errors->any())
+                                        @if ($errors->has('image'))
+                                        {{ $errors->first('image')}}
+                                        @endif
+                                        @endif
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Tên banner
+                                    <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="text" name="name" class="form-control" id="exampleInputEmail1"
+                                        placeholder="Nhập tên ..." value="{{ old('name') }}">
+                                    <!-- <input type="text" id="first-name" name="name" class="form-control "> -->
+                                    <div>
+                                        @if ($errors->any())
+
+                                        @if ($errors->has('name'))
+                                        {{ $errors->first('name')}}
+                                        @endif
+                                        @endif
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="item form-group">
+                                <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Trạng
+                                    thái</label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <select class="form-control cars" name="status" id="">
+                                        <option selected value="1">hiển thị
+                                        </option>
+                                        <option selected value="0">ẩn
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="ln_solid"></div>
+                            <div class="item form-group">
+                                <div class="col-md-6 col-sm-6 offset-md-3">
+                                    <button type="submit" class="btn btn-success">Tạo Mới</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
                 </div>
-
             </div>
         </div>
     </div>
 </div>
+
 <script>
-    $(document).ready(function() {
-        var readURL = function(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
+$(document).ready(function() {
+    var readURL = function(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
-                reader.onload = function(e) {
-                    $('.avatar').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(input.files[0]);
+            reader.onload = function(e) {
+                $('.avatars').attr('src', e.target.result);
             }
+            reader.readAsDataURL(input.files[0]);
         }
+    }
 
-        $(".file-upload").on('change', function() {
-            readURL(this);
-        });
+    $(".file-upload").on('change', function() {
 
-        $('#avatar').on('click', function() {
-            $('#avatarfile').trigger('click');
-        });
+        readURL(this);
     });
-    </script>
+
+    $('#avatars').on('click', function() {
+        $('#avatarfile').trigger('click');
+    });
+});
+</script>
 @endsection

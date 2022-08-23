@@ -265,6 +265,7 @@
     transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
     outline: none;
 }
+
 .form-cmt button{
     cursor: pointer;
     width: 200px;
@@ -390,6 +391,5 @@
         display: none;
     }
 }
-
 
 

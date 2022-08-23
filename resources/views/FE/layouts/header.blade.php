@@ -10,9 +10,9 @@
                                 <em>{{$admin->email}}</em>
                             </a>
                         </li>
-                        
+
                     </ul>
-                    <div class="tg-userlogin tg-addnav">
+                    <div class="tg-userlogin tg-addnav" style="padding: 10px 10px;">
                         @guest
                         @if (Route::has('login'))
                         <li>
@@ -39,14 +39,21 @@
                         @endif
                         @else
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="dropdown-item" href="thong-tin-{{Auth::user()->id}}"
-                                role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                v-pre>
+                            <a id="navbarDropdown" class="dropdown-item nut_dropdown">
                                 {{ Auth::user()->name }}
                             </a>
+                            <div class="noidung_dropdown">
+                                <a href="thong-tin-{{Auth::user()->id}}">Thông tin</a>
+                                <a href="hoa-don-{{Auth::user()->id}}">Hóa Đơn</a>
+                                <a href="yeu-thich-{{Auth::user()->id}}">Yêu Thích
+                                    ({{ Auth::user()->wishlist->count() }})</a>
+                                @if(Auth::user()->level==2)
+                                <a href="admin">Trang quản trị</a>
+                                @endif
+                            </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                            <a class="dropdown-item " href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                 {{ __('Đăng xuất') }}
                             </a>
@@ -81,13 +88,17 @@
                     <strong class="tg-logo"><a href="/"><img src="{{URL::asset('FE/images/logo.png')}}"
                                 alt="company name here"></a></strong>
                     <div class="tg-searchbox">
-                        <form class="tg-formtheme tg-formsearch">
-                            <fieldset>
-                                <input type="text" name="search" class="typeahead form-control"
-                                    placeholder="Search by title, author, keyword, ISBN...">
-                                <button type="submit" class="tg-btn">Tìm kiếm</button>
-                            </fieldset>
-                        </form>
+
+                        <div class="form-group tg-formtheme tg-formsearch" style="">
+                            <input style="position: relative;    width: 102%;" type="text" name="country_name"
+                                id="country_name" class="typeahead form-control"
+                                placeholder="Tìm kiếm sản phẩm, tác giả..." />
+                            <i style="position: absolute; right: 15px; top: 19px;"  class="icon-magnifier"></i>
+                            <div id="countryList" style="position: relative;"><br>
+                            </div>
+                        </div>
+                        <!-- <button style="font-size: 18px;" type="submit" class="tg-btn">Tìm kiếm</button> -->
+                        {{ csrf_field() }}
                     </div>
                 </div>
             </div>
@@ -110,6 +121,45 @@
                             </div>
                             <div id="tg-navigation" class="collapse navbar-collapse tg-navigation">
                                 <ul>
+                                    <li class="menu-item-has-children menu-item-has-mega-menu">
+                                        <a href="javascript:void(0);">Danh mục</a>
+                                        <div class="mega-menu">
+
+
+
+                                            <ul class="tg-themetabnav" role="tablist">
+                                                @foreach ($categorys as $category)
+                                                <li role="presentation" class="">
+                                                    <a href="#cate{{$category['id']}}"
+                                                        aria-controls="cate{{$category['id']}}" role="tab"
+                                                        data-toggle="tab">{{$category['name']}}</a>
+                                                </li>
+
+                                                @endforeach
+                                            </ul>
+                                            <div class="tab-content tg-themetabcontent">
+                                                @foreach ($categorys as $category)
+                                                <div role="tabpanel" class="tab-pane" id="cate{{$category['id']}}">
+                                                    <ul>
+                                                        <li>
+                                                            <ul>
+                                                                @foreach ($sub_categorys as $sub_category)
+                                                                @if($sub_category['category_id'] == $category['id'])
+                                                                <li><a
+                                                                        href="/the-loai-{{$sub_category['id']}}">{{$sub_category['name']}}</a>
+                                                                </li>
+                                                                @endif
+                                                                @endforeach
+                                                            </ul>
+                                                        </li>
+
+
+                                                    </ul>
+                                                </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </li>
                                     <li class="menu-item-has-children">
                                         <a href="/">Trang chủ</a>
                                         <!-- <ul class="sub-menu">
@@ -123,7 +173,7 @@
 
                                     </li>
 
-                                    @foreach ($categorys as $category)
+                                    <!-- @foreach ($categorys as $category)
                                     <li class="menu-item-has-children">
                                         <a href="javascript:void(0);">{{$category['name']}}</a>
                                         <ul class="sub-menu">
@@ -138,24 +188,21 @@
                                             @endforeach
                                         </ul>
                                     </li>
-                                    @endforeach
+                                    @endforeach -->
 
                                 </ul>
                             </div>
                         </nav>
                         <div class="tg-wishlistandcart">
-                            <!-- <div class="dropdown tg-themedropdown tg-wishlistdropdown">
-                                @if(Auth::check())
-                                <a href="{{ route('showWish') }}" id="tg-wishlisst" class="tg-btnthemedropdown"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @if(Auth::check())
+                            <div class="dropdown tg-themedropdown tg-wishlistdropdown">
+
+                                <a href="yeu-thich-{{Auth::user()->id}}" id="tg-wishlisst" class="tg-btnthemedropdown">
                                     <span class="tg-themebadge">{{ Auth::user()->wishlist->count() }}</span>
                                     <i class="icon-heart"></i>
                                 </a>
-                                @endif
-
-                               
-
-                            </div> -->
+                            </div>
+                            @endif
                             <div class="dropdown tg-themedropdown tg-minicartdropdown">
                                 <a href="{{ route('showCart') }}" class="tg-btnthemedropdown">
                                     <span class="tg-themebadge">{{ Cart::content()->count() }}</span>
@@ -170,3 +217,36 @@
         </div>
     </div>
 </header>
+
+<script>
+$(document).ready(function() {
+
+    $('#country_name').keyup(function() { //bắt sự kiện keyup khi người dùng gõ từ khóa tim kiếm
+        var query = $(this).val(); //lấy gía trị ng dùng gõ
+        if (query != '') //kiểm tra khác rỗng thì thực hiện đoạn lệnh bên dưới
+        {
+            var _token = $('input[name="_token"]').val(); // token để mã hóa dữ liệu
+            $.ajax({
+                url: "{{ route('search') }}", // đường dẫn khi gửi dữ liệu đi 'search' là tên route mình đặt bạn mở route lên xem là hiểu nó là cái j.
+                method: "POST", // phương thức gửi dữ liệu.
+                data: {
+                    query: query,
+                    _token: _token
+                },
+                success: function(data) { //dữ liệu nhận về
+                    $('#countryList').fadeIn();
+                    $('#countryList').html(
+                        data
+                    ); //nhận dữ liệu dạng html và gán vào cặp thẻ có id là countryList
+                }
+            });
+        }
+    });
+
+    $(document).on('click', 'li', function() {
+        $('#country_name').val($(this).text());
+        $('#countryList').fadeOut();
+    });
+
+});
+</script>

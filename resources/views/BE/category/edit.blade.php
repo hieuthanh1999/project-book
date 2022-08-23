@@ -2,38 +2,88 @@
 @section('content')
     <!-- page start-->
     <!-- page start-->
-    <div class="row">
-        <div class="col-lg-12">
-            <section class="panel">
-                <header class="panel-heading">
-                    Cập Nhập Danh Mục Sản Phẩm
-                </header>
-                <div class="panel-body">
-                    <div class="position-center">
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <!-- <div class="title_left">
+                <h3>Thêm banner</h3>
+            </div> -->
 
-                        <form role="form" action="/admin/category/update/{{$value['id']}}" method="POST">   
-                        @csrf
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Tên danh mục</label>
-                                <input type="text" name="name" class="form-control" value="{{$value['name']}}">
-                                @if($errors->has('name'))
-                                <div class="alert alert-danger">
-                                    {{$errors->first('name')}}
+
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 ">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Cập Nhập Danh Mục</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+
+                        <br />
+                        <form role="form" action="{{ route('admin.category.update', $value->id)}}" method="post" enctype="multipart/form-data">
+                            @csrf
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Tên danh
+                                    mục
+                                    <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="text" name="name" class="form-control" id="exampleInputEmail1"
+                                        placeholder="Nhập tên ..." value="{{ $value->name }}">
+                                    <!-- <input type="text" id="first-name" name="name" class="form-control "> -->
+                                    <div>
+                                        @if ($errors->any())
+
+                                        @if ($errors->has('name'))
+                                        {{ $errors->first('name')}}
+                                        @endif
+                                        @endif
+                                    </div>
                                 </div>
-                                @endif
+
                             </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Mô tả danh mục</label>
-                                <textarea style="resize: none" rows="6" name="description" class="form-control">{{$value['description']}}</textarea>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Chi tiết
+                                    danh mục
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <textarea class="form-control" id="description" name="description" rows="3">
+                                    {{ $value->description }}
+                                </textarea>
+
+                                    <!-- <input type="text" id="first-name" name="name" class="form-control "> -->
+                                    <div>
+                                        @if ($errors->any())
+
+                                        @if ($errors->has('description'))
+                                        {{ $errors->first('description')}}
+                                        @endif
+                                        @endif
+                                    </div>
+                                </div>
+
+                            </div>
+                          
+                            <div class="ln_solid"></div>
+                            <div class="item form-group">
+                                <div class="col-md-6 col-sm-6 offset-md-3">
+                                    <button type="submit" class="btn btn-success">Cập Nhập</button>
+                                </div>
                             </div>
 
-                            <button type="submit" class="btn btn-info">Cập nhập</button>
                         </form>
-                        <br>
                     </div>
                 </div>
-            </section>
+            </div>
         </div>
     </div>
+</div>
 
 @endsection

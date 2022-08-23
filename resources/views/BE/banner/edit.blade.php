@@ -1,74 +1,105 @@
 @extends('BE.layout_theme')
 @section('content')
-    <!-- page start-->
-    <!-- page start-->
-    <div class="row">
-    <div class="col-lg-12">
-        <section class="panel">
-            <header class="panel-heading">
-                Cap nhap
-            </header>
-            <div class="panel-body">
-                <div class="position-center">
-                    <form role="form" action="/admin/banner/update/{{$value['id']}}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Tiêu đề</label>
-                            <input type="text" name="name" class="form-control" value="{{$value['name']}}"id="exampleInputEmail1" placeholder="Nhập tên danh mục sản phẩm">
-                            <span>
-                                @if($errors->has('name'))
-                                <div class="alert alert-danger">
-                                    {{$errors->first('name')}}
-                                </div>
-                                @endif
-                            </span>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputFile">Hình ảnh</label>
-                            <input type="file" name="image" id="avatarfile" class="form-control file-upload" value="{{$value['image']}}"/>
-                            <img id="avatar" src="{{asset('image/banner/'.$value['image'])}}" class="avatar img-thumbnail" alt="thumnail"
-                                style="max-width: 500px; margin-top: 2px;">
-
-                            <!-- <input type="file" id="exampleInputFile" name="image" value="{{$value['image']}}"/>
-                            <img style="object-fit: contain;" height="200"width="500" src="{{asset('image/banner/'.$value['image'])}}" alt="" /> -->
-                            <span>
-                                @if($errors->has('image'))
-                                <div class="alert alert-danger">
-                                    {{$errors->first('image')}}
-                                </div>
-                                @endif
-                            </span>
-                        </div>
-                    
-                        <button type="submit" name="" class="btn btn-info">Cap nhap</button>
-                    </form>
-                    <br>
-                </div>
-
+<!-- page start-->
+<!-- page start-->
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Thêm banner</h3>
             </div>
-        </section>
+
+
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 ">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Tạo banner</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+
+                        <br />
+                        <form role="form" action="{{ route('admin.banner.update', $value->id)}}" method="post" enctype="multipart/form-data">
+                            @csrf
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Hình
+                                    ảnh</label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="file" name="image" id="avatarfile" class="form-control file-upload" value="{{$value['image']}}"/>
+                                    <img id="avatars" src="{{URL::asset('image/banner/'.$value['image'])}}" class="avatars img-thumbnail" alt="thumnail"
+                                        style="max-width: 500px; margin-top: 10px;">
+                                    <div>
+                                        @if ($errors->any())
+                                        @if ($errors->has('image'))
+                                        {{ $errors->first('image')}}
+                                        @endif
+                                        @endif
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Tên banner
+                                    <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="text" name="name" class="form-control" id="exampleInputEmail1"
+                                        placeholder="Nhập tên ..." value="{{ $value['name'] }}">
+                                    <!-- <input type="text" id="first-name" name="name" class="form-control "> -->
+                                    <div>
+                                        @if ($errors->any())
+
+                                        @if ($errors->has('name'))
+                                        {{ $errors->first('name')}}
+                                        @endif
+                                        @endif
+                                    </div>
+                                </div>
+
+                            </div>
+                           
+                            <div class="ln_solid"></div>
+                            <div class="item form-group">
+                                <div class="col-md-6 col-sm-6 offset-md-3">
+                                    <button type="submit" class="btn btn-success">Cập Nhập</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <script>
-    $(document).ready(function() {
-        var readURL = function(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
+$(document).ready(function() {
+    var readURL = function(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
-                reader.onload = function(e) {
-                    $('.avatar').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(input.files[0]);
+            reader.onload = function(e) {
+                $('.avatar').attr('src', e.target.result);
             }
+            reader.readAsDataURL(input.files[0]);
         }
+    }
 
-        $(".file-upload").on('change', function() {
-            readURL(this);
-        });
-
-        $('#avatar').on('click', function() {
-            $('#avatarfile').trigger('click');
-        });
+    $(".file-upload").on('change', function() {
+        readURL(this);
     });
-    </script>
+
+    $('#avatar').on('click', function() {
+        $('#avatarfile').trigger('click');
+    });
+});
+</script>
 @endsection

@@ -42,20 +42,36 @@ class PublisherController extends Controller
      */
     public function create(Request $request)
     {
-        // dump($request);
-        $data=$request->validate([
-            'name'=>'required',
-            'description' =>'',
-            'status' =>'',
-        ], ['required'=>'không được để trống!']);
-        $add = new PublisherModel();
-        $add->name = $data['name'];
-        $add->description = $data['description'];
-        $add->status = $request->status;
-        $add->save();
-        session()->flash('save', 'Thêm nhà xuất bản thành công!');
+
+        $rules = [
+            'name' => 'required'
+        ];
+
+        $messages = [ 
+            'name.required'=> 'Tên danh mục không được để trống.'
+        ];
+
+        $validator = \Validator::make($request->all(), $rules, $messages);
+        $request->flashOnly(['name', 'description',]);
         
-        return Redirect::to('admin/publisher/list');
+        if (!$validator->fails())
+        {
+            $add = new PublisherModel();
+            $add->name = $request->name;
+            $add->description =$request->description;
+            $add->status = $request->status;
+            $add->save();
+            session()->flash('save', 'Thêm nhà xuất bản thành công!');
+            
+            return Redirect::to('admin/publisher/list');
+        }
+        else{
+            
+            // dd($validator);
+            return back()->withErrors($validator);
+
+        }
+      
     }
 
     public  function disable_status($id)
@@ -83,23 +99,38 @@ class PublisherController extends Controller
 
     public function update($id, Request $request)
     {
-        $data=$request->validate([
-            'name'=>'required',
-            'description' =>'',
-            'status' =>'',
-        ], ['required'=>'không được để trống!']);
+        $rules = [
+            'name' => 'required'
+        ];
+
+        $messages = [ 
+            'name.required'=> 'Tên danh mục không được để trống.'
+        ];
+
+        $validator = \Validator::make($request->all(), $rules, $messages);
+        $request->flashOnly(['name', 'description',]);
         
-        if($request->isMethod('post'))
+        if (!$validator->fails())
         {
-            $up= PublisherModel::where('id', $request->id)->first();
-            $up->name = $request->name;
-            $up->description = $request->description;
-            $up->save();
-
-            session()->flash('update', 'Cập nhập nhà xuất bản thành công!');
-
-            return Redirect::to('admin/publisher/list');
+            if($request->isMethod('post'))
+            {
+                $up= PublisherModel::where('id', $request->id)->first();
+                $up->name = $request->name;
+                $up->description = $request->description;
+                $up->save();
+    
+                session()->flash('update', 'Cập nhập nhà xuất bản thành công!');
+    
+                return Redirect::to('admin/publisher/list');
+            }
         }
+        else{
+            
+            // dd($validator);
+            return back()->withErrors($validator);
+
+        }
+        
 
     }
 

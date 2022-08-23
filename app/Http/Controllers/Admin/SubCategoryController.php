@@ -45,22 +45,36 @@ class SubCategoryController extends Controller
      */
     public function create(Request $request)
     {
-        // dump($request);
-        $data=$request->validate([
-            'category_id' => 'required',
-            'name'=>'required',
-            'description' =>'',
-            'status' =>'',
-        ], ['required'=>'không được để trống!']);
-        $add = new SubCategoryModel();
-        $add->category_id = $data['category_id'];
-        $add->name = $data['name'];
-        $add->description = $data['description'];
-        $add->status = $request->status;
-        $add->save();
-        session()->flash('save', 'Thêm thể loại thành công!');
+
+        $rules = [
+            'name' => 'required'
+        ];
+
+        $messages = [ 
+            'name.required'=> 'Tên thể loại không được để trống.'
+        ];
+
+        $validator = \Validator::make($request->all(), $rules, $messages);
+        $request->flashOnly(['name', 'description',]);
         
-        return Redirect::to('admin/sub-category/list');
+        if (!$validator->fails())
+        {
+            $add = new SubCategoryModel();
+            $add->category_id =  $request->category_id;
+            $add->name =  $request->name;
+            $add->description =  $request->description;
+            $add->status = $request->status;
+            $add->save();
+            session()->flash('save', 'Thêm thể loại thành công!');
+
+            return Redirect::to('admin/sub-category/list');
+        }
+        else{
+            
+            // dd($validator);
+            return back()->withErrors($validator);
+
+        }
     }
 
     public  function disable_status($id)
@@ -89,28 +103,41 @@ class SubCategoryController extends Controller
 
     public function update($id, Request $request)
     {
-        $data=$request->validate([
-            'category_id' => 'required',
-            'name'=>'required',
-            'description' =>'',
-            'status' =>'',
-        ], ['required'=>'không được để trống!']);
+
+        $rules = [
+            'name' => 'required'
+        ];
+
+        $messages = [ 
+            'name.required'=> 'Tên thể loại không được để trống.'
+        ];
+
+        $validator = \Validator::make($request->all(), $rules, $messages);
+        $request->flashOnly(['name', 'description',]);
         
-        if($request->isMethod('post'))
+        if (!$validator->fails())
         {
-            $up= SubCategoryModel::where('id', $request->id)->first();
-           
-            $up->name = $request->name;
-            $up->category_id = (int)$request->category_id;
-            $up->description = $request->description;
-           
-            $up->save();
-
-            session()->flash('update', 'Cập nhập thể loại thành công!');
-
-            return Redirect::to('admin/sub-category/list');
+            if($request->isMethod('post'))
+            {
+                $up= SubCategoryModel::where('id', $request->id)->first();
+               
+                $up->name = $request->name;
+                $up->category_id = (int)$request->category_id;
+                $up->description = $request->description;
+               
+                $up->save();
+    
+                session()->flash('update', 'Cập nhập thể loại thành công!');
+    
+                return Redirect::to('admin/sub-category/list');
+            }
         }
+        else{
+            
+            // dd($validator);
+            return back()->withErrors($validator);
 
+        }
     }
 
      //delete

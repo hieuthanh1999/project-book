@@ -20,4 +20,18 @@ class UsersController extends Controller
         $wish = User::findOrFail($user_id);
         return BasicClass::handlingView('FE.users.details', ['wish' => $wish]);
     }
+
+    public function order()
+    {
+        $user_id = Auth::user()->id;
+        $wish = User::findOrFail($user_id);
+        return BasicClass::handlingView('FE.users.order', ['wish' => $wish]);
+    }
+
+    public function wishlist()
+    {
+        $user_id = Auth::user()->id;
+        $wish = User::findOrFail($user_id);
+        return BasicClass::handlingView('FE.users.wishlist', ['wish' => $wish]);
+    }
 }

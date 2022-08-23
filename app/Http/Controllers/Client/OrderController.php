@@ -27,7 +27,8 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $province_id = $request->input('province');
-        $states = DistrictModel::all();
+        // $states = DistrictModel::all();
+        $states = DistrictModel::where('provinceid',  Auth::user()->province_id)->get();
         $countries = ProvinceModel::all();
         $fee_price = ShippingFeeModel::getShippingFee($province_id);
     
@@ -51,6 +52,9 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+
+        $states = DistrictModel::where('districtid', $request->district_id)->first();
+        $countries = ProvinceModel::where('provinceid', $request->province_id)->first();
         // insert order
         $order = new OrdersModel;
         $id_user = Auth::user()->id;
@@ -59,9 +63,9 @@ class OrderController extends Controller
         $fee = $request->input('fee_price');
         $order->order_status = 1;
         $order->payment_id = 1;
-        $order->shipping_address = ($users->address).','.($users->district->name).','. ($users->province->name);
-        $order->phoneReceiver = $users->phone;
-        $order->nameReceiver = $users->name;
+        $order->shipping_address = ($request->order_address).', '.($states->name).', '. ($countries->name);
+        $order->phoneReceiver = $request->order_phone;
+        $order->nameReceiver = $request->order_name;
         $order->shipping_id = $fee;
         $order->save();
 

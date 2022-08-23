@@ -19,6 +19,6 @@ class BannerModel extends Model
 
     public static function getAll()
     {
-        return BannerModel::where('status', 1)->orderBy('id', 'DESC')->get(); 
+        return BannerModel::orderBy('id', 'DESC')->get(); 
     }
 }

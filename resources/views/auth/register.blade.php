@@ -82,7 +82,7 @@
                                             <select
                                                 class="form-control m-bot15 @error('province_id') is-invalid @enderror"
                                                 id="country_id" name="province_id">
-                                                <option value="" selected>Tỉnh/Thành</option>
+                                                <option value="0" selected>Tỉnh/Thành</option>
                                                 @foreach($countries as $country)
 
                                                 <option value="{{ $country->provinceid }}">{{ $country->name }}</option>

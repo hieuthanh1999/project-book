@@ -6,44 +6,58 @@
         <div class="col-12">
             <div class="vertical-tab" role="tabpanel" style="width: 100%">
                 <!-- Nav tabs -->
-                <ul class="nav nav-tabs" role="tablist">
+                <!-- <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active"><a href="#Section1" aria-controls="home" role="tab"
                             data-toggle="tab">Thông tin tài khoản</a></li>
                     <li role="presentation"><a href="#Section2" aria-controls="profile" role="tab" data-toggle="tab">Yêu
                             thích ({{ Auth::user()->wishlist->count() }})</a></li>
                     <li role="presentation"><a href="#Section3" aria-controls="messages" role="tab"
                             data-toggle="tab">Hóa đơn</a></li>
-                </ul>
+                </ul> -->
                 <!-- Tab panes -->
                 <div class="tab-content tabs">
                     <div role="tabpanel" class="tab-pane fade in active" id="Section1">
-                        <h3 style="text-align: center;">Thông tin tài khoản</h3>
+                        <div class="row">
+
+                            <h3 class="col-sm-12 col-md-4 col-lg-4">Thông tin tài khoản</h3>
+                        </div>
                         <div class="card">
 
                             <div class="card-body">
+                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                    <h4 class="card-title">Tên: {{$wish->name}}</h4>
 
-                                <h4 class="card-title">Tên: {{$wish->name}}</h4>
-                                <h6 class="card-subtitle mb-2 text-muted">Email: {{$wish->email}}</h6>
-                                <h6 class="card-subtitle mb-2 text-muted">Số điện thoại: {{$wish->phone}}</h6>
 
-                                @foreach($countries as $countrie)
-                                @if($countrie->provinceid == $wish->province_id)
-                                <h6 class="card-subtitle mb-2 text-muted">Tỉnh/Thành Phố: {{$countrie->name}}</h6>
-                                @endif
+                                    @foreach($countries as $countrie)
+                                    @if($countrie->provinceid == $wish->province_id)
+                                    <h4 class="card-subtitle mb-2 text-muted">Tỉnh/Thành Phố: {{$countrie->name}}</h4>
+                                    @endif
 
-                                @endforeach
-                                @foreach($states as $state)
-                                @if($state->districtid == $wish->district_id)
-                                <h6 class="card-subtitle mb-2 text-muted">Quận/Huyện: {{$state->name}}</h6>
-                                @endif
+                                    @endforeach
+                                    @foreach($states as $state)
+                                    @if($state->districtid == $wish->district_id)
+                                    <h4 class="card-subtitle mb-2 text-muted">Quận/Huyện: {{$state->name}}</h4>
+                                    @endif
 
-                                @endforeach
-                                <h6 class="card-subtitle mb-2 text-muted">Địa chỉ: {{$wish->address}}</h6>
-                                <a href="#" class="btn btn-info">Thay đổi tài khoản</a>
+                                    @endforeach
+                                    <h4 class="card-subtitle mb-2 text-muted">Địa chỉ: {{$wish->address}}</h4>
+                                    <a href="#" class="btn btn-info">Thay đổi tài khoản</a>
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                    <h4 class="card-subtitle mb-2 text-muted">Email: {{$wish->email}}</h4>
+                                    <h4 class="card-subtitle mb-2 text-muted">Số điện thoại: {{$wish->phone}}</h4>
+
+
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-lg-4">
+
+
+
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div role="tabpanel" class="tab-pane fade" id="Section2">
+                    <!-- <div role="tabpanel" class="tab-pane fade" id="Section2">
                         <h3 style="text-align: center;">Yêu thích </h3>
                         @if($wish->wishlist->count() >0 )
                         <table class="table">
@@ -119,7 +133,7 @@
                         @else
                         <h4 style="text-align: center;">Chưa có hóa đơn!</h4>
                         @endif
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
