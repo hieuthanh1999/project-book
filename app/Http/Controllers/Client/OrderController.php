@@ -102,4 +102,18 @@ class OrderController extends Controller
     
        return $token;
    }
+
+     //delete
+     public function cancel(Request $request)
+     {
+         $order = OrdersModel::where('id', $request->id)->first();
+         $order->order_status = 4;
+         $order->save();
+         $order_details= $order->orderDetails;
+         foreach($order_details as $item){
+            $item->product->quantity += $item->quality;
+            $item->product->save();
+         }
+         return back();
+     }
 }

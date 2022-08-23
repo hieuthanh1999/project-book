@@ -30,7 +30,7 @@
                     <div class="col-md-12 col-sm-12 ">
                         @foreach($list_product_view as $item)
                         <div>
-                            <p>{{$item->name}} <small class="text-danger">{{$item->view_count}} lượt xem</small></p>
+                            <p>{{$item->name}} <small class="text-danger">({{$item->view_count}} lượt xem)</small></p>
                         </div>
                         @endforeach
                     </div>
@@ -53,6 +53,8 @@
         </div>
 
     </div>
+
+
 </div>
 <style type="text/css">
 .text_center {

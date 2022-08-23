@@ -60,12 +60,11 @@ Route::get('delete-cart/{rowId}', [CartController::class, 'delete'])->name('dele
 Route::post('them-yeu-thich', [WishlistController::class, 'save'])->name('addWish');
 Route::get('danh-sach-yeu-thich}', [WishlistController::class, 'index'])->name('showWish');
 Route::post('xoa/{id}', [WishlistController::class, 'delete'])->name('deleteWish');
-
 //Router
 Route::post('order',  [OrderController::class, 'index'])->name('viewOrder');
 Route::post('order/store', [OrderController::class, 'store'])->name('storeOrder');
 Route::get('thanh-cong', [OrderController::class, 'done']);
-
+Route::post('cancel/{id}', [OrderController::class, 'cancel'])->name('cancelOrder');
 #Author
 Route::get('danh-sach-tac-gia', [App\Http\Controllers\Client\AuthorController::class, 'index']);
 
@@ -156,6 +155,7 @@ Route::name('admin.')->prefix('admin')->group(function () {
         Route::get('/details/{id}', [App\Http\Controllers\Admin\OrderController::class, 'details'])->name('detailOrder');
         Route::post('/update/{id}', [App\Http\Controllers\Admin\OrderController::class, 'update'])->name('updateStatusOrder');
         Route::get('/delete/{id}', [App\Http\Controllers\Admin\OrderController::class, 'delete'])->name('deleteOrder');
+       
     });
 
      // sub category 

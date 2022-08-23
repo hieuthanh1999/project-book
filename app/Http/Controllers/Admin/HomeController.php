@@ -33,6 +33,21 @@ class HomeController extends Controller
         $list_product_buy = OrderDetailsModel::getProductTopBuy(); 
         $list_product_rate = ProductModel::getProductTopRate();  
         // dd( $list_product_rate);
+
+        //  // categories chart
+        //  $categories = CategoryModel::where('parent_id', null)->get();
+        //  $cateLabel = [];
+        //  $cateData = [];
+        //  foreach($categories as $cate){
+        //      $cateLabel[] = $cate->cate_name;
+        //      $cateData[] = $cate->children->count();
+        //  }
+        //  $cateChart = new CategoryChart;
+        //  $cateChart->labels($cateLabel);
+        //  $cateChart->dataset(trans('admin.chart.category_con'), 'line', collect($cateData));
+
+         
+
         return view('BE.dash_board', compact('count_user', 'count_product', 'count_order', 'list_product_view', 'list_product_buy', 'list_product_rate'));
     }
 }

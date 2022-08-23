@@ -122,8 +122,12 @@
                                     <td>{{$value->created_at}}</td>
                                     <td>
                                         @if($value->order_status == 1)
-                                        <a href="{{ route('admin.order.deleteOrder', $value->id) }}"
-                                                        class="btn btn-outline-danger">Huỷ</a>
+                                        <form action="{{route('cancelOrder', $value->id) }}" method="post">
+                                        @csrf
+                                        <button type="submit"> <span  class="btn btn-outline-danger"></span> Huỷ
+                                        </button>
+                                    </form>
+            
                                         @endif
 
                                     </td>
