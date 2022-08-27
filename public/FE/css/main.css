@@ -1199,7 +1199,7 @@ li.menu-item-has-children:hover > .sub-menu > li.menu-item-has-children:hover > 
 li.menu-item-has-mega-menu { position: static; }
 .mega-menu {
 	opacity: 0;
-	width: 100%;
+	width: 40%;
 	visibility: hidden;
 }
 .mega-menu .tg-themetabnav {
@@ -1818,13 +1818,13 @@ li.menu-item-has-mega-menu { position: static; }
 }
 .tg-bookscategories li:first-child{padding-left: 0;}
 .tg-bookscategories li + li:before {
-	left: 0;
+	/* left: 0;
 	bottom: 0;
 	content: ',';
 	color: inherit;
 	position: absolute;
 	font-size: inherit;
-	line-height: inherit;
+	line-height: inherit; */
 }
 .tg-bookscategories li a {
 	color: #666;

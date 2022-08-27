@@ -37,15 +37,22 @@
                             </span>
                             @enderror
                             @error('district_id')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                            @enderror
-                                            @error('password')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                            @enderror
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                            @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                            
+                            @if ($errors->has('address'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('address') }}</strong>
+                            </span>
+                            @endif
+
                             <div class="card-body">
                                 <form method="POST" action="{{ route('register') }}">
                                     @csrf
@@ -111,12 +118,7 @@
                                         <div class="col-md-6">
                                             <input name="address" id="address" class="form-control"
                                                 value="{{ old('address') }}" />
-                                            @if ($errors->has('address'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('address') }}</strong>
-                                            </span>
-                                            @endif
-                                           
+
                                         </div>
 
 
@@ -144,7 +146,7 @@
                                                 class="form-control @error('password') is-invalid @enderror"
                                                 name="password" required autocomplete="new-password">
 
-                                          
+
                                         </div>
                                     </div>
 

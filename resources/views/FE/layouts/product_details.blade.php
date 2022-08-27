@@ -50,17 +50,8 @@
                         <em>Thêm vào giỏ</em>
                     </a>
                     @endif
-                    @guest
-                    @else
-                    <form action="{{ route('addWish') }}" method="post">
-                        @csrf
-                        <input type="hidden" name="id" value="{{ $product_details['id'] }}">
-                        <button class="tg-btnaddtowishlist" type="submit">
-                            <i class="icon-heart"></i>
-                            <span>Yêu thích</span>
-                        </button>
-                    </form>
-                    @endguest
+
+
 
                 </div>
             </div>
@@ -136,8 +127,8 @@
                 <div class="tg-tab-content tab-content">
                     <div role="tabpanel" class="tg-tab-pane tab-pane active" id="description">
                         <div class="tg-description">
-                        {!!$product_details['long_description']!!}
-                           
+                            {!!$product_details['long_description']!!}
+
                         </div>
                     </div>
                     <div role="tabpanel" class="tg-tab-pane tab-pane" id="review">

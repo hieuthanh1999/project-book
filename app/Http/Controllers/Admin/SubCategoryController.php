@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\SubCategoryModel;
 use App\Models\CategoryModel;
+use App\Models\ProductModel;
 use Illuminate\Support\Facades\Redirect;
 use Auth;
 
@@ -143,9 +144,14 @@ class SubCategoryController extends Controller
      //delete
      public function delete(Request $request)
      {
-        SubCategoryModel::where('id', $request->id)->delete();
-         session()->flash('delete', 'Xóa thể loại thành công!');
-         
-         return back();
+        $check = ProductModel::where('sub_category_id',$request->id)->count();
+        if($check>0){
+            session()->flash('rangbuoc', 'Bạn cần xóa sản phẩm trước!');
+        }else{
+            SubCategoryModel::where('id', $request->id)->delete();
+            session()->flash('delete', 'Xóa thể loại thành công!');
+        }
+          
+        return back();
      }
 }

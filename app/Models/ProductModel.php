@@ -24,7 +24,7 @@ class ProductModel extends Model
     
     public function wishlists()
     {
-        return $this->hasMany(WishListModel::class);
+        return $this->hasMany(WishListModel::class, 'product_id', 'id');
     }
 
     public function reviews()
@@ -73,13 +73,7 @@ class ProductModel extends Model
     //     return $this->belongsTo(DiscountModel::class, 'discount_id', 'id');
     // }
 
-     /**
-     * Get the post that owns the comment.
-     */
-    public function sizeModel()
-    {
-        return $this->belongsTo(SizeModel::class, 'size_id', 'id');
-    }
+   
 
     public static function getAll()
     {
@@ -126,5 +120,23 @@ class ProductModel extends Model
         // $rate = ReviewsModel::orderBy('id', 'DESC')->with('product')->get();
         // return ProductModel::orderBy('id', 'DESC')->with('reviews')->avg('rate')->take(10)->get(); 
     }
+
+    public static function checkWishList($id, $user_id)
+    {
+        $check = WishListModel::where('product_id', $id)->where('user_id',  $user_id)->count();
+        if($check > 0){
+            // $record =  WishListModel::where('product_id', $id)->where('user_id',  $user_id)->first();
+            return True;
+        }
+        return False; 
+    }
+
+    public static function getIdWishList($id, $user_id)
+    {
+        $check = WishListModel::where('product_id', $id)->where('user_id',  $user_id)->first();
+      
+        return $check; 
+    }
+
 
 }

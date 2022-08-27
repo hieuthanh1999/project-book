@@ -1,5 +1,9 @@
 /* Make clicks pass-through */
 
+/* Make clicks pass-through */
+.nav.side-menu>li.active .fa-chevron-down:before {
+  content: "\f077";
+}
 
 .custom{
   background: azure !important;

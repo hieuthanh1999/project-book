@@ -35,7 +35,7 @@
                                     ảnh</label>
                                 <div class="col-md-6 col-sm-6 ">
                                     <input type="file" name="image" id="avatarfile" class="form-control file-upload" />
-                                    <img id="avatars" src="#" class="avatars img-thumbnail" alt="thumnail"
+                                    <img id="avatars" src="{{URL::asset('basic-image.jpg')}}" class="avatars img-thumbnail" alt="thumnail"
                                         style="max-width: 500px; margin-top: 10px;">
                                     <div>
                                         @if ($errors->any())

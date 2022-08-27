@@ -98,7 +98,7 @@
                                                         sửa </a></td>
                                                 <td class="text-center">
                                                         <a href="{{ route('admin.banner.delete', $banner->id) }}" class="btn btn-outline-danger"><i
-                                                                class="fa fa-trash-o"></i>Xóa</a>
+                                                                class="fa fa-trash-o"></i> Xóa</a>
                                                 </td>
                                             </tr>
                                             @endforeach

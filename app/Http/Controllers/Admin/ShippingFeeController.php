@@ -64,6 +64,29 @@ class ShippingFeeController extends Controller
         return Redirect::to('admin/shipping-fee/list');
     }
 
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update($id, Request $request)
+    {
+      
+        // dump($request);
+        $data = $request->validate([
+            'name'=>'required',
+            'price' =>'required|numeric',
+        ], ['required'=>'không được để trống!', 'numeric'=>'Phải nhập số!']);
+        $up= ShippingFeeModel::where('id', $request->id)->first();
+        $up->name = $data['name'];
+        $up->price = $data['price'];  
+        $up->save();
+        session()->flash('save', 'Cập nhập thành công!');
+        
+        return Redirect::to('admin/shipping-fee/list');
+    }
+
     public function edit(Request $request)
     {
         $value = ShippingFeeModel::where('id',$request->id)->first();

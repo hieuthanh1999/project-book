@@ -28,6 +28,6 @@ class CategoryModel extends Model
 
     public static function getAll()
     {
-        return CategoryModel::where('status', 1)->orderBy('id', 'DESC')->get()->take(4);
+        return CategoryModel::orderBy('id', 'DESC')->get()->take(4);
     }
 }

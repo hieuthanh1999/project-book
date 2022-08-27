@@ -84,9 +84,9 @@
                                             @foreach($order_detail as $order_details)
                                             <tr data-expanded="true">
                                                 <td>{{$order_details->id}}</td>
-                                                <td>{{$order_details->product->name}}</td>
+                                                <td>{{$order_details->name}}</td>
                                                 <td> <span class="text-ellipsis"><img
-                                                            src="{{URL::asset('image/product/'.$order_details->product->image)}}"
+                                                            src="{{URL::asset('image/product/'.$order_details->image)}}"
                                                             style="object-fit: contain;" height="200"
                                                             width="200"></span></td>
                                                 <td>{{ number_format( $order_details->price).' '.'VND' }}</td>

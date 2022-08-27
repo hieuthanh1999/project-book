@@ -73,7 +73,7 @@ class OrderController extends Controller
      public function delete(Request $request)
      {
          OrdersModel::where('id', $request->id)->delete();
-         session()->flash('delete', 'Xóa tác giả thành công!');
+         session()->flash('delete', 'Xóa thành công!');
          
          return back();
      }

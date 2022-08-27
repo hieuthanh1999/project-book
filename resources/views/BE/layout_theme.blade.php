@@ -12,6 +12,7 @@
     <title>Trang quản trị | </title>
     <base href="{{ asset('') }}">
     <!-- Bootstrap -->
+    <link id="bsdp-css" href="https://unpkg.com/bootstrap-datepicker@1.9.0/dist/css/bootstrap-datepicker3.min.css" rel="stylesheet">
 
     <link href="{{ asset('./assets/vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Font Awesome -->
@@ -39,7 +40,6 @@
     <link href="{{ asset('./assets/build/css/custom.min.css') }}" rel="stylesheet">
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />  -->
 
 
 </head>
@@ -77,7 +77,7 @@
                                 <li><a><i class="fa fa-home"></i> Trang chủ <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="{{ route('admin.index') }}">Thống kê</a></li>
-
+                                        <li><a href="{{ route('admin.doanhthu') }}">Thống kê doanh thu</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-image"></i> Quản lý banner <span
@@ -309,6 +309,7 @@
         };
     });
     </script>
+
 
     <!-- jQuery -->
     <script src="{{ asset('./assets/vendors/jquery/dist/jquery.min.js') }}"></script>

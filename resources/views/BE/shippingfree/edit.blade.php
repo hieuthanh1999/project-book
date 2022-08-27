@@ -28,7 +28,7 @@
                     <div class="x_content">
 
                         <br />
-                        <form role="form" action="" method="post" enctype="multipart/form-data">
+                        <form role="form" action="{{ route('admin.shipping.updateship', $value->id) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Tên

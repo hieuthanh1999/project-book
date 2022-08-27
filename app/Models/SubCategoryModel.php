@@ -37,11 +37,11 @@ class SubCategoryModel extends Model
 
     public static function getAll()
     {
-        return SubCategoryModel::where('status', 1)->orderBy('id', 'DESC')->get(); 
+        return SubCategoryModel::orderBy('id', 'DESC')->get(); 
     }
 
     public static function getSub()
     {
-        return SubCategoryModel::where('status', 1)->first(); 
+        return SubCategoryModel::first(); 
     }
 }

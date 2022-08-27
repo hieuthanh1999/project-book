@@ -114,6 +114,9 @@ Route::get('sign-up', function () {
 Route::name('admin.')->prefix('admin')->group(function () {
 
     Route::get('/',  [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('index');
+    Route::get('/doanhthu',  [App\Http\Controllers\Admin\HomeController::class, 'doanhthu'])->name('doanhthu');
+  
+    Route::post('/search-doanhthu',  [App\Http\Controllers\Admin\HomeController::class, 'search'])->name('searchDoanhThu');
   
 
     // category 
@@ -242,7 +245,7 @@ Route::name('admin.')->prefix('admin')->group(function () {
         Route::get('/update/{id}', [ShippingFeeController::class, 'edit'])->name('editView');
 
 	    Route::post('/create', [ShippingFeeController::class, 'create']);
-        Route::post('/update/{id}', [ShippingFeeController::class, 'update']);
+        Route::post('/update/{id}', [ShippingFeeController::class, 'update'])->name('updateship');
 
         
         // // Route::get('/edit', [ProductController::class, 'view_update']);

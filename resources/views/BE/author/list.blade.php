@@ -39,29 +39,34 @@
 
                                 @if(session()->has('delete'))
                                 <div class=" text-success custom" style="text-shadow: 0 0 1px black;">
-                        {{session()->get('delete')}}
-                    </div>
-                @endif
-                @if(session()->has('save'))
-                    <div  class=" text-success custom" style="text-shadow: 0 0 1px black;">
-                        {{session()->get('save')}}
-                    </div>
-                @endif
-                @if(session()->has('update'))
-                    <div class=" text-success custom" style="text-shadow: 0 0 1px black;">
-                        {{session()->get('update')}}
-                    </div>
-                @endif
-                @if(session()->has('disable_status'))
-                    <div class=" text-success custom" style="text-shadow: 0 0 1px black;">
-                        {{session()->get('disable_status')}}
-                    </div>
-                @endif
-                @if(session()->has('enable_status'))
-                    <div class=" text-success custom" style="text-shadow: 0 0 1px black;">
-                        {{session()->get('enable_status')}}
-                    </div>
-                @endif 
+                                    {{session()->get('delete')}}
+                                </div>
+                                @endif
+                                @if(session()->has('save'))
+                                <div class=" text-success custom" style="text-shadow: 0 0 1px black;">
+                                    {{session()->get('save')}}
+                                </div>
+                                @endif
+                                @if(session()->has('update'))
+                                <div class=" text-success custom" style="text-shadow: 0 0 1px black;">
+                                    {{session()->get('update')}}
+                                </div>
+                                @endif
+                                @if(session()->has('disable_status'))
+                                <div class=" text-success custom" style="text-shadow: 0 0 1px black;">
+                                    {{session()->get('disable_status')}}
+                                </div>
+                                @endif
+                                @if(session()->has('enable_status'))
+                                <div class=" text-success custom" style="text-shadow: 0 0 1px black;">
+                                    {{session()->get('enable_status')}}
+                                </div>
+                                @endif
+                                @if(session()->has('rangbuoc'))
+                                <div class=" text-danger custom" style="text-shadow: 0 0 1px black;">
+                                    {{session()->get('rangbuoc')}}
+                                </div>
+                                @endif
 
                                 <div class=" card-box table-responsive">
 
@@ -82,15 +87,20 @@
                                             <tr>
                                                 <td>{{ $value->id }}</td>
                                                 <td>
-                                                <span class="text-ellipsis"><img src="{{URL::asset('image/author/'.$value['author_image'])}}"  style="object-fit: contain;" height="200"width="200"></span>
+                                                    <span class="text-ellipsis"><img
+                                                            src="{{URL::asset('image/author/'.$value['author_image'])}}"
+                                                            style="object-fit: contain;" height="200"
+                                                            width="200"></span>
                                                 </td>
                                                 <td>{{ $value->name }}</td>
-                                                <td class="text-center"><a href="{{ route('admin.author.edit', $value->id) }}"
+                                                <td class="text-center"><a
+                                                        href="{{ route('admin.author.edit', $value->id) }}"
                                                         class="btn btn-outline-info btn-xs"><i class="fa fa-pencil"></i>
                                                         sửa </a></td>
                                                 <td class="text-center">
-                                                        <a href="{{ route('admin.author.delete', $value->id) }}" class="btn btn-outline-danger"><i
-                                                                class="fa fa-trash-o"></i>Xóa</a>
+                                                    <a href="{{ route('admin.author.delete', $value->id) }}"
+                                                        class="btn btn-outline-danger"><i class="fa fa-trash-o"></i>
+                                                        Xóa</a>
                                                 </td>
                                             </tr>
                                             @endforeach

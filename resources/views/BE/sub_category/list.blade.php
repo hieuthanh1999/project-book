@@ -62,6 +62,12 @@
                                 </div>
                                 @endif
 
+                                @if(session()->has('rangbuoc'))
+                                <div class=" text-danger custom" style="text-shadow: 0 0 1px black;">
+                                    {{session()->get('rangbuoc')}}
+                                </div>
+                                @endif
+
                                 <div class=" card-box table-responsive">
 
                                     <table id="datatable" class="table table-striped table-bordered" style="width:100%">
@@ -81,9 +87,13 @@
                                             @foreach($values as $banner)
                                             <tr>
                                                 <td>{{ $banner->id }}</td>
-                                                <td>{{ $banner->category->name }}</td>
                                                 <td>
-                                                {{ $banner->name }}
+                                                    @if($banner->category)
+                                                    {{ $banner->category->name }}
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    {{ $banner->name }}
                                                 </td>
                                                 <td>{!!$banner->description!!}</td>
                                                 <td class="text-center"><a
@@ -93,7 +103,7 @@
                                                 <td class="text-center">
                                                     <a href="{{ route('admin.subcategory.delete', $banner->id) }}"
                                                         class="btn btn-outline-danger"><i
-                                                            class="fa fa-trash-o"></i>Xóa</a>
+                                                            class="fa fa-trash-o"></i> Xóa</a>
                                                 </td>
                                             </tr>
                                             @endforeach

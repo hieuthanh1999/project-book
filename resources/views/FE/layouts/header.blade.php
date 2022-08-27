@@ -92,7 +92,7 @@
                         <div class="form-group tg-formtheme tg-formsearch" style="">
                             <input style="position: relative;    width: 102%;" type="text" name="country_name"
                                 id="country_name" class="typeahead form-control"
-                                placeholder="Tìm kiếm sản phẩm, tác giả..." />
+                                placeholder="Tìm kiếm sản phẩm" />
                             <i style="position: absolute; right: 15px; top: 19px;"  class="icon-magnifier"></i>
                             <div id="countryList" style="position: relative;"><br>
                             </div>
@@ -121,6 +121,14 @@
                             </div>
                             <div id="tg-navigation" class="collapse navbar-collapse tg-navigation">
                                 <ul>
+                                <li class="menu-item-has-children">
+                                        <a href="/">Trang chủ</a>
+                                        <!-- <ul class="sub-menu">
+												<li><a href="index-2.html">Home V one</a></li>
+												<li><a href="indexv2.html">Home V two</a></li>
+												<li><a href="indexv3.html">Home V three</a></li>
+											</ul> -->
+                                    </li>
                                     <li class="menu-item-has-children menu-item-has-mega-menu">
                                         <a href="javascript:void(0);">Danh mục</a>
                                         <div class="mega-menu">
@@ -160,14 +168,7 @@
                                             </div>
                                         </div>
                                     </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="/">Trang chủ</a>
-                                        <!-- <ul class="sub-menu">
-												<li><a href="index-2.html">Home V one</a></li>
-												<li><a href="indexv2.html">Home V two</a></li>
-												<li><a href="indexv3.html">Home V three</a></li>
-											</ul> -->
-                                    </li>
+                                   
                                     <li class="menu-item-has-children">
                                         <a href="danh-sach-tac-gia">Tác giả</a>
 

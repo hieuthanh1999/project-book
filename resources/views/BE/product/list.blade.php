@@ -116,7 +116,7 @@
                                                 <td class="text-center">
                                                     <a href="{{ route('admin.product.delete', $value->id) }}"
                                                         class="btn btn-outline-danger"><i
-                                                            class="fa fa-trash-o"></i>Xóa</a>
+                                                            class="fa fa-trash-o"></i> Xóa</a>
                                                 </td>
                                             </tr>
                                             @endforeach

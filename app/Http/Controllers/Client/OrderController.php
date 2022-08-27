@@ -26,17 +26,40 @@ class OrderController extends Controller
 
     public function index(Request $request)
     {
-        $province_id = $request->input('province');
-        // $states = DistrictModel::all();
-        $states = DistrictModel::where('provinceid',  Auth::user()->province_id)->get();
-        $countries = ProvinceModel::all();
-        $fee_price = ShippingFeeModel::getShippingFee($province_id);
-    
-        return BasicClass::handlingView('FE.order.list', [
-            'states' => $states,
-            'countries' => $countries,
-            'fee_price' => $fee_price
-        ]);
+
+        $arrray  = [];
+        foreach (Cart::content() as $row) {
+           
+            $book = ProductModel::find($row->id);
+
+            if($book->quantity <1){
+                $arrray[]  = $row->rowId;
+            }
+        }
+        if(count($arrray)){
+            foreach($arrray as $k){
+                Cart::remove($k);
+      
+            }
+        }
+        if(Cart::count()>0){
+            $province_id = $request->input('province');
+            // $states = DistrictModel::all();
+            $states = DistrictModel::where('provinceid',  Auth::user()->province_id)->get();
+            $countries = ProvinceModel::all();
+            $fee_price = ShippingFeeModel::getShippingFee($province_id);
+        
+            return BasicClass::handlingView('FE.order.list', [
+                'states' => $states,
+                'countries' => $countries,
+                'fee_price' => $fee_price
+            ]);
+        }else{
+            session()->flash('het', 'Sản phẩm đã hết hoặc đã bị xóa!');
+         
+            return back();
+        }
+       
     }
 
     public function done()
@@ -72,17 +95,21 @@ class OrderController extends Controller
         foreach (Cart::content() as $row) {
 
                 $book = ProductModel::find($row->id);
-                $book->quantity = ($book->quantity)-($row->qty);
-                $book->save();
+                if($book->quantity>0){
+                    $book->quantity = ($book->quantity)-($row->qty);
+                    $book->save();
     
-                $arrBook[]=$book->book_name;
-                $orderDetail = new OrderDetailsModel;
-                $orderDetail->order_id = $order->id;
-                $orderDetail->product_id = $row->id;
-                $orderDetail->price = $row->price;
-                $orderDetail->quality = $row->qty;
-    
-                $orderDetail->save();  
+                    $arrBook[]=$book->book_name;
+                    $orderDetail = new OrderDetailsModel;
+                    $orderDetail->order_id = $order->id;
+                    $orderDetail->product_id = $row->id;
+                    $orderDetail->name = $book->name;
+                    $orderDetail->image = $book->image;
+                    $orderDetail->price = $row->price;
+                    $orderDetail->quality = $row->qty;
+        
+                    $orderDetail->save(); 
+                }
                        
         }
         Cart::destroy(); 

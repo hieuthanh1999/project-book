@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\PublisherModel;
+use App\Models\ProductModel;
 use Illuminate\Support\Facades\Redirect;
 use Auth;
 
@@ -137,9 +138,14 @@ class PublisherController extends Controller
        //delete
        public function delete(Request $request)
        {
-           PublisherModel::where('id', $request->id)->delete();
-           session()->flash('delete', 'Xóa nhà xuất bản thành công!');
            
+           $check = ProductModel::where('sub_category_id',$request->id)->count();
+           if($check>0){
+               session()->flash('rangbuoc', 'Bạn cần xóa sản phẩm trước!');
+           }else{
+                PublisherModel::where('id', $request->id)->delete();
+                session()->flash('delete', 'Xóa nhà xuất bản thành công!');
+           }
            return back();
        }
 }

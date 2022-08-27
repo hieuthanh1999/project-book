@@ -61,6 +61,11 @@
                                     {{session()->get('enable_status')}}
                                 </div>
                                 @endif
+                                @if(session()->has('rangbuoc'))
+                                <div class=" text-danger custom" style="text-shadow: 0 0 1px black;">
+                                    {{session()->get('rangbuoc')}}
+                                </div>
+                                @endif
 
                                 <div class=" card-box table-responsive">
 
@@ -91,7 +96,7 @@
                                                 <td class="text-center">
                                                     <a href="{{ route('admin.publisher.delete', $value->id) }}"
                                                         class="btn btn-outline-danger"><i
-                                                            class="fa fa-trash-o"></i>Xóa</a>
+                                                            class="fa fa-trash-o"></i> Xóa</a>
                                                 </td>
                                             </tr>
                                             @endforeach

@@ -34,7 +34,9 @@
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Hình
                                     ảnh</label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="file" name="image" id="avatarfile" class="form-control file-upload" value="{{$value['image']}}"/>
+                                   
+
+                                    <input type="file" name="image" id="avatarfile" class="form-control file-upload" value="{{$value['image']}}" />
                                     <img id="avatars" src="{{URL::asset('image/banner/'.$value['image'])}}" class="avatars img-thumbnail" alt="thumnail"
                                         style="max-width: 500px; margin-top: 10px;">
                                     <div>
@@ -87,17 +89,18 @@ $(document).ready(function() {
             var reader = new FileReader();
 
             reader.onload = function(e) {
-                $('.avatar').attr('src', e.target.result);
+                $('.avatars').attr('src', e.target.result);
             }
             reader.readAsDataURL(input.files[0]);
         }
     }
 
     $(".file-upload").on('change', function() {
+
         readURL(this);
     });
 
-    $('#avatar').on('click', function() {
+    $('#avatars').on('click', function() {
         $('#avatarfile').trigger('click');
     });
 });

@@ -67,7 +67,7 @@
                                 <th scope="col">Tên Sách</th>
                                 <th scope="col">Hình Ảnh</th>
                                 <th scope="col">Giá Tiền</th>
-                                <th scope="col">Hành Động</th>
+                                <th colspan="2" scope="col">Hành Động</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -75,12 +75,17 @@
                             $i = 1;
                             @endphp
                             @foreach($wish->wishlist as $pro)
+                            @if($pro->product)
                             <tr>
                                 <th scope="row">{{$i++;}}</th>
                                 <td>{{$pro->product->name}}</td>
                                 <td><img style="width: 150px; height: auto; object-fit: contain;"
                                         src="{{URL::asset('image/product/'. $pro->product->image )}}" alt=""></td>
                                 <td>{{ number_format($pro->product->price).' '.'VND'}}</td>
+                                <td class="text-center"><a
+                                    href="chi-tiet-sach-{{$pro->product->id}}"
+                                    class="">
+                                    Chi tiết </a></td>
                                 <td>
                                     <form action="{{route('deleteWish', $pro->wish_id)}}" method="post">
                                         @csrf
@@ -89,6 +94,7 @@
                                     </form>
                                 </td>
                             </tr>
+                            @endif
                             @endforeach
                         </tbody>
                     </table>

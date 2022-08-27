@@ -119,12 +119,10 @@ class BannerController extends Controller
     {
         $rules = [
             'name' => 'required',
-            'image' => 'required',
         ];
 
         $messages = [ 
             'name.required'=> 'Tên banner không được để trống.',
-            'image.required'=> 'Tên banner không được để trống.',
         ];
 
         $validator = \Validator::make($request->all(), $rules, $messages);
@@ -143,13 +141,13 @@ class BannerController extends Controller
         
                 }
         
-                $add->name = $data['name'];
+                $add->name = $request->name;
                 if(isset($get_img)) {
                     $add->image = $new_img;
                 }
     
                 $add->save();
-                session()->flash('update', 'cập nhập thành công!');
+                session()->flash('update', 'Cập nhập thành công!');
     
                 return Redirect::to('admin/banner/list');
             }

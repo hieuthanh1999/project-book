@@ -19,46 +19,60 @@
         </div>
     </div>
 
+
+
     <div class="row">
-        <div class="col-md-12 col-sm-12 ">
-            <div class="dashboard_graph">
-                <div class="col-md-6 col-sm-6 bg-white">
-                    <div class="x_title">
-                        <h2>Sản phẩm được quan tâm nhiều nhất</h2>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="col-md-12 col-sm-12 ">
-                        @foreach($list_product_view as $item)
-                        <div>
-                            <p>{{$item->name}} <small class="text-danger">({{$item->view_count}} lượt xem)</small></p>
-                        </div>
-                        @endforeach
-                    </div>
+        <div class="col-md-4 col-sm-4">
+            <div class="x_panel tile fixed_height_520">
+                <div class="x_title">
+                    <h2>Được quan tâm</h2>
+                    <div class="clearfix"></div>
                 </div>
-                <div class="col-md-6 col-sm-6  bg-white">
-                    <div class="x_title">
-                        <h2>Sản phẩm được mua nhiều nhất</h2>
-                        <div class="clearfix"></div>
+                <div class="x_content">
+                    <h4>Sản phẩm được quan tâm nhiều nhất</h4>
+                    @foreach($list_product_view as $item)
+                    <div>
+                        <p>{{$item->name}} <small class="text-danger">({{$item->view_count}} lượt xem)</small></p>
                     </div>
-                    <div class="col-md-12 col-sm-12 ">
-                        @foreach($list_product_buy as $item)
-                        <div>
-                            <p>{{$item->name}} <small class="text-danger">{{$item->view_count}} lượt mua</small></p>
-                        </div>
-                        @endforeach
-                    </div>
+                    @endforeach
                 </div>
-                <div class="clearfix"></div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-4 ">
+            <div class="x_panel tile fixed_height_520">
+                <div class="x_title">
+                    <h2>Thống kê thể loại</h2>
+                    <div class="clearfix"></div>
+                </div>
+                {!! $cateChart->container() !!}
+                {!! $cateChart->script() !!}
+            </div>
+        </div>
+
+
+        <div class="col-md-4 col-sm-4 ">
+            <div class="x_panel tile fixed_height_520">
+                <div class="x_title">
+                    <h2>Thống kê đơn hàng</h2>
+                    <div class="clearfix"></div>
+                    {!! $orderSttChart->container() !!}
+                    {!! $orderSttChart->script() !!}
+                </div>
+
             </div>
         </div>
 
     </div>
-
-
 </div>
 <style type="text/css">
 .text_center {
     text-align: center;
 }
 </style>
+<script type="text/javascript">
+$(function() {
+    $('#datetimepicker').datetimepicker();
+});
+</script>
 @endsection

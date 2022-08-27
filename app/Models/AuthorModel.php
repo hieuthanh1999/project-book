@@ -33,6 +33,6 @@ class AuthorModel extends Model
 
     public static function getAll()
     {
-        return AuthorModel::where('status', 1)->orderBy('id', 'DESC')->get();
+        return AuthorModel::orderBy('id', 'DESC')->get();
     }
 }

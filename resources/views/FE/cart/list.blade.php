@@ -7,6 +7,11 @@
                 <div class="cart-right">
                     <div class="cart-title">Giỏ Hàng</div>
                     <div class="cart-content">
+                        @if(session()->has('het'))
+                        <div class=" text-success custom" style="text-shadow: 0 0 1px black;">
+                            {{session()->get('het')}}
+                        </div>
+                        @endif
                         @foreach (Cart::content() as $item)
                         <div class="cart-main">
                             <div class="row ">
@@ -59,11 +64,12 @@
                     <div class="prices">
                         <div class="cart-title">Tổng tiền</div>
                         <p class="prices__total text-center justify-content-center">
-                            <span class="prices__value prices__value--final">{{number_format(Cart::subTotal()).' '.'VND'}}
+                            <span
+                                class="prices__value prices__value--final">{{number_format(Cart::subTotal()).' '.'VND'}}
                                 <!-- <i style="margin:0 auto">(@lang('main.cart.vated'))</i> -->
                             </span>
                         </p>
-                      
+
                     </div>
                 </div>
             </div>
@@ -75,13 +81,15 @@
         $province_id = Auth::user()->province_id;
         }
         @endphp
+        @if(Cart::count()>0)
         <form action="{{ route('viewOrder') }}" method="POST">
-        @csrf
-        <input name="province" type="hidden" value="{{$province_id}}" />
-        <button type="submit"  class="cart__submit"> 
-        Thanh Toán
-        </button>
+            @csrf
+            <input name="province" type="hidden" value="{{$province_id}}" />
+            <button type="submit" class="cart__submit">
+                Thanh Toán
+            </button>
         </form>
+        @endif
     </div>
 
 </div>

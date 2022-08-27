@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\AuthorModel;
+use App\Models\ProductModel;
 use Illuminate\Support\Facades\Redirect;
 use Auth;
 
@@ -159,8 +160,14 @@ class AuthorController extends Controller
     //delete
     public function delete(Request $request)
     {
-        AuthorModel::where('id', $request->id)->delete();
-        session()->flash('delete', 'Xóa tác giả thành công!');
+        $check = ProductModel::where('sub_category_id',$request->id)->count();
+        if($check>0){
+            session()->flash('rangbuoc', 'Bạn cần xóa sản phẩm trước!');
+        }else{
+            AuthorModel::where('id', $request->id)->delete();
+            session()->flash('delete', 'Xóa tác giả thành công!');
+        }
+       
         
         return back();
     }
