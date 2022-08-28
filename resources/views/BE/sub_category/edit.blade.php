@@ -31,8 +31,7 @@
                         <form role="form" action="{{ route('admin.subcategory.update', $value->id) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="item form-group">
-                                <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Thể
-                                    loaji</label>
+                                <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Danh mục</label>
                                 <div class="col-md-6 col-sm-6 ">
                                     <select class="form-control cars" name="category_id" id="">
                                         <option value="{{ $value->category->id }}">{{ $value->category->name }}
