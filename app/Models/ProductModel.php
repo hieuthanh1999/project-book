@@ -107,7 +107,11 @@ class ProductModel extends Model
 
     public static function getProductWithDiscount()
     {
-        return ProductModel::orderBy('sale','desc')->first();
+        $sale =  ProductModel::orderBy('sale','desc')->first();
+        if($sale->sale){
+            return $sale;
+        }
+
     }
 
     public static function getProductTopView()
