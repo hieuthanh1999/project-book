@@ -42,8 +42,7 @@
                                        
                                         <a href="{{route('deleteWish', $id_wish)}}" onclick="event.preventDefault();
                                                      document.getElementById('remove_wishlist').submit();"
-                                            style="cursor: pointer;"><i style="font-size: 18px; color: red"
-                                                class="icon-heart"></i></a>
+                                            style="cursor: pointer;"><i style="font-size: 18px; color: red" class="fa fa-heart" aria-hidden="true"></i></a>
                                         <form id="remove_wishlist" action="{{route('deleteWish', $id_wish)}}"
                                             method="post">
                                             @csrf

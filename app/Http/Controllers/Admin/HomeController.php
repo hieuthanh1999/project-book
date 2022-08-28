@@ -75,6 +75,8 @@ class HomeController extends Controller
 
     public function check()
     {
+
+    
         $prices = ProductModel::orderBy('price', 'DESC')->limit(5)->get();
         $currentYear = Carbon::now()->year;
         $mot = OrdersModel::whereBetween('created_at', [$currentYear.'-1-1 00:00:00', $currentYear.'-1-31 23:59:59'])->sum('subtotal');
@@ -104,9 +106,10 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function doanhthu()
-    {
+    {    $bday = "";
+        $kday = "";
         $cateChart= $this->check();
-        return view('BE.doanhthu', compact('cateChart'));
+        return view('BE.doanhthu', compact('cateChart', 'bday', 'kday'));
     }
     
 
@@ -146,8 +149,10 @@ class HomeController extends Controller
             return view('BE.doanhthu', compact( 'cateChart', 'bday', 'kday'));
         }
         else{
+            $bday = "";
+            $kday = "";
             $cateChart= $this->check();
-            return view('BE.doanhthu', compact('cateChart'));
+            return view('BE.doanhthu', compact('cateChart', 'bday', 'kday'));
         }
        
     }
