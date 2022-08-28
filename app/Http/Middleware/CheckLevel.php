@@ -18,10 +18,17 @@ class CheckLevel
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user() && Auth::user()->level==0) {
+        if(Auth::check()){
+            if (Auth::user()->level==0) {
+                return redirect('/');
+            }else{
+                return $next($request);
+            }
+        }else{
             return redirect('/');
         }
+       
         
-        return $next($request);
+       
     }
 }

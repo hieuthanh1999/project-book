@@ -72,7 +72,10 @@
                     <!-- sidebar menu -->
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                         <div class="menu_section">
-                            <h3>Xin Chào: {{Auth::user()->name}}</h3>
+                        @if(Auth::check())
+                        <h3>Xin Chào: {{Auth::user()->name}}</h3>
+                        @endif
+                           
                             <ul class="nav side-menu">
                                 <li><a><i class="fa fa-home"></i> Trang chủ <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
@@ -178,27 +181,7 @@
                     <nav class="nav navbar-nav">
                         <ul class=" navbar-right">
                             <li class="nav-item dropdown open" style="padding-left: 15px;">
-                                <!-- <a href="javascript:;" class="user-profile " aria-haspopup="true"
-                                    id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                                    {{Auth::user()->name }}
-                                </a> -->
-                                <!-- <div class="dropdown-menu dropdown-usermenu pull-right"
-                                    aria-labelledby="navbarDropdown"> -->
-                                    <!-- <a class="dropdown-item" href="javascript:;"> Profile</a>
-                                    <a class="dropdown-item" href="javascript:;">
-                                        <span class="badge bg-red pull-right">50%</span>
-                                        <span>Settings</span>
-                                    </a>
-                                    <a class="dropdown-item" href="javascript:;">Help</a> -->
-
-                                    <!-- <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"><i
-                                            class="fa fa-sign-out pull-right"></i>
-                                        Đăng xuất</a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form> -->
-                                <!-- </div> -->
+                              
                             </li>
 
                             <li role="presentation" class="nav-item dropdown open">

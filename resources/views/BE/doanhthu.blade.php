@@ -30,12 +30,16 @@
                 <div class="x_title">
                     <h2>Thống kê đơn hàng</h2>
                     <div class="clearfix"></div>
-                    {!! $orderSttChart->container() !!}
-                    {!! $orderSttChart->script() !!}
+                    <div style="margin: 20px; 0">
+                    {!! $cateChart->container() !!}
+                    {!! $cateChart->script() !!}
+                    </div>
+                   
                 </div>
 
             </div>
         </div>
+       
     </div>
 
   
