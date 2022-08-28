@@ -5,25 +5,25 @@
 
     <div class="row">
         <div class="col-md-6 col-sm-6 dates">
-        <form role="form" action="{{ route('admin.searchDoanhThu') }}" method="post" enctype="multipart/form-data">
-                            @csrf
-            <div class='col-sm-6'>
-                <div class="form-group">
-                    <input type="date" name="bday" class="form-control">
+            <form role="form" action="{{ route('admin.searchDoanhThu') }}" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class='col-sm-6'>
+                    <div class="form-group">
+                        <input type="date" name="bday" class="form-control"  value="{{$bday}}">
+                    </div>
                 </div>
-            </div>
-            <div class='col-sm-4'>
-                <div class="form-group">
-                    <input type="date" name="kday" class="form-control">
+                <div class='col-sm-4'>
+                    <div class="form-group">
+                        <input type="date" name="kday" class="form-control" value="{{$kday}}">
+                    </div>
+
                 </div>
-               
-            </div>
-            <div class='col-sm-2'>
-                <div class="form-group">
-                <button type="submit" class="btn btn-success">Lọc</button>
+                <div class='col-sm-2'>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Lọc</button>
+                    </div>
                 </div>
-            </div>
-</form>
+            </form>
         </div>
         <div class="col-md-12 col-sm-12 ">
             <div class="x_panel tile fixed_height_520">
@@ -31,18 +31,18 @@
                     <h2>Thống kê đơn hàng</h2>
                     <div class="clearfix"></div>
                     <div style="margin: 20px; 0">
-                    {!! $cateChart->container() !!}
-                    {!! $cateChart->script() !!}
+                        {!! $cateChart->container() !!}
+                        {!! $cateChart->script() !!}
                     </div>
-                   
+
                 </div>
 
             </div>
         </div>
-       
+
     </div>
 
-  
+
 </div>
 <style type="text/css">
 .text_center {

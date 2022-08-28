@@ -143,7 +143,7 @@ class HomeController extends Controller
             $cateChart = new OrderChart();
             $cateChart->labels($cateLabel);
             $cateChart->dataset("Tổng tiền",'bar', collect($cateData));
-            return view('BE.doanhthu', compact( 'cateChart'));
+            return view('BE.doanhthu', compact( 'cateChart', 'bday', 'kday'));
         }
         else{
             $cateChart= $this->check();
