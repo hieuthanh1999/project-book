@@ -30,12 +30,12 @@ Sau khi đã có danh sách các sản phẩm được tìm kiếm nhiều nhấ
 
 + Hàm getProductsSortedBySimularity(int $productId, array $matrix) dùng để sắp xếp các sản phẩm theo độ tương đồng với sản phẩm có ID là $productId.
 
-Bước đầu tiên, nó lấy ra các độ tương đồng của sản phẩm có ID là $productId từ ma trận $matrix, nếu không tìm thấy sản phẩm thì nó sẽ throw một exception.
+- Bước đầu tiên, nó lấy ra các độ tương đồng của sản phẩm có ID là $productId từ ma trận $matrix, nếu không tìm thấy sản phẩm thì nó sẽ throw một exception.
 Sau đó, nó sẽ sắp xếp các sản phẩm theo độ tương đồng giảm dần.
 Với mỗi sản phẩm trong danh sách đã sắp xếp, nó lấy ra thông tin của sản phẩm đó và tính toán độ tương đồng với sản phẩm có ID là $productId, sau đó đưa sản phẩm đó vào một mảng $sortedProducts và trả về mảng này khi đã duyệt qua toàn bộ danh sách.
 + Hàm calculateSimilarityScore($productA, $productB) dùng để tính toán độ tương đồng giữa hai sản phẩm $productA và $productB dựa trên các tính năng khác nhau của sản phẩm.
 
-Đầu tiên, nó tạo ra hai object $featuresA và $featuresB chứa các thông tin về trọng lượng, tác giả, nhà xuất bản và số trang của hai sản phẩm.
+- Đầu tiên, nó tạo ra hai object $featuresA và $featuresB chứa các thông tin về trọng lượng, tác giả, nhà xuất bản và số trang của hai sản phẩm.
 Sau đó, nó chuyển đổi các object này thành một chuỗi string bằng cách lấy tất cả các thuộc tính của object và ghép lại với nhau.
 Tiếp theo, nó sử dụng các hàm Similarity để tính toán độ tương đồng của các tính năng khác nhau của hai sản phẩm, sau đó cộng tổng các giá trị này lại để ra được độ tương đồng tổng thể của hai sản phẩm.
 Cuối cùng, nó trả về giá trị độ tương đồng được tính toán này.
