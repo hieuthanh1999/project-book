@@ -43,7 +43,7 @@ Cuối cùng, nó trả về giá trị độ tương đồng được tính to�
 
 
 ===  In PDF đơn hàng ===
-Hàm generatePDF($id) sử dụng thư viện PDF để tạo ra một file PDF từ dữ liệu đơn hàng và chi tiết đơn hàng.
+- Hàm generatePDF($id) sử dụng thư viện PDF để tạo ra một file PDF từ dữ liệu đơn hàng và chi tiết đơn hàng.
 
 ===  Giảm giá ===
 - Hàm addCouponCart() dùng để thêm mã giảm giá cho giỏ hàng của người dùng khi người dùng add mã giảm giá.
