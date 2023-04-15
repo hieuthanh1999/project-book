@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddFkShipping extends Migration
+class AddColumb extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AddFkShipping extends Migration
      */
     public function up()
     {
-        Schema::table('table_shipping_fee', function (Blueprint $table) {
-            //  $table->foreign('provinceid')->references('provinceid')->on('province')->onDelete('cascade');
+        Schema::table('order_details', function (Blueprint $table) {
+            $table->string('name')->nullable();
+            $table->string('image')->nullable();
         });
     }
 
@@ -25,7 +26,7 @@ class AddFkShipping extends Migration
      */
     public function down()
     {
-        Schema::table('table_shipping_fee', function (Blueprint $table) {
+        Schema::table('order_details', function (Blueprint $table) {
             //
         });
     }

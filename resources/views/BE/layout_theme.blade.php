@@ -122,6 +122,13 @@
                                         <!-- <li><a href="{{ route('admin.order.createView') }}">Tạo đơn hàng</a></li> -->
                                         <li><a href="{{ route('admin.order.list') }}">Xem đơn hàng</a></li>
                                         <li><a href="{{ route('admin.shipping.list') }}">Phí vận chuyển</a></li>
+
+                                    </ul>
+                                </li>
+                                <li><a><i class="fa fa-money"></i> Mã giảm giá <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="{{ route('admin.coupons.create') }}">Thêm mã</a></li>
+                                        <li><a href="{{ route('admin.coupons.list') }}">Liệt kê mã</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-user"></i> Quản lý khách hàng <span

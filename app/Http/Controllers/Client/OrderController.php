@@ -16,14 +16,55 @@ use App\Models\DistrictModel;
 use App\Models\ProvinceModel;
 use App\Models\User;
 use Illuminate\Support\Facades\Redirect;
-
+use App\Http\Controller\Client\CartController;
 class OrderController extends Controller
 {
     public function __construct()
     {
         $this->middleware('user');
     }
+     //Hàm xử lý tính tổng giỏ hàng
+     public function getTotals($cart_total){
+        $cart_totals = 0;
+        if(Session::get('coupon')){
+            if(Session::get('coupon')['coupon_status'] == 1){
+                // $coupon_cart = $coupon['coupon_value'] . ' %';
+                $cart_totals = $cart_total - ($cart_total/100 * Session::get('coupon')['coupon_value']);
+            }
+            else if(Session::get('coupon')['coupon_status'] == 2){
+                // $coupon_cart = $coupon['coupon_value'] . ' VNĐ';
 
+                $cart_totals = $cart_total - Session::get('coupon')['coupon_value'];
+            }
+        }
+        else{
+            $cart_totals = $cart_total;
+        }
+
+        return $cart_totals;
+    }
+    public function getValues($cart_total){
+        $coupon_cart = '';
+        if(Session::get('coupon')){
+            if(Session::get('coupon')['coupon_status'] == 1){
+                $coupon_cart .= number_format(Session::get('coupon')['coupon_value']) . ' %';
+                //$cart_totals = $cart_total - ($cart_total/100 * Session::get('coupon')['coupon_value']);
+            }
+            else if(Session::get('coupon')['coupon_status'] == 2){
+                $coupon_cart .= number_format(Session::get('coupon')['coupon_value']) . ' VNĐ';
+
+                //$cart_totals = $cart_total - Session::get('coupon')['coupon_value'];
+            }
+        }
+        return $coupon_cart;
+    }
+    public function getTotal($cart){
+        $cart_total = 0;
+        foreach($cart as $key => $val){
+            $cart_total += Cart::subTotal();
+        }
+        return $cart_total;
+    }
     public function index(Request $request)
     {
 
@@ -48,11 +89,16 @@ class OrderController extends Controller
             $states = DistrictModel::where('provinceid',  Auth::user()->province_id)->get();
             $countries = ProvinceModel::all();
             $fee_price = ShippingFeeModel::getShippingFee($province_id);
-        
+            $cart_total = $this->getTotal(Session::get('cart'));
+            $total = $this->getTotals($cart_total);
+            $valuesCounpons = $this->getValues($cart_total);
+            
             return BasicClass::handlingView('FE.order.list', [
                 'states' => $states,
                 'countries' => $countries,
-                'fee_price' => $fee_price
+                'fee_price' => $fee_price,
+                'total' => $total,
+                'valuesCounpons' => $valuesCounpons
             ]);
         }else{
             session()->flash('het', 'Sản phẩm đã hết hoặc đã bị xóa!');
@@ -79,6 +125,7 @@ class OrderController extends Controller
         $states = DistrictModel::where('districtid', $request->district_id)->first();
         $countries = ProvinceModel::where('provinceid', $request->province_id)->first();
         // insert order
+        $cart_total = $this->getTotal(Session::get('cart'));
         $order = new OrdersModel;
         $id_user = Auth::user()->id;
         $users = User::where('id',$id_user)->first();
@@ -90,6 +137,10 @@ class OrderController extends Controller
         $order->phoneReceiver = $request->order_phone;
         $order->nameReceiver = $request->order_name;
         $order->shipping_id = $fee;
+        $order->subtotal = $this->getTotals($cart_total);
+        if(Session::get('coupon')){
+            $order->coupons = $this->getValues($cart_total);
+        }
         $order->save();
 
         foreach (Cart::content() as $row) {

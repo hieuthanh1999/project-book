@@ -106,8 +106,21 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="col-lg-4">
+                                            <h4>Thành tiền SP:</h4>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <span>{{number_format($total).' '.'VND' }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-bottom: 20px;">
+                                    <div class="col-lg-6">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="col-lg-4">
                                             @php
-                                            $total += ($orders->shipping->price);
+                                            $totals = $orders->subtotal;
+                                            $totals += ($orders->shipping->price);
                                             @endphp
 
                                             <h4>Phí vẩn chuyển<span
@@ -116,6 +129,19 @@
                                         </div>
                                         <div class="col-lg-4">
                                             <span>{{number_format($orders->shipping->price).' '.'VND' }}</span>
+                                        </div>
+                                    </div>
+                                
+                                </div>
+                                <div class="row" style="margin-bottom: 20px;">
+                                    <div class="col-lg-6">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="col-lg-4">
+                                            <h4>Giảm giá:</h4>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <span>{{$orders->coupons}}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -127,7 +153,7 @@
                                             <h4>Tổng tiền sản phẩm:</h4>
                                         </div>
                                         <div class="col-lg-4">
-                                            <span>{{number_format($total).' '.'VND' }}</span>
+                                            <span>{{number_format($totals).' '.'VND' }}</span>
                                         </div>
                                     </div>
                                 </div>

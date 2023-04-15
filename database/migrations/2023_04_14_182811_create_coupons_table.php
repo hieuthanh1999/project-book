@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddFkShipping extends Migration
+class CreateCouponsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class AddFkShipping extends Migration
      */
     public function up()
     {
-        Schema::table('table_shipping_fee', function (Blueprint $table) {
-            //  $table->foreign('provinceid')->references('provinceid')->on('province')->onDelete('cascade');
+        Schema::create('coupons_table', function (Blueprint $table) {
+            $table->id();
+            $table->string('code')->unique();
+            $table->integer('value');
+            $table->dateTime('expires_at')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ class AddFkShipping extends Migration
      */
     public function down()
     {
-        Schema::table('table_shipping_fee', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('coupons_table');
     }
 }

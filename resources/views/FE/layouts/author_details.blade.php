@@ -93,7 +93,7 @@
                                             @endif
                                             @else
 
-                                            <a href="/login" class="tg-btn tg-btnstyletwo">
+                                            <a href="/sign-in" class="tg-btn tg-btnstyletwo">
                                                 <i class="fa fa-shopping-basket"></i>
                                                 <em>Thêm vào giỏ</em>
                                             </a>

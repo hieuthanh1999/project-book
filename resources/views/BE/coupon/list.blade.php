@@ -2,11 +2,11 @@
 @section('content')
 <div class="right_col" role="main">
     <div class="">
-        <!-- <div class="page-title">
+        <div class="page-title">
             <div class="title_left">
-                <h3>Danh sách thể loại</h3>
+                <h3>Danh sách banner</h3>
             </div>
-        </div> -->
+        </div>
 
         <div class="clearfix"></div>
 
@@ -14,7 +14,7 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Danh Sách Đơn Hàng</h2>
+                        <h2>Danh Sách Giảm Giá</h2>
                         <ul class="nav navbar-right panel_toolbox">
                             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                             </li>
@@ -67,46 +67,43 @@
                                     <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th>Mã hoá đơn</th>
-                                                <th>Khách hàng</th>
-                                                <th>Phương thúc</th>
-                                                <th>Trạng thái</th>
-                                                <th>Ngày tạo</th>
-                                                <th class="text-center" colspan="3">
-                                                    <!-- <a href="{{ route('admin.subcategory.create') }}"
-                                                        class="btn btn-outline-success">Tạo mới</a> -->
+                                                <th>Tên Mã</th>
+                                                <th>Mã Giảm Giá</th>
+                                                <th>Giá Trị</th>
+                                                <th>Loại Mã</th>
+                                                <th>	Hạn Sử Dụng</th>
+                                                <th colspan="2" class="text-center">
+                                                    <a href="{{ route('admin.coupons.create') }}"
+                                                        class="btn btn-outline-success">Tạo mới</a>
                                                 </th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($order as $value )
+                                            @foreach($values as $banner)
                                             <tr>
-
-                                                <td>{{$value->id}}</td>
-                                                <td>{{$value->user->name}}</td>
-                                                <td>{{$value->payment->type}}</td>
                                                 <td>
-                                                    {{config('app.order_status.'.$value->order_status)}}
+                                                {{ $banner->coupon_name }}
                                                 </td>
-                                                <td>{{$value->created_at}}</td>
-                                                <td class="text-center"><a
-                                                        href="{{ route('admin.order.detailOrder', $value->id) }}"
-                                                        class="btn btn-outline-info btn-xs"><i class="fa fa-pencil"></i>
-                                                        Chi tiết </a></td>
-                                                <td class="text-center">
-                                                    <a href="{{ route('admin.order.deleteOrder', $value->id) }}"
-                                                        class="btn btn-outline-danger"><i
-                                                            class="fa fa-trash-o"></i> Xóa</a>
-                                                </td>
-                                                <td class="text-center">
-                                                    <a class="btn btn-outline-info btn-xs" target="_blank" href="admin/order/generate-pdf/{{$value->id}}"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF</a> 
-                                                </td>
+                                                <td>{!!$banner->coupon_code!!}</td>
+                                                <td> @if ($banner->coupon_status == 1)
+                                                    {{$banner->coupon_value}} %
+                                                @elseif($banner->coupon_status == 2)
+                                                    {{number_format($banner->coupon_value)}} VNĐ
+                                                @endif</td>
+                                                <td>@if ($banner->coupon_status == 1)
+                                                    {{'Giảm Theo Phần Trăm'}}
+                                                @elseif($banner->coupon_status == 2)
+                                                    {{'Giảm Theo Tiền'}}
+                                                @endif</td>
+                                                <td>{!!$banner->coupon_expiry!!}</td>
+                                                <td class="text-center"><a href="{{ route('admin.coupons.update', $banner->coupon_id) }}"
+                                                    class="btn btn-outline-info btn-xs"><i class="fa fa-pencil"></i>
+                                                    sửa </a></td>
                                             </tr>
                                             @endforeach
-
                                         </tbody>
                                     </table>
-                                    {{ $order->links() }}
+                                    {{ $values->links() }}
                                 </div>
                             </div>
                         </div>

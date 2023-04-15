@@ -135,16 +135,25 @@
                                                             <td>Tổng tiền</td>
                                                             <td style="text-align: center">
                                                                 {{(number_format(Cart::subTotal())).' '.'VND'}}</td>
+                                                              
                                                         </tr>
+                                                        <tr>
+                                                            <td>Khuyến mãi</td>
+                                                            <td style="text-align: center">
+                                                                {{$valuesCounpons}}</td>
+                                                              
+                                                        </tr>
+
                                                         <tr>
                                                             <td>Phí vận chuyển</td>
                                                             <td style="text-align: center">
                                                                 {{number_format($fee_price['price']).' '.'VND' }}</td>
+                                                        
                                                         </tr>
                                                         <tr>
                                                             <td>Thành tiền</td>
                                                             <td style="text-align: center">
-                                                                {{number_format(Cart::subTotal() + $fee_price['price']).' '.'VND'}}
+                                                                {{number_format($total + $fee_price['price']).' '.'VND'}}
                                                             </td>
                                                         </tr>
                                                     </table>

@@ -10,6 +10,8 @@ use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ShippingFeeController;
 use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\CouponsController;
+use App\Http\Controllers\Admin\PDFController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\CityController; 
 use App\Http\Controllers\Client\CartController; 
@@ -18,6 +20,8 @@ use App\Http\Controllers\Client\UsersController as UsersClient;
 // use App\Http\Controllers\Admin\UsersController  as UsersAdmin; 
 use App\Http\Controllers\WishlistController;  
 use App\Http\Controllers\SearchController;  
+use App\Models\Coupon;
+use App\Models\ProductModel;
 /*SearchController
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,6 +40,28 @@ use App\Http\Controllers\SearchController;
  *
  *
 */
+// Route::get('/', function () {
+//     $products        =  ProductModel::all();
+//     $products = json_decode(json_encode($products), true);
+//     // dd($products)
+//     $selectedId      = intval(app('request')->input('id') ?? '1');
+
+//     $selectedProduct = $products[0];
+
+//     $selectedProducts = array_filter($products, function ($product) use ($selectedId) { return $product['id'] === $selectedId; });
+//     // dd($selectedProducts);
+//     if (count($selectedProducts)) {
+//         $selectedProduct = $selectedProducts[array_keys($selectedProducts)[0]];
+//     }
+
+//     $productSimilarity = new App\ProductSimilarity($products);
+//     $similarityMatrix  = $productSimilarity->calculateSimilarityMatrix();
+//     $products          = $productSimilarity->getProductsSortedBySimularity($selectedId, $similarityMatrix);
+
+//     return view('welcome', compact('selectedId', 'selectedProduct', 'products'));
+// });
+
+
 Auth::routes();
 
 Route::get('/', [HomeController::class, 'index']);
@@ -55,7 +81,7 @@ Route::post('addCart', [CartController::class, 'save'])->name('addCart');
 Route::get('cart', [CartController::class, 'index'])->name('showCart');
 Route::post('update-qty-cart{id}', [CartController::class, 'update'])->name('updateCart');
 Route::get('delete-cart/{rowId}', [CartController::class, 'delete'])->name('deleteCart');
-
+Route::post('/add_coupon_cart', [CartController::class, 'addCouponCart']);
 //Wishlist
 Route::post('them-yeu-thich', [WishlistController::class, 'save'])->name('addWish');
 Route::get('danh-sach-yeu-thich}', [WishlistController::class, 'index'])->name('showWish');
@@ -79,6 +105,18 @@ Route::post('review/store', [App\Http\Controllers\ReviewsController::class, 'sto
 
 Route::get('search', [SearchController::class, 'getSearch']);
 Route::post('search/name', [SearchController::class, 'getSearchAjax'])->name('search');
+
+
+Route::post('/coupons/apply', function (Illuminate\Http\Request $request) {
+    $coupon = Coupon::findByCode($request->code);
+    if (!$coupon) {
+        return redirect()->back()->withErrors(['code' => 'Invalid discount code']);
+    }
+    if (!$coupon->isValid()) {
+        return redirect()->back()->withErrors(['code' => 'Expired discount code']);
+    }
+    // Apply discount code to purchase
+})->name('coupons.apply');
 /*
  *
  *
@@ -158,6 +196,8 @@ Route::name('admin.')->prefix('admin')->group(function () {
         Route::get('/details/{id}', [App\Http\Controllers\Admin\OrderController::class, 'details'])->name('detailOrder');
         Route::post('/update/{id}', [App\Http\Controllers\Admin\OrderController::class, 'update'])->name('updateStatusOrder');
         Route::get('/delete/{id}', [App\Http\Controllers\Admin\OrderController::class, 'delete'])->name('deleteOrder');
+        //Export PDF
+        Route::get('/generate-pdf/{id}', [PDFController::class, 'generatePDF']);
        
     });
 
@@ -250,6 +290,14 @@ Route::name('admin.')->prefix('admin')->group(function () {
         
         // // Route::get('/edit', [ProductController::class, 'view_update']);
         Route::get('/delete/{id}', [ShippingFeeController::class, 'delete']);
+
+    });
+    Route::name('coupons.')->prefix('coupons')->group(function () {
+        Route::get('/list', [CouponsController::class, 'index'])->name('list');
+        Route::post('/create', [CouponsController::class, 'store']);
+        Route::get('/create', [CouponsController::class, 'view_create'])->name('create');
+        Route::get('/update/{id}', [CouponsController::class, 'edit'])->name('update');
+        Route::post('/update/{id}', [CouponsController::class, 'update']);
 
     });
 

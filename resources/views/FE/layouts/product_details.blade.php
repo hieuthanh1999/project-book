@@ -215,7 +215,7 @@
                                             @if(Auth::check())
                                             <div class="form-cmt ">
                                                 <input class="" id="xxx" type="text" name="comment"
-                                                    placeholder="Nhập bình luận tại đây">
+                                                    placeholder="Nhập bình luận tại đây" required>
                                                 <input id="last-name1" type="hidden" value="{{ $product_details->id }}"
                                                     name="product_id">
                                                 <p class="err_cmt text-danger"></p>
@@ -280,7 +280,7 @@
             </div>
         </div>
     </div>
-    @if($list_product->count() >0)
+    {{-- @if($list_product->count() >0)
     <div class="tg-relatedproducts">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="tg-sectionhead">
@@ -362,7 +362,89 @@
             </div>
         </div>
     </div>
-    @endif
+    @endif --}}
+    <div class="tg-relatedproducts">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="tg-sectionhead">
+                <h2>Sản phẩm tương tự theo tỉ lệ %</h2>
+                <!-- <a class="tg-btn" href="javascript:void(0);">View All</a> -->
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div id="tg-relatedproductslider" class="tg-relatedproductslider tg-relatedbooks owl-carousel">
+
+                @foreach ($products as $value)
+                <div class="item">
+                    <div class="tg-postbook">
+                        <figure class="tg-featureimg">
+                            <div class="tg-bookimg">
+                                <div class="tg-frontcover"><img src="{{URL::asset('image/product/'.$value['image'])}}"
+                                        alt="image description"></div>
+                                <div class="tg-backcover"><img src="{{URL::asset('image/product/'.$value['image'])}}"
+                                        alt="image description"></div>
+                            </div>
+                            <a class="tg-btnaddtowishlist" href="javascript:void(0);">
+                                <i class="icon-heart"></i>
+                                <span>Yêu thích</span>
+                            </a>
+                        </figure>
+                        <div class="tg-postbookcontent">
+                            <ul class="tg-bookscategories">
+
+                                @foreach($sub_categorys as $category)
+                                @if($value['sub_category_id'] == $category['id'])
+                                <li><a href="/the-loai-{{$category['id']}}">{{$category['name']}}</a></li>
+                                @endif
+                                @endforeach
+                            </ul>
+                            <!-- <div class="tg-themetagbox"><span class="tg-themetag">sale</span></div> -->
+                            <div class="tg-booktitle">
+                                <h5 class="card-title">Tỉ lệ: {{ round($value['similarity'] * 100, 1) }}%</h5>
+                                <h3><a href="/chi-tiet-sach-{{$value['id']}}">{{$value['name']}}</a></h3>
+                            </div>
+                            <span class="tg-bookwriter">Tác giả:
+
+                                @foreach($authors_all as $author)
+                                @if($value['author_id'] == $author['id'])
+                                <a href="/tac-gia-{{$author['id']}}">{{$author['name']}}</a>
+                                @endif
+                                @endforeach
+
+                            </span>
+                            <!-- <span class="tg-stars"><span></span></span> -->
+                            <span class="tg-bookprice">
+                                <ins>{{number_format($value['price']).' '.'VND'}}</ins>
+                                <!-- <del>$27.20</del> -->
+                            </span>
+                            @if (Auth::check())
+                            @if ($value['quantity'] > 0)
+                            <form action="{{ route('addCart') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="quantity" value="1">
+                                <input type="hidden" name="id" value="{{ $value['id'] }}">
+                                <button type="submit" class="tg-btn tg-btnstyletwo">
+                                    <i class="fa fa-shopping-basket"></i>
+                                    <em>Thêm vào giỏ</em>
+                                </button>
+                            </form>
+                            @else
+                            <button class="tg-btn tg-btnstyletwo">Đã hết hàng</button>
+                            @endif
+                            @else
+
+                            <a href="/login" class="tg-btn tg-btnstyletwo">
+                                <i class="fa fa-shopping-basket"></i>
+                                <em>Thêm vào giỏ</em>
+                            </a>
+                            @endif
+
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
 </div>
 </div>
 
