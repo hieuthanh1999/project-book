@@ -12,13 +12,13 @@ Windows:
   -  clone git: git clone git@github.com:hieuthanh1999/project-book.git
 
 
-===============================  Một thuật toán gợi ý sản phẩm được tìm kiếm nhiều trong Laravel =============================================
+===  Một thuật toán gợi ý sản phẩm được tìm kiếm nhiều trong Laravel ===
 - Bước 1: Lấy danh sách các sản phẩm được tìm kiếm nhiều
 Để làm được điều này, bạn có thể sử dụng một truy vấn SQL để lấy các sản phẩm được tìm kiếm nhiều nhất từ cơ sở dữ liệu. Đối với ví dụ này, chúng ta sẽ giả định rằng mỗi lần tìm kiếm sản phẩm được lưu vào cơ sở dữ liệu như một bản ghi trong bảng 'search_logs'. Các bản ghi trong bảng này chứa thông tin về sản phẩm đã được tìm kiếm và số lần tìm kiếm.
 Bước 2: Hiển thị danh sách các sản phẩm gợi ý
 Sau khi đã có danh sách các sản phẩm được tìm kiếm nhiều nhất, bạn có thể hiển thị chúng trên trang web của mình.
 
-===============================   Thuật toán gợi ý sản phẩm liên quan theo tỉ lệ gần đúng (%) =============================================
+====   Thuật toán gợi ý sản phẩm liên quan theo tỉ lệ gần đúng (%) ===
 - Các thuật toán sử dụng là Khoảng cách Hamming cho các tính năng của sản phẩm, Khoảng cách Euclidean cho giá sản phẩm và hệ số tương tự Jaccard cho các danh mục sản phẩm.
 
 + hàm hamming(string $string1, string $string2, bool $returnDistance = false):  Tính toán độ đo tương đồng Hamming giữa hai chuỗi ký tự. Phương thức này nhận ba tham số: $string1 và $string2 là chuỗi cần tính toán, và $returnDistance là một biến boolean để quyết định phương thức sẽ trả về độ đo tương đồng hay khoảng cách giữa hai chuỗi. Độ đo Hamming là số lượng ký tự khác nhau giữa hai chuỗi.
@@ -42,9 +42,9 @@ Tiếp theo, nó sử dụng các hàm Similarity để tính toán độ tươn
 Cuối cùng, nó trả về giá trị độ tương đồng được tính toán này.
 
 
-=========================  In PDF đơn hàng =============================================
+===  In PDF đơn hàng ===
 Hàm generatePDF($id) sử dụng thư viện PDF để tạo ra một file PDF từ dữ liệu đơn hàng và chi tiết đơn hàng.
 
-=========================  Giảm giá ====================================================
+===  Giảm giá ===
 - Hàm addCouponCart() dùng để thêm mã giảm giá cho giỏ hàng của người dùng khi người dùng add mã giảm giá.
 - Hàm getTotal() dùng để tính tổng giá trị của các sản phẩm trong giỏ hàng.
