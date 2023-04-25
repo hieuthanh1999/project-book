@@ -41,7 +41,7 @@
 
                                     @endforeach
                                     <h4 class="card-subtitle mb-2 text-muted">Địa chỉ: {{$wish->address}}</h4>
-                                    <a href="#" class="btn btn-info">Thay đổi tài khoản</a>
+                                    <a href="cap-nhat-{{$wish->id}}" class="btn btn-info">Thay đổi tài khoản</a>
                                 </div>
                                 <div class="col-sm-12 col-md-4 col-lg-4">
                                     <h4 class="card-subtitle mb-2 text-muted">Email: {{$wish->email}}</h4>

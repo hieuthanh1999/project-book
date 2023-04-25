@@ -97,6 +97,8 @@ Route::get('danh-sach-tac-gia', [App\Http\Controllers\Client\AuthorController::c
 
 #Users
 Route::get('thong-tin-{id}', [UsersClient::class, 'index']);
+Route::get('cap-nhat-{id}', [UsersClient::class, 'update']);
+Route::post('user-update/{id}', [UsersClient::class, 'updateUser'])->name('user-update');
 Route::get('hoa-don-{id}', [UsersClient::class, 'order']);
 Route::get('yeu-thich-{id}', [UsersClient::class, 'wishlist']);
 
