@@ -142,6 +142,7 @@ class AuthorController extends Controller
            
             $up->name = $request->name;
             $up->description = $request->description;
+            $up->status = $request->status;
             $up->save();
 
             session()->flash('update', 'Cập nhập tác giả thành công!');

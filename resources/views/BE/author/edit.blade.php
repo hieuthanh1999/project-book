@@ -87,7 +87,19 @@
                                 </div>
 
                             </div>
-                            
+                            <div class="item form-group">
+                                <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Trạng
+                                    thái</label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <select class="form-control cars" name="status" id="">
+                                        <option @if($value['status'] == 0) selected @endif value="0">ẩn
+                                        </option>
+                                        <option @if($value['status'] == 1) selected @endif value="1">hiển thị
+                                        </option>
+                                       
+                                    </select>
+                                </div>
+                            </div>
                             <div class="ln_solid"></div>
                             <div class="item form-group">
                                 <div class="col-md-6 col-sm-6 offset-md-3">

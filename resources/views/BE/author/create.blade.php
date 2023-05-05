@@ -92,10 +92,11 @@
                                     thái</label>
                                 <div class="col-md-6 col-sm-6 ">
                                     <select class="form-control cars" name="status" id="">
-                                        <option selected value="1">hiển thị
-                                        </option>
                                         <option selected value="0">ẩn
                                         </option>
+                                        <option selected value="1">hiển thị
+                                        </option>
+                                       
                                     </select>
                                 </div>
                             </div>
