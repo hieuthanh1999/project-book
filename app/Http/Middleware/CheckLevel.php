@@ -27,8 +27,5 @@ class CheckLevel
         }else{
             return redirect('/');
         }
-       
-        
-       
     }
 }

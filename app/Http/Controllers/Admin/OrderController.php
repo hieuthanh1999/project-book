@@ -8,6 +8,10 @@ use App\Models\OrdersModel;
 use App\Models\OrderDetailsModel;
 use Illuminate\Support\Facades\Redirect;
 use Auth;
+use App\Models\CouponsModel;
+use App\Mail\SendMail;
+use Mail;
+use Carbon\Carbon;
 class OrderController extends Controller
 {
     public function __construct()
@@ -63,6 +67,22 @@ class OrderController extends Controller
     public function update(Request $request, $id)
     {
         $order = OrdersModel::findOrFail($id);
+        if($request->input('order_status') == 3 && $order->subtotal >= 500000){
+            $datenow = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+            $randomRecord = CouponsModel::inRandomOrder()->Where('coupon_expiry', '>=', $datenow)->first();
+            if($randomRecord != null){
+                $data = [
+                    'name' => $order->nameReceiver,
+                    'coupon_code' => $randomRecord->coupon_code,
+                    'coupon_values' => $randomRecord->coupon_value,
+                    'coupon_expiry' =>  $randomRecord->coupon_expiry,
+                    'coupon_status' =>  $randomRecord->coupon_status,
+                    'Email'=>$order->user->email,
+                ];
+                Mail::to($order->user->email)->send(new SendMail($data));
+            }
+           
+        }
         $order->order_status = $request->input('order_status');
         $order->save();
 
