@@ -5,7 +5,7 @@
     <div class="">
         <div class="page-title">
             <div class="title_left">
-                <h3>Danh sách banner</h3>
+                <h3>Danh sách sản phẩm</h3>
             </div>
         </div>
 
@@ -15,7 +15,7 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Danh sách banner</h2>
+                        <h2>Danh sách sản phẩm</h2>
                         <ul class="nav navbar-right panel_toolbox">
                             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                             </li>
@@ -67,6 +67,7 @@
                                             <tr style="text-align: center;">
                                                 <th>Mã</th>
                                                 <th>Tên</th>
+                                                <th>Thể loại</th>
                                                 <th>Số lượng</th>
                                                 <th>Giá</th>
                                                 <th>Hình ảnh</th>
@@ -83,6 +84,7 @@
                                                 <td>{{ $value->code }}</td>
 
                                                 <td>{{ $value->name }}</td>
+                                                <td>{{ $value->subCategory->name }}</td>
                                                 <td>{{ $value->quantity }}</td>
                                                 <td> <span
                                                         class="text-ellipsis">{{number_format($value['price']).' '.'VND'}}</span>

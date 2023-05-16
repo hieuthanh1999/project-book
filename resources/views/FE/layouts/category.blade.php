@@ -2,6 +2,7 @@
 @section('content')
 <div class="tg-products">
     <div class="tg-sectionhead">
+        {{-- {{dd($sub_category_details)}} --}}
         <h2>{{$sub_category_details['name']}}</h2>
     </div>
 
